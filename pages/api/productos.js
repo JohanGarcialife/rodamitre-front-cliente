@@ -213,3 +213,25 @@ export async function motorRM(Dato) {
     console.log(error);
   }
 }
+
+//////////productps por codigo/////
+
+export async function productosCodigo(CLI_ID , LPP_ID, Dato) {
+
+  try {
+    const url = `${URL}/busqcogido/${CLI_ID }/${LPP_ID}`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+          Accept: "*/*",
+      },
+      body: JSON.stringify(Dato),
+    };
+    const response = await fetch(url, params);
+     const result = await response.json();
+     return result;
+  } catch (error) {
+    console.log(error);
+  }
+}

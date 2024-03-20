@@ -179,7 +179,7 @@ CLAVE: WPBMPVHD
               auth={auth}
             />
           )}
-          {buscador === "Rapida" && <BuscadorRapida />}
+          {buscador === "Rapida" && <BuscadorRapida auth={auth} comparacion={comparacion} />}
           {buscador === "Oferta" && <BuscadorOferta />}
           {buscador === "Reclamo" && <Reclamos />}
           {buscador === "Garantia" && <Garantia />}

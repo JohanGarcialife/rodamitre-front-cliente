@@ -30,6 +30,10 @@ import {
   rubrosP,
 } from "@/pages/api/productos";
 import AtributosProducto from "./AtributosProducto";
+import Esparte from "../productos/Esparte";
+import Intercambianles from "../productos/Intercambianles";
+import Formadopor from "../productos/Formadopor";
+
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -119,6 +123,7 @@ export default function BuscadorFamilia(props) {
     }, {})
   );
 
+
   useEffect(() => {
     (async () => {
       const response = await productosApi(auth.CLI_ID, auth.LPP_ID);
@@ -160,7 +165,11 @@ export default function BuscadorFamilia(props) {
 
   useEffect(() => {
     if (marID?.length > 0 && !rudID && !marcaId?.length && !rubroId) {
+
+
       (async () => {
+
+        setReloadUser(false)
         var newproduct = marID.map(function (data) {
           var data = data.value;
           return data;
@@ -728,8 +737,10 @@ export default function BuscadorFamilia(props) {
           <p className="text-[#969696] font-bold text-xs uppercase">Vehículo</p>
 
           <Select
+          
             isMulti
             name="vehiculos"
+            closeMenuOnSelect={false}
             options={autoSelect}
             className="text-black font-montserrat"
             placeholder="Todos los vehículos..."
@@ -740,7 +751,19 @@ export default function BuscadorFamilia(props) {
           <p className="text-[#969696] font-bold text-xs uppercase">Familias</p>
 
           <Select
-            options={superRubroSelect}
+             options={superRubroSelect} 
+           /*  options={selectSrubro?.map((sr) => (
+
+              <option value={sr?.spr_id} label={sr?.super_rubro}>
+{sr?.super_rubro}
+
+              </option>
+            )
+)
+            
+            } */
+            
+            defaultValue={[]}
             placeholder="Todas las familias..."
             className="text-black font-montserrat"
             onChange={handleSelectFamilia}
@@ -752,6 +775,7 @@ export default function BuscadorFamilia(props) {
           <Select
             isMulti
             name="marcas"
+            closeMenuOnSelect={false}
             options={marcaArticuloSelect}
             className="text-black font-montserrat"
             placeholder="Todas las marcas..."
@@ -851,32 +875,40 @@ export default function BuscadorFamilia(props) {
                         <p>{producto?.codigo} </p>
                       </div>
                       <div>
-                        <p className="font-bold text-black text-left">
-                          Es parte de
-                        </p>
-                        <div className="flex font-normal items-center space-x-2 text-sm text-left">
-                          <p className="cursor-pointer hover:border-b-2 hover:border-amarillo">
-                            VKMC 01107 A1
-                          </p>
-                          <span>-</span>
-                          <p className="cursor-pointer hover:border-b-2 hover:border-amarillo">
-                            VKMC 01107 A1
-                          </p>
-                          <span>-</span>
-                          <p className="cursor-pointer hover:border-b-2 hover:border-amarillo">
-                            VKMC 01107 A1
-                          </p>
-                        </div>
+                      {producto?.es_parte_de ? (
+                          <div className="flex flex-col">
+                            <p className="font-bold text-black text-left">
+                              Es parte de
+                            </p>
+                            <Esparte esparte={producto?.es_parte_de} />
+                          </div>
+                        ) : (
+                          <></>
+                        )}
                       </div>
                       <div>
-                        <p className="font-bold text-black text-left">
-                          Intercambiable
-                        </p>
-                        <div className="flex font-normal items-center space-x-2 text-sm text-left">
-                          <p className="cursor-pointer hover:border-b-2 hover:border-amarillo">
-                            BA358 VMG
-                          </p>
-                        </div>
+                      {producto?.intercambiables ? (
+                          <div className="flex flex-col">
+                            <p className="font-bold text-black text-left">
+                            Intercambiable
+                            </p>
+                            <Intercambianles intercambiable={producto?.intercambiables} />
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                      <div>
+                      {producto?.formado_por ? (
+                          <div className="flex flex-col">
+                            <p className="font-bold text-black text-left">
+                            Formado por
+                            </p>
+                            < Formadopor formadopor={producto?.formado_por} />
+                          </div>
+                        ) : (
+                          <></>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -885,17 +917,20 @@ export default function BuscadorFamilia(props) {
                   <div className="text-gris text-xs ">
                     {comparacion?.map((comparacion) => (
                       <div>
-                        {comparacion.PRE_ID === producto?.pre_id && (
+                        {comparacion.pre_id === producto?.pre_id && (
                           <div className="flex items-center space-x-2 ">
                             <div className="flex items-center space-x-1 ">
-                              <p>{comparacion.MARCA_AUTO}</p>
-                              <p>{comparacion.MODELO}</p>
+                              <p>{comparacion.marca_auto}</p>
+                              <p>{comparacion.modelo}</p>
                             </div>
                             <div className="group">
                               {" "}
                               <div className="absolute z-30 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3">
                                 <p className="font-bold text-black text-base">
-                                  {comparacion.SUPER_RUBRO}
+                                  {producto.super_rubro}
+                                </p>
+                                <p className=" text-black  text-xs	 ">
+                                  {comparacion.descripcion}
                                 </p>
                               </div>
                               <CiCircleInfo className="font-bold text-lg" />
