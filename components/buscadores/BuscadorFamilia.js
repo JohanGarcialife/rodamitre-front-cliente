@@ -34,7 +34,6 @@ import Esparte from "../productos/Esparte";
 import Intercambianles from "../productos/Intercambianles";
 import Formadopor from "../productos/Formadopor";
 
-
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -112,7 +111,6 @@ export default function BuscadorFamilia(props) {
   const [selectSrubro, setSelectSrubro] = useState(null);
   const [selectMarId, setSelectMarId] = useState(null);
   const [selectRubro, setSelecRubro] = useState(null);
-
   const [vehiculoName, setVehiculoName] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -122,7 +120,6 @@ export default function BuscadorFamilia(props) {
       return acc;
     }, {})
   );
-
 
   useEffect(() => {
     (async () => {
@@ -165,11 +162,8 @@ export default function BuscadorFamilia(props) {
 
   useEffect(() => {
     if (marID?.length > 0 && !rudID && !marcaId?.length && !rubroId) {
-
-
       (async () => {
-
-        setReloadUser(false)
+        setReloadUser(false);
         var newproduct = marID.map(function (data) {
           var data = data.value;
           return data;
@@ -737,7 +731,6 @@ export default function BuscadorFamilia(props) {
           <p className="text-[#969696] font-bold text-xs uppercase">Vehículo</p>
 
           <Select
-          
             isMulti
             name="vehiculos"
             closeMenuOnSelect={false}
@@ -751,18 +744,7 @@ export default function BuscadorFamilia(props) {
           <p className="text-[#969696] font-bold text-xs uppercase">Familias</p>
 
           <Select
-             options={superRubroSelect} 
-           /*  options={selectSrubro?.map((sr) => (
-
-              <option value={sr?.spr_id} label={sr?.super_rubro}>
-{sr?.super_rubro}
-
-              </option>
-            )
-)
-            
-            } */
-            
+            options={superRubroSelect}
             defaultValue={[]}
             placeholder="Todas las familias..."
             className="text-black font-montserrat"
@@ -875,7 +857,7 @@ export default function BuscadorFamilia(props) {
                         <p>{producto?.codigo} </p>
                       </div>
                       <div>
-                      {producto?.es_parte_de ? (
+                        {producto?.es_parte_de ? (
                           <div className="flex flex-col">
                             <p className="font-bold text-black text-left">
                               Es parte de
@@ -887,24 +869,26 @@ export default function BuscadorFamilia(props) {
                         )}
                       </div>
                       <div>
-                      {producto?.intercambiables ? (
+                        {producto?.intercambiables ? (
                           <div className="flex flex-col">
                             <p className="font-bold text-black text-left">
-                            Intercambiable
+                              Intercambiable
                             </p>
-                            <Intercambianles intercambiable={producto?.intercambiables} />
+                            <Intercambianles
+                              intercambiable={producto?.intercambiables}
+                            />
                           </div>
                         ) : (
                           <></>
                         )}
                       </div>
                       <div>
-                      {producto?.formado_por ? (
+                        {producto?.formado_por ? (
                           <div className="flex flex-col">
                             <p className="font-bold text-black text-left">
-                            Formado por
+                              Formado por
                             </p>
-                            < Formadopor formadopor={producto?.formado_por} />
+                            <Formadopor formadopor={producto?.formado_por} />
                           </div>
                         ) : (
                           <></>

@@ -11,10 +11,7 @@ import Reclamos from "../reclamos/Reclamos";
 import Garantia from "../garantias/Garantia";
 import useAuth from "@/hooks/useAuth";
 import { loginApi } from "@/pages/api/clientes";
-import {
-  viewConsulApi,
-  marcaAutosApi,
-} from "@/pages/api/productos";
+import { viewConsulApi, marcaAutosApi } from "@/pages/api/productos";
 
 export default function HeroSection(props) {
   const { isLogin, setIsLogin, buscador } = props;
@@ -31,7 +28,7 @@ export default function HeroSection(props) {
     onSubmit: async (formData) => {
       /*inicio sesion base de datos */
       const response = await loginApi(formData);
-     
+
       if (response?.token) {
         setIsLogin(true);
         login(response.token);
@@ -59,11 +56,11 @@ USUARIO: 20-12789811-2
 CLAVE: WPBMPVHD
 
  */
- 
+
   return (
     <div
       className={
-        isLogin === false
+        !auth
           ? "bg-[url('/chicago-690365-lq.jpg')] bg-cover relative min-h-screen overflow-hidden font-montserrat"
           : "bg-[#f5f5f5] relative min-h-screen overflow-hidden font-montserrat"
       }
@@ -179,7 +176,9 @@ CLAVE: WPBMPVHD
               auth={auth}
             />
           )}
-          {buscador === "Rapida" && <BuscadorRapida auth={auth} comparacion={comparacion} />}
+          {buscador === "Rapida" && (
+            <BuscadorRapida auth={auth} comparacion={comparacion} />
+          )}
           {buscador === "Oferta" && <BuscadorOferta />}
           {buscador === "Reclamo" && <Reclamos />}
           {buscador === "Garantia" && <Garantia />}
