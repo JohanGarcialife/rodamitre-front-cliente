@@ -45,6 +45,36 @@ export default function BuscadorVehiculo(props) {
     }, {})
   );
 
+  const [resetModelo, setResetModelo] = useState(false);
+  const [resetRubro, setResetRubro] = useState(false);
+  const [resetMotor, setResetMotor] = useState(false);
+
+  useEffect(() => {
+    setResetModelo(true);
+    setResetModelo(false);
+
+    setResetRubro(true);
+    setResetRubro(false);
+
+    setResetMotor(true);
+    setResetMotor(false);
+  }, [vehiculo]);
+
+  useEffect(() => {
+    setResetRubro(true);
+    setResetRubro(false);
+
+    setResetMotor(true);
+    setResetMotor(false);
+  }, [modelo]);
+
+  useEffect(() => {
+    setResetMotor(true);
+    setResetMotor(false);
+  }, [rubro]);
+
+  console.log(resetModelo);
+
   //console.log(marcaAutos);
   //console.log(modeloVh);
   //console.log(selectRubro);
@@ -282,41 +312,45 @@ export default function BuscadorVehiculo(props) {
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Autos</p>
 
-          <Select
-            value={modeloSelect}
-            options={modeloSelect}
-            placeholder="Seleccione un auto"
-            className="text-black font-montserrat"
-            onChange={handleSelectModelo}
-          />
+          {!resetModelo && (
+            <Select
+              value={modeloSelect}
+              options={modeloSelect}
+              placeholder="Seleccione un auto"
+              className="text-black font-montserrat"
+              onChange={handleSelectModelo}
+            />
+          )}
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Rubros</p>
 
-          <Select
-            isMulti
-            closeMenuOnSelect={false}
-            name="rubros"
-            options={rubroSelect}
-            className="text-black font-montserrat"
-            placeholder="Todos los rubros..."
-            onChange={handleSelectRubro}
-            value={rubro || []}
-          />
+          {!resetRubro && (
+            <Select
+              isMulti
+              closeMenuOnSelect={false}
+              name="rubros"
+              options={rubroSelect}
+              className="text-black font-montserrat"
+              placeholder="Todos los rubros..."
+              onChange={handleSelectRubro}
+            />
+          )}
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Motores</p>
 
-          <Select
-            isMulti
-            closeMenuOnSelect={false}
-            name="motores"
-            options={motSelect}
-            className="text-black font-montserrat"
-            placeholder="Todos los motores..."
-            onChange={handleSelectMotor}
-            //value={motor || []}
-          />
+          {!resetMotor && (
+            <Select
+              isMulti
+              closeMenuOnSelect={false}
+              name="motores"
+              options={motSelect}
+              className="text-black font-montserrat"
+              placeholder="Todos los motores..."
+              onChange={handleSelectMotor}
+            />
+          )}
         </div>
       </div>
       <div className=" flex justify-center font-montserrat">

@@ -100,13 +100,12 @@ export default function BuscadorFamilia(props) {
   const { comparacion, marcaAutos, auth, setReloadUser } = props;
   const [productos1, setProductos1] = useState([]);
   const [productos, setProductos] = useState([]);
-  const [marca, setMarca] = useState([]);
   const [marID, setMarID] = useState();
   const [rudID, setRudID] = useState(null);
   const [marcaId, setMarcaId] = useState(null);
   const [rubroId, setRubroId] = useState(null);
-
   const [familia, setFamilia] = useState(null);
+  const [marca, setMarca] = useState([]);
   const [rubro, setRubro] = useState(null);
   const [selectSrubro, setSelectSrubro] = useState(null);
   const [selectMarId, setSelectMarId] = useState(null);
@@ -120,6 +119,34 @@ export default function BuscadorFamilia(props) {
       return acc;
     }, {})
   );
+
+  const [resetFamilia, setResetFamilia] = useState(false);
+  const [resetMarca, setResetMarca] = useState(false);
+  const [resetRubro, setResetRubro] = useState(false);
+
+  useEffect(() => {
+    setResetFamilia(true);
+    setResetFamilia(false);
+
+    setResetMarca(true);
+    setResetMarca(false);
+
+    setResetRubro(true);
+    setResetRubro(false);
+  }, [vehiculoName]);
+
+  useEffect(() => {
+    setResetMarca(true);
+    setResetMarca(false);
+
+    setResetRubro(true);
+    setResetRubro(false);
+  }, [familia]);
+
+  useEffect(() => {
+    setResetRubro(true);
+    setResetRubro(false);
+  }, [marca]);
 
   useEffect(() => {
     (async () => {
@@ -743,36 +770,42 @@ export default function BuscadorFamilia(props) {
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Familias</p>
 
-          <Select
-            options={superRubroSelect}
-            defaultValue={[]}
-            placeholder="Todas las familias..."
-            className="text-black font-montserrat"
-            onChange={handleSelectFamilia}
-          />
+          {!resetFamilia && (
+            <Select
+              options={superRubroSelect}
+              defaultValue={[]}
+              placeholder="Todas las familias..."
+              className="text-black font-montserrat"
+              onChange={handleSelectFamilia}
+            />
+          )}
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Marcas</p>
 
-          <Select
-            isMulti
-            name="marcas"
-            closeMenuOnSelect={false}
-            options={marcaArticuloSelect}
-            className="text-black font-montserrat"
-            placeholder="Todas las marcas..."
-            onChange={handleChangeMarca}
-          />
+          {!resetMarca && (
+            <Select
+              isMulti
+              name="marcas"
+              closeMenuOnSelect={false}
+              options={marcaArticuloSelect}
+              className="text-black font-montserrat"
+              placeholder="Todas las marcas..."
+              onChange={handleChangeMarca}
+            />
+          )}
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Rubros</p>
 
-          <Select
-            options={rubroSelect}
-            placeholder="Todos los rubros..."
-            className="text-black font-montserrat"
-            onChange={handleSelectRubro}
-          />
+          {!resetRubro && (
+            <Select
+              options={rubroSelect}
+              placeholder="Todos los rubros..."
+              className="text-black font-montserrat"
+              onChange={handleSelectRubro}
+            />
+          )}
         </div>
       </div>
       <div className=" font-montserrat">
