@@ -20,10 +20,9 @@ import {
   rubroModeloS,
   motorRM,
 } from "@/pages/api/productos";
-import AtributosProducto from "./AtributosProducto";
-import Esparte from "../productos/Esparte";
-import Intercambianles from "../productos/Intercambianles";
-import Formadopor from "../productos/Formadopor";
+import ProductoInfo from "../producto/ProductoInfo";
+import Contador from "../producto/Contador";
+import Marca from "../producto/Marca";
 
 export default function BuscadorVehiculo(props) {
   const { comparacion, productos, marcaAutos, auth } = props;
@@ -60,10 +59,6 @@ export default function BuscadorVehiculo(props) {
     setMotor([]);
   }, [rubro]);
 
-  console.log(modelo);
-  console.log(rubro);
-  console.log(motor);
-
   var autoSelect = marcaAutos?.map(function (obj) {
     var rObj = {
       value: obj?.MAU_ID,
@@ -79,10 +74,6 @@ export default function BuscadorVehiculo(props) {
     };
     return rObj;
   });
-
-  // useEffect(() => {
-  //   console.log(modeloSelect);
-  // }, [vehiculo]);
 
   var rubroSelect = selectRubro?.map(function (obj) {
     var rObj = {
@@ -100,21 +91,6 @@ export default function BuscadorVehiculo(props) {
     return rObj;
   });
 
-  const handleChange = (productId, event) => {
-    const newQuantity = parseInt(event.target.value);
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: newQuantity,
-    }));
-  };
-
-  const handleQuantityChange = (productId, newQuantity) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: newQuantity,
-    }));
-  };
-
   const handleSelectVehiculo = async function (event) {
     setVehiculo(event);
     setModeloVh(null);
@@ -123,7 +99,6 @@ export default function BuscadorVehiculo(props) {
   };
 
   const handleSelectModelo = async function (event) {
-    console.log(event);
     setModelo(event);
     setSelectRubro(null);
     setModId(event.value);
@@ -267,22 +242,6 @@ export default function BuscadorVehiculo(props) {
           </Breadcrumbs>
         </div>
       </div>
-      {/* <div className="flex items-center justify-end  font-montserrat px-2">
-        <div className="flex items-center space-x-4 bg-white rounded-lg p-3 mt-5 w-fit">
-          <div className="flex items-center space-x-2">
-            <FaCircle className="" />
-            <p className="text-black">Stock</p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <FaCircle className="" />
-            <p className="text-black">Sin Stock</p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <FaCircle className="text-[#EFBE5E]" />
-            <p className="text-black">Consultar Stock</p>
-          </div>
-        </div>
-      </div> */}
       <div className="flex font-montserrat mt-5 px-2 rounded-t-md bg-white border border-[#D9D9D9]">
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Marcas</p>
@@ -390,7 +349,7 @@ export default function BuscadorVehiculo(props) {
                       {producto.rubro === rubro.label && (
                         <TableRowStyled className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center">
                           <TableCell className="w-full text-center">
-                            <div className="font-bold flex items-center space-x-3">
+                            {/* <div className="font-bold flex items-center space-x-3">
                               <Image
                                 src="/VKPC-85097_1_SKF.jpg"
                                 height={100}
@@ -471,7 +430,8 @@ export default function BuscadorVehiculo(props) {
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            </div> */}
+                            <ProductoInfo producto={producto} />
                           </TableCell>
                           <TableCell className="w-full text-center">
                             <div className="font-black">
@@ -479,13 +439,11 @@ export default function BuscadorVehiculo(props) {
                             </div>
                           </TableCell>
                           <TableCell className="w-full text-center">
-                            <div className="font-bold ">
-                              <p>SFK</p>
-                            </div>
+                            <Marca producto={producto} />
                           </TableCell>
                           <TableCell className="w-full text-center">
                             <div className="font-bold ">
-                              <p>$ 9.668,68</p>
+                              <Precio producto={producto} />
                             </div>
                           </TableCell>
                           <TableCell className="w-full text-center">
@@ -526,7 +484,7 @@ export default function BuscadorVehiculo(props) {
                           </TableCell>
                           <TableCell className="w-full text-center space-y-2">
                             <div className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo">
-                              <p>Pedir</p>
+                              <p>Pedirrrrr</p>
                             </div>
                             <div className="font-bold text-green-600">
                               <p>Disponible</p>
@@ -570,85 +528,7 @@ export default function BuscadorVehiculo(props) {
                       {rubro.rup_descripcion === producto.rubro && (
                         <TableRowStyled className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center">
                           <TableCell className="w-full ">
-                            <div className="font-bold flex items-center justify-start space-x-3">
-                              <Image
-                                src="/VKPC-85097_1_SKF.jpg"
-                                height={100}
-                                width={100}
-                                alt="Imagen"
-                                className="mr-3"
-                              />
-                              <div className="space-y-2">
-                                <div className="flex items-center space-x-2">
-                                  <div className="group">
-                                    {" "}
-                                    <AiFillInfoCircle />
-                                    <div className="absolute z-30 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3">
-                                      {/*  {!producto?.atributos ? null : (
-                              <AtributosProducto
-                                atributos={producto?.atributos}
-                              />
-                            )} */}
-                                      {!producto?.notas ? null : (
-                                        <div className="space-y-3">
-                                          <div className="bg-amarillo w-full py-1">
-                                            <p className="text-azul font-bold">
-                                              Notas
-                                            </p>
-                                          </div>
-                                          <p>{producto?.notas} </p>
-                                        </div>
-                                      )}
-                                    </div>
-                                  </div>
-                                  <p>{producto?.codigo} </p>
-                                </div>
-                                <div>
-                                  {producto?.es_parte_de ? (
-                                    <div className="flex flex-col">
-                                      <p className="font-bold text-black text-left">
-                                        Es parte de
-                                      </p>
-                                      <Esparte
-                                        esparte={producto?.es_parte_de}
-                                      />
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </div>
-                                <div>
-                                  {producto?.intercambiables ? (
-                                    <div className="flex flex-col">
-                                      <p className="font-bold text-black text-left">
-                                        Intercambiable
-                                      </p>
-                                      <Intercambianles
-                                        intercambiable={
-                                          producto?.intercambiables
-                                        }
-                                      />
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </div>
-                                <div>
-                                  {producto?.formado_por ? (
-                                    <div className="flex flex-col">
-                                      <p className="font-bold text-black text-left">
-                                        Formado por
-                                      </p>
-                                      <Formadopor
-                                        formadopor={producto?.formado_por}
-                                      />
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
+                            <ProductoInfo producto={producto} />
                           </TableCell>
                           <TableCell className="w-full text-center">
                             <div className="font-black">
@@ -656,21 +536,12 @@ export default function BuscadorVehiculo(props) {
                             </div>
                           </TableCell>
                           <TableCell className="w-full text-center">
-                            <div className="flex space-x-4 items-center font-bold">
-                              <p>{producto?.marca_articulo} </p>
+                            <div className="flex space-x-4 items-center text-center font-bold">
+                              <Marca producto={producto} />
                             </div>
                           </TableCell>
                           <TableCell className="w-full text-center">
-                            <div className="font-bold ">
-                              $
-                              {quantities[producto?.pre_id] <= 0 ||
-                              !quantities[producto?.pre_id]
-                                ? 0
-                                : (
-                                    quantities[producto?.pre_id] *
-                                    producto?.ppa_precio
-                                  ).toFixed(2)}
-                            </div>
+                            <Precio producto={producto} />
                           </TableCell>
                           <TableCell className="w-full text-center">
                             <div className="font-bold ">
@@ -679,65 +550,17 @@ export default function BuscadorVehiculo(props) {
                           </TableCell>
                           {/* Contador */}
                           <TableCell className="w-full flex justify-center">
-                            <div className="w-full flex justify-center">
-                              <div className="w-full flex items-center  justify-center space-x-2">
-                                <div
-                                  className="text-amarillo p-1 bg-azul rounded-md cursor-pointer hover:bg-amarillo hover:text-azul"
-                                  onClick={() =>
-                                    handleQuantityChange(
-                                      producto?.pre_id,
-                                      quantities[producto?.pre_id] - 1
-                                    )
-                                  }
-                                >
-                                  <FaMinus />
-                                </div>
-                                <input
-                                  type="number"
-                                  min="0"
-                                  max="1000"
-                                  value={
-                                    quantities[producto?.pre_id] < 0
-                                      ? 0
-                                      : quantities[producto?.pre_id] || 0
-                                  }
-                                  onChange={(event) =>
-                                    handleChange(producto?.pre_id, event)
-                                  }
-                                  className="px-2 rounded-md border border-black h-full text-center"
-                                />
-                                <div
-                                  className="text-amarillo p-1 bg-azul rounded-md cursor-pointer hover:bg-amarillo hover:text-azul"
-                                  onClick={() =>
-                                    handleQuantityChange(
-                                      producto?.pre_id,
-                                      quantities[producto?.pre_id]
-                                        ? quantities[producto?.pre_id] + 1
-                                        : +1
-                                    )
-                                  }
-                                >
-                                  <FaPlus />
-                                </div>
-                              </div>
-                            </div>
+                            <Contador
+                              producto={producto}
+                              productos={productos}
+                              quantities={quantities}
+                              setQuantities={setQuantities}
+                            />
                           </TableCell>
                           <TableCell className="w-full text-center space-y-2">
                             <div className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo">
-                              <p>Pedir</p>
+                              <p>Pedirrrr</p>
                             </div>
-
-                            {producto?.pre_stock_actual > 0 && (
-                              <div className="font-bold text-green-600">
-                                <p>Disponible</p>
-                              </div>
-                            )}
-
-                            {producto?.pre_stock_actual === 0 && (
-                              <div className="font-bold text-red-600">
-                                <p>Sin Stock</p>
-                              </div>
-                            )}
                           </TableCell>
                         </TableRowStyled>
                       )}
