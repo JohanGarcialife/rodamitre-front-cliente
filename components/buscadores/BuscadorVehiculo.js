@@ -45,39 +45,24 @@ export default function BuscadorVehiculo(props) {
     }, {})
   );
 
-  const [resetModelo, setResetModelo] = useState(false);
-  const [resetRubro, setResetRubro] = useState(false);
-  const [resetMotor, setResetMotor] = useState(false);
-
   useEffect(() => {
-    setResetModelo(true);
-    setResetModelo(false);
-
-    setResetRubro(true);
-    setResetRubro(false);
-
-    setResetMotor(true);
-    setResetMotor(false);
+    setModelo(null);
+    setRubro([]);
+    setMotor([]);
   }, [vehiculo]);
 
   useEffect(() => {
-    setResetRubro(true);
-    setResetRubro(false);
-
-    setResetMotor(true);
-    setResetMotor(false);
+    setRubro([]);
+    setMotor([]);
   }, [modelo]);
 
   useEffect(() => {
-    setResetMotor(true);
-    setResetMotor(false);
+    setMotor([]);
   }, [rubro]);
 
-  console.log(resetModelo);
-
-  //console.log(marcaAutos);
-  //console.log(modeloVh);
-  //console.log(selectRubro);
+  console.log(modelo);
+  console.log(rubro);
+  console.log(motor);
 
   var autoSelect = marcaAutos?.map(function (obj) {
     var rObj = {
@@ -95,9 +80,9 @@ export default function BuscadorVehiculo(props) {
     return rObj;
   });
 
-  useEffect(() => {
-    console.log(modeloSelect);
-  }, [vehiculo]);
+  // useEffect(() => {
+  //   console.log(modeloSelect);
+  // }, [vehiculo]);
 
   var rubroSelect = selectRubro?.map(function (obj) {
     var rObj = {
@@ -131,7 +116,7 @@ export default function BuscadorVehiculo(props) {
   };
 
   const handleSelectVehiculo = async function (event) {
-    setVehiculo(event.label);
+    setVehiculo(event);
     setModeloVh(null);
     const modeloV = await modelosVeApi(event.value);
     setModeloVh(modeloV);
@@ -139,7 +124,7 @@ export default function BuscadorVehiculo(props) {
 
   const handleSelectModelo = async function (event) {
     console.log(event);
-    setModelo(event.label);
+    setModelo(event);
     setSelectRubro(null);
     setModId(event.value);
 
@@ -229,13 +214,13 @@ export default function BuscadorVehiculo(props) {
             ,
             {!vehiculo ? null : (
               <p key="" className="text-gris">
-                {vehiculo}
+                {vehiculo.label}
               </p>
             )}
             ,
             {!modelo ? null : (
               <p key="" className="text-gris">
-                {modelo}
+                {modelo.label}
               </p>
             )}
             ,
@@ -312,45 +297,41 @@ export default function BuscadorVehiculo(props) {
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Autos</p>
 
-          {!resetModelo && (
-            <Select
-              value={modeloSelect}
-              options={modeloSelect}
-              placeholder="Seleccione un auto"
-              className="text-black font-montserrat"
-              onChange={handleSelectModelo}
-            />
-          )}
+          <Select
+            value={modelo}
+            options={modeloSelect}
+            placeholder="Seleccione un auto"
+            className="text-black font-montserrat"
+            onChange={handleSelectModelo}
+          />
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Rubros</p>
 
-          {!resetRubro && (
-            <Select
-              isMulti
-              closeMenuOnSelect={false}
-              name="rubros"
-              options={rubroSelect}
-              className="text-black font-montserrat"
-              placeholder="Todos los rubros..."
-              onChange={handleSelectRubro}
-            />
-          )}
+          <Select
+            isMulti
+            value={rubro}
+            closeMenuOnSelect={false}
+            name="rubros"
+            options={rubroSelect}
+            className="text-black font-montserrat"
+            placeholder="Todos los rubros..."
+            onChange={handleSelectRubro}
+          />
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Motores</p>
 
-          {!resetMotor && (
-            <Select
-              isMulti
-              closeMenuOnSelect={false}
-              name="motores"
-              options={motSelect}
-              className="text-black font-montserrat"
-              placeholder="Todos los motores..."
-              onChange={handleSelectMotor}
-            />
-          )}
+          <Select
+            isMulti
+            value={motor}
+            closeMenuOnSelect={false}
+            name="motores"
+            options={motSelect}
+            className="text-black font-montserrat"
+            placeholder="Todos los motores..."
+            onChange={handleSelectMotor}
+          />
         </div>
       </div>
       <div className=" flex justify-center font-montserrat">

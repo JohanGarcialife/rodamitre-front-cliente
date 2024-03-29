@@ -34,75 +34,13 @@ import Esparte from "../productos/Esparte";
 import Intercambianles from "../productos/Intercambianles";
 import Formadopor from "../productos/Formadopor";
 
-function TablePaginationActions(props) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleFirstPageButtonClick = (event) => {
-    onPageChange(event, 0);
-  };
-
-  const handleBackButtonClick = (event) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (event) => {
-    onPageChange(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (event) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }} className="px-5 text-azul">
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === "rtl" ? <LuChevronLast /> : <LuChevronFirst />}
-      </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === "rtl" ? (
-          <MdKeyboardArrowRight />
-        ) : (
-          <MdKeyboardArrowLeft />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === "rtl" ? (
-          <MdKeyboardArrowLeft />
-        ) : (
-          <MdKeyboardArrowRight />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === "rtl" ? <LuChevronFirst /> : <LuChevronLast />}
-      </IconButton>
-    </Box>
-  );
-}
-
 export default function BuscadorFamilia(props) {
   const { comparacion, marcaAutos, auth, setReloadUser } = props;
   const [productos1, setProductos1] = useState([]);
   const [productos, setProductos] = useState([]);
   const [marID, setMarID] = useState();
   const [rudID, setRudID] = useState(null);
-  const [marcaId, setMarcaId] = useState(null);
+  const [marcaId, setMarcaId] = useState([]);
   const [rubroId, setRubroId] = useState(null);
   const [familia, setFamilia] = useState(null);
   const [marca, setMarca] = useState([]);
@@ -120,33 +58,21 @@ export default function BuscadorFamilia(props) {
     }, {})
   );
 
-  const [resetFamilia, setResetFamilia] = useState(false);
-  const [resetMarca, setResetMarca] = useState(false);
-  const [resetRubro, setResetRubro] = useState(false);
-
   useEffect(() => {
-    setResetFamilia(true);
-    setResetFamilia(false);
-
-    setResetMarca(true);
-    setResetMarca(false);
-
-    setResetRubro(true);
-    setResetRubro(false);
+    setFamilia(null);
+    setRudID(null);
+    setMarcaId([]);
+    setRubroId(null);
   }, [vehiculoName]);
 
   useEffect(() => {
-    setResetMarca(true);
-    setResetMarca(false);
-
-    setResetRubro(true);
-    setResetRubro(false);
-  }, [familia]);
+    setMarcaId([]);
+    setRubroId(null);
+  }, [rudID]);
 
   useEffect(() => {
-    setResetRubro(true);
-    setResetRubro(false);
-  }, [marca]);
+    setRubroId(null);
+  }, [marcaId]);
 
   useEffect(() => {
     (async () => {
@@ -609,35 +535,22 @@ export default function BuscadorFamilia(props) {
 
   const handleChangeVehiculo = (event) => {
     setVehiculoName(event);
-    setRudID(null);
-    setMarcaId(null);
-    setRubroId(null);
     setMarID(event);
-
-    /*  setFamilia(null);
-    setMarca([]);
-    setRubro(null); */
   };
 
   function handleSelectFamilia(event) {
     setRudID(event);
     setFamilia(event.label);
-    setMarcaId(null);
-    setRubroId(null);
-    /*  setMarca([]);
-    setRubro(null); */
   }
 
   const handleChangeMarca = (event) => {
     setMarca(event);
     setMarcaId(event);
-    /*  setRubro(null); */
   };
 
   function handleSelectRubro(event) {
     setRubro(event.label);
     setRubroId(event);
-    setMarcaId(null);
   }
 
   const TableRowStyled = styled(TableRow)`
@@ -722,7 +635,7 @@ export default function BuscadorFamilia(props) {
               </p>
             )}
             ,
-            {marca.length > 0 ? (
+            {marcaId.length > 0 ? (
               <Link
                 underline="hover"
                 key="2"
@@ -740,14 +653,15 @@ export default function BuscadorFamilia(props) {
               </Link>
             ) : null}
             ,
-            {!rubro ? null : (
+            {!rubroId ? null : (
               <p key="" className="text-gris">
                 {rubro}
               </p>
             )}
             ,
             <p key="" className="text-gris">
-              Página 1 de 1
+              Página {page + 1} de{" "}
+              {(productos?.length / rowsPerPage).toFixed(0)}
             </p>
             ,
           </Breadcrumbs>
@@ -770,42 +684,38 @@ export default function BuscadorFamilia(props) {
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Familias</p>
 
-          {!resetFamilia && (
-            <Select
-              options={superRubroSelect}
-              defaultValue={[]}
-              placeholder="Todas las familias..."
-              className="text-black font-montserrat"
-              onChange={handleSelectFamilia}
-            />
-          )}
+          <Select
+            value={rudID}
+            options={superRubroSelect}
+            placeholder="Todas las familias..."
+            className="text-black font-montserrat"
+            onChange={handleSelectFamilia}
+          />
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Marcas</p>
 
-          {!resetMarca && (
-            <Select
-              isMulti
-              name="marcas"
-              closeMenuOnSelect={false}
-              options={marcaArticuloSelect}
-              className="text-black font-montserrat"
-              placeholder="Todas las marcas..."
-              onChange={handleChangeMarca}
-            />
-          )}
+          <Select
+            value={marcaId}
+            isMulti
+            name="marcas"
+            closeMenuOnSelect={false}
+            options={marcaArticuloSelect}
+            className="text-black font-montserrat"
+            placeholder="Todas las marcas..."
+            onChange={handleChangeMarca}
+          />
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Rubros</p>
 
-          {!resetRubro && (
-            <Select
-              options={rubroSelect}
-              placeholder="Todos los rubros..."
-              className="text-black font-montserrat"
-              onChange={handleSelectRubro}
-            />
-          )}
+          <Select
+            value={rubroId}
+            options={rubroSelect}
+            placeholder="Todos los rubros..."
+            className="text-black font-montserrat"
+            onChange={handleSelectRubro}
+          />
         </div>
       </div>
       <div className=" font-montserrat">
@@ -1075,5 +985,67 @@ export default function BuscadorFamilia(props) {
         </Table>
       </div>
     </>
+  );
+}
+
+function TablePaginationActions(props) {
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
+
+  const handleFirstPageButtonClick = (event) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (event) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }} className="px-5 text-azul">
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === "rtl" ? <LuChevronLast /> : <LuChevronFirst />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === "rtl" ? (
+          <MdKeyboardArrowRight />
+        ) : (
+          <MdKeyboardArrowLeft />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === "rtl" ? (
+          <MdKeyboardArrowLeft />
+        ) : (
+          <MdKeyboardArrowRight />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === "rtl" ? <LuChevronFirst /> : <LuChevronLast />}
+      </IconButton>
+    </Box>
   );
 }
