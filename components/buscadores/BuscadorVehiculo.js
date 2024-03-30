@@ -559,7 +559,7 @@ export default function BuscadorVehiculo(props) {
                           </TableCell>
                           <TableCell className="w-full text-center space-y-2">
                             <div className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo">
-                              <p>Pedirrrr</p>
+                              <p>Pedirrrr2</p>
                             </div>
                           </TableCell>
                         </TableRowStyled>
