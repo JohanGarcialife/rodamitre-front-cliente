@@ -2,7 +2,7 @@ import React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
 export default function Contador(props) {
-  const { producto, quantities } = props;
+  const { producto, quantities, setQuantities } = props;
 
   const handleChange = (productId, event) => {
     const newQuantity = parseInt(event.target.value);

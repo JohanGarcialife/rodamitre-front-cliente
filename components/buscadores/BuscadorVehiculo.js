@@ -23,6 +23,7 @@ import {
 import ProductoInfo from "../producto/ProductoInfo";
 import Contador from "../producto/Contador";
 import Marca from "../producto/Marca";
+import Precio from "../producto/Precio";
 
 export default function BuscadorVehiculo(props) {
   const { comparacion, productos, marcaAutos, auth } = props;
@@ -510,65 +511,7 @@ export default function BuscadorVehiculo(props) {
               ))}
             </TableBody>
           ) : (
-            <TableBody className="bg-white">
-              {selectRubro?.map((rubro) => (
-                <>
-                  <TableRowStyled className="w-full">
-                    <TableCell colSpan={7}>
-                      <div className="border-b border-black text-center w-full flex justify-center">
-                        <p className="text-3xl text-black font-bold border-b-4 border-amarillo w-fit px-4">
-                          {rubro.rup_descripcion}
-                        </p>
-                      </div>
-                    </TableCell>
-                  </TableRowStyled>
-
-                  {producto?.map((producto) => (
-                    <>
-                      {rubro.rup_descripcion === producto.rubro && (
-                        <TableRowStyled className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center">
-                          <TableCell className="w-full ">
-                            <ProductoInfo producto={producto} />
-                          </TableCell>
-                          <TableCell className="w-full text-center">
-                            <div className="font-black">
-                              <p>1.6 16v</p>
-                            </div>
-                          </TableCell>
-                          <TableCell className="w-full text-center">
-                            <div className="flex space-x-4 items-center text-center font-bold">
-                              <Marca producto={producto} />
-                            </div>
-                          </TableCell>
-                          <TableCell className="w-full text-center">
-                            <Precio producto={producto} />
-                          </TableCell>
-                          <TableCell className="w-full text-center">
-                            <div className="font-bold ">
-                              <p>$ 9.668,68</p>
-                            </div>
-                          </TableCell>
-                          {/* Contador */}
-                          <TableCell className="w-full flex justify-center">
-                            <Contador
-                              producto={producto}
-                              productos={productos}
-                              quantities={quantities}
-                              setQuantities={setQuantities}
-                            />
-                          </TableCell>
-                          <TableCell className="w-full text-center space-y-2">
-                            <div className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo">
-                              <p>Pedirrrr2</p>
-                            </div>
-                          </TableCell>
-                        </TableRowStyled>
-                      )}
-                    </>
-                  ))}
-                </>
-              ))}
-            </TableBody>
+            <p className="text-black"> No hay productos en la cesta</p>
           )}
         </Table>
       </div>

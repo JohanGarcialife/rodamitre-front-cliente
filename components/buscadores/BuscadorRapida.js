@@ -27,68 +27,6 @@ import Esparte from "../productos/Esparte";
 import Intercambianles from "../productos/Intercambiables";
 import Formadopor from "../productos/Formadopor";
 
-function TablePaginationActions(props) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleFirstPageButtonClick = (event) => {
-    onPageChange(event, 0);
-  };
-
-  const handleBackButtonClick = (event) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (event) => {
-    onPageChange(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (event) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }} className="px-5 text-azul">
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === "rtl" ? <LuChevronLast /> : <LuChevronFirst />}
-      </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === "rtl" ? (
-          <MdKeyboardArrowRight />
-        ) : (
-          <MdKeyboardArrowLeft />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === "rtl" ? (
-          <MdKeyboardArrowLeft />
-        ) : (
-          <MdKeyboardArrowRight />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === "rtl" ? <LuChevronFirst /> : <LuChevronLast />}
-      </IconButton>
-    </Box>
-  );
-}
-
 export default function BuscadorRapida(props) {
   const { auth, comparacion } = props;
   const [productos, setProductos] = useState([]);
@@ -159,12 +97,12 @@ export default function BuscadorRapida(props) {
   return (
     <>
       <form
-        className="flex space-x-10 w-full font-montserrat"
+        className="flex space-x-10 px-2 w-full font-montserrat"
         onSubmit={handleSubmit}
       >
         <div className="w-full space-y-5">
           <div className="bg-white rounded-lg border border-black flex">
-            <div className="bg-amarillo text-white rounded-l-lg flex space-x-3 text-balck p-3 w-1/5">
+            <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 w-1/5">
               <p>Código / Ubicación</p>
             </div>
             <input
@@ -177,7 +115,7 @@ export default function BuscadorRapida(props) {
           </div>
           <div className="w-full flex space-x-5">
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-amarillo text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
                 <p>Interior</p>
               </div>
               <input
@@ -189,7 +127,7 @@ export default function BuscadorRapida(props) {
               />
             </div>
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-amarillo text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
                 <p>Exterior</p>
               </div>
               <input
@@ -201,7 +139,7 @@ export default function BuscadorRapida(props) {
               />
             </div>
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-amarillo text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
                 <p>Altura</p>
               </div>
               <input
@@ -214,15 +152,15 @@ export default function BuscadorRapida(props) {
             </div>
           </div>
         </div>
-        <div className="flex h-fit bg-amarillo text-white rounded-lg  ">
+        <div className="flex h-fit bg-azul text-white rounded-lg  ">
           <button
-            className="flex items-center space-x-2 p-3 hover:bg-azul rounded-l-lg cursor-pointer"
+            className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-l-lg cursor-pointer"
             type="submit"
           >
             <p>Buscar</p>
             <FaSearch />
           </button>
-          <div className="flex items-center space-x-2 p-3 hover:bg-azul rounded-r-lg cursor-pointer">
+          <div className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-r-lg cursor-pointer">
             <p>Limpiar</p>
             <IoClose className="text-2xl" />
           </div>
@@ -501,5 +439,67 @@ export default function BuscadorRapida(props) {
         </div>
       )}
     </>
+  );
+}
+
+function TablePaginationActions(props) {
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
+
+  const handleFirstPageButtonClick = (event) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (event) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }} className="px-5 text-azul">
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === "rtl" ? <LuChevronLast /> : <LuChevronFirst />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === "rtl" ? (
+          <MdKeyboardArrowRight />
+        ) : (
+          <MdKeyboardArrowLeft />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === "rtl" ? (
+          <MdKeyboardArrowLeft />
+        ) : (
+          <MdKeyboardArrowRight />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === "rtl" ? <LuChevronFirst /> : <LuChevronLast />}
+      </IconButton>
+    </Box>
   );
 }
