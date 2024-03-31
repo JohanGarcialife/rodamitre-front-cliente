@@ -19,7 +19,7 @@ export default function Aplicaciones(props) {
                   <p className="font-bold text-black text-base">
                     {producto.super_rubro}
                   </p>
-                  <p className=" text-black  text-xs	 ">
+                  <p className=" text-black text-xs">
                     {comparacion.descripcion}
                   </p>
                 </div>

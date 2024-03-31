@@ -4,14 +4,20 @@ import React, { useEffect, useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF } from "react-icons/fa";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import useAuth from '@/hooks/useAuth';
-
+import useAuth from "@/hooks/useAuth";
+import { BsCart4 } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { selectCartItems } from "@/features/cartSlice";
+import Carrito from "@/components/Cart/Carrito";
 
 export default function Topbar(props) {
-  const { show, setShow, handleOpen, handleClose, isLogin, setIsLogin } = props;
+  const { show, setShow, handleOpen, handleClose } = props;
   const [scrolled, setScrolled] = useState(false);
   const { auth, logout } = useAuth();
 
+  const items = useSelector(selectCartItems);
+
+  console.log(items);
 
   useEffect(() => {
     const onScroll = () => {
@@ -42,7 +48,7 @@ export default function Topbar(props) {
               </p>
             </div>
           </div>
-          {/* isLogin === false */ !auth ? 
+          {!auth ? (
             <div className="flex items-center">
               <Auth
                 show={show}
@@ -51,12 +57,33 @@ export default function Topbar(props) {
                 handleClose={handleClose}
               />
             </div>
-           : 
-            <IoArrowBackCircleOutline
-              onClick={ logout /* () => setIsLogin(!isLogin) */}
-              className="text-white text-3xl font-light cursor-pointer"
-            />
-        }
+          ) : (
+            <div className="flex items-center space-x-4">
+              <div className="relative group">
+                <BsCart4 className="text-white text-3xl font-light cursor-pointer" />
+                {items.length ? (
+                  <div className="bg-amarillo absolute -bottom-4 -right-2 z-30 rounded-full px-2 py-1 ">
+                    <p className="text-sm text-azul font-bold">
+                      {items.length}
+                    </p>
+                  </div>
+                ) : null}
+                <div
+                  className={
+                    items.length
+                      ? "absolute -left-48 z-20 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3"
+                      : "absolute -left-28 z-20 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3"
+                  }
+                >
+                  <Carrito items={items} />
+                </div>
+              </div>
+              <IoArrowBackCircleOutline
+                onClick={logout}
+                className="text-white text-3xl font-light cursor-pointer"
+              />
+            </div>
+          )}
         </div>
       ) : (
         <div className="flex justify-between w-full py-4 ">

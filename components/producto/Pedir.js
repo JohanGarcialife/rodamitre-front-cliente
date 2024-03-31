@@ -2,6 +2,7 @@ import React from "react";
 
 export default function Pedir(props) {
   const { producto } = props;
+
   return (
     <div>
       <div className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo">

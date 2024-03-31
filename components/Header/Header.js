@@ -3,10 +3,7 @@ import Image from "next/image";
 import Topbar from "./topbar/Topbar";
 import Menu from "./menu/Menu";
 import { IoIosArrowDown } from "react-icons/io";
-import useWindowSize from "@/hooks/useWindowSize";
-import useAuth from '@/hooks/useAuth';
-
-
+import useAuth from "@/hooks/useAuth";
 
 export default function Header(props) {
   const {
@@ -21,9 +18,6 @@ export default function Header(props) {
   } = props;
   const [scrolled, setScrolled] = useState(false);
   const { auth, logout } = useAuth();
-
-
-  const { width } = useWindowSize();
 
   useEffect(() => {
     const onScroll = () => {
@@ -82,7 +76,7 @@ export default function Header(props) {
               width={100}
               sizes="100vw"
               style={{
-                width: '100%',
+                width: "100%",
               }}
               alt="Imagen"
               className="mr-3"

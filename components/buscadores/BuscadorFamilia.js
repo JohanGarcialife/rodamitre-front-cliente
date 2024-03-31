@@ -14,7 +14,7 @@ import {
   TableFooter,
   TablePagination,
 } from "@mui/material";
-import styled from "@emotion/styled";
+
 import { MdNavigateNext } from "react-icons/md";
 import Select from "react-select";
 import { useTheme } from "@mui/material/styles";
@@ -25,13 +25,7 @@ import {
   pMarcarticulo,
   rubrosP,
 } from "@/pages/api/productos";
-import ProductoInfo from "../producto/ProductoInfo";
-import Aplicaciones from "../producto/Aplicaciones";
-import Subtotal from "../producto/Subtotal";
-import Marca from "../producto/Marca";
-import Pedir from "../producto/Pedir";
-import Precio from "../producto/Precio";
-import Contador from "../producto/Contador";
+import RowBuscadorFamilia from "./RowBuscadorFamilia";
 
 export default function BuscadorFamilia(props) {
   const { comparacion, marcaAutos, auth, setReloadUser } = props;
@@ -50,12 +44,6 @@ export default function BuscadorFamilia(props) {
   const [vehiculoName, setVehiculoName] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [quantities, setQuantities] = useState(
-    productos?.reduce((acc, producto) => {
-      acc[producto?.pre_id] = 0;
-      return acc;
-    }, {})
-  );
 
   useEffect(() => {
     setFamilia(null);
@@ -552,20 +540,6 @@ export default function BuscadorFamilia(props) {
     setRubroId(event);
   }
 
-  const TableRowStyled = styled(TableRow)`
-    &:nth-of-type(odd) {
-      background-color: #e8e8ff;
-    }
-    &:nth-of-type(even) {
-      background-color: #f5f5f5;
-    }
-    & td,
-    th {
-      width: fit-content;
-      text-align: center;
-    }
-  `;
-
   function handleClick(event) {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
@@ -747,38 +721,11 @@ export default function BuscadorFamilia(props) {
                 )
               : productos
             )?.map((producto) => (
-              <TableRowStyled
-                key={producto?.pre_id}
-                className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
-              >
-                <TableCell className="w-full ">
-                  <ProductoInfo producto={producto} />
-                </TableCell>
-                <TableCell className="w-full text-center">
-                  <Aplicaciones comparacion={comparacion} producto={producto} />
-                </TableCell>
-                <TableCell className="w-full text-center">
-                  <Marca producto={producto} />
-                </TableCell>
-                <TableCell className="w-full text-center">
-                  <Precio producto={producto} />
-                </TableCell>
-                {/* contador */}
-                <TableCell className="w-full flex justify-center">
-                  <Contador
-                    producto={producto}
-                    productos={productos}
-                    quantities={quantities}
-                    setQuantities={setQuantities}
-                  />
-                </TableCell>
-                <TableCell className="w-full text-center">
-                  <Subtotal producto={producto} quantities={quantities} />
-                </TableCell>
-                <TableCell className="w-full text-center space-y-2">
-                  <Pedir producto={producto} />
-                </TableCell>
-              </TableRowStyled>
+              <RowBuscadorFamilia
+                productos={productos}
+                producto={producto}
+                comparacion={comparacion}
+              />
             ))}
           </TableBody>
           <TableFooter>
