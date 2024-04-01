@@ -12,6 +12,7 @@ import Garantia from "../garantias/Garantia";
 import useAuth from "@/hooks/useAuth";
 import { loginApi } from "@/pages/api/clientes";
 import { viewConsulApi, marcaAutosApi } from "@/pages/api/productos";
+import Carrito from "../Cart/Carrito";
 
 export default function HeroSection(props) {
   const { isLogin, setIsLogin, buscador } = props;
@@ -182,6 +183,7 @@ CLAVE: WPBMPVHD
           {buscador === "Oferta" && <BuscadorOferta />}
           {buscador === "Reclamo" && <Reclamos />}
           {buscador === "Garantia" && <Garantia />}
+          {buscador === "Cart" && <Carrito />}
         </div>
       )}
     </div>

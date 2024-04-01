@@ -12,14 +12,11 @@ import { Modal } from "@mui/material";
 import { IoClose } from "react-icons/io5";
 import { loginApi } from "./api/clientes";
 
-
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [buscador, setBuscador] = useState("Familia");
   const { auth, login } = useAuth();
-
-
 
   const formik = useFormik({
     initialValues: {
@@ -29,11 +26,11 @@ export default function Home() {
     validationSchema: basicSchema,
     onSubmit: async (formData) => {
       const response = await loginApi(formData);
-     if (response?.token){
-         setIsLogin(true);
-         login(response.token);
+      if (response?.token) {
+        setIsLogin(true);
+        login(response.token);
         setOpen(false);
-     }
+      }
     },
   });
 
@@ -44,20 +41,11 @@ export default function Home() {
     setOpen(false);
   };
 
-  /* const handleLogin = () => {
-    try {
-      setIsLogin(true);
-      setOpen(false);
-    } catch (error) {}
-  }; */
-
   return (
     <>
       <Layout
         handleOpen={handleOpen}
         handleClose={handleClose}
-        isLogin={isLogin}
-        setIsLogin={setIsLogin}
         setBuscador={setBuscador}
         buscador={buscador}
       >
@@ -67,7 +55,7 @@ export default function Home() {
           buscador={buscador}
           setBuscador={setBuscador}
         />
-         {!auth && <Distribuidores />}
+        {!auth && <Distribuidores />}
         {!auth && <Nosotros />}
         {!auth && <Productos />}
         {!auth && <Contacto />}

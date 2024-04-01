@@ -90,6 +90,7 @@ export default function Header(props) {
               handleClose={handleClose}
               isLogin={isLogin}
               setIsLogin={setIsLogin}
+              setBuscador={setBuscador}
             />
           </div>
           <div className="flex items-end pb-3 justify-between px-12">

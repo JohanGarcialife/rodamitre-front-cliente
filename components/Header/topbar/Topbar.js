@@ -8,16 +8,14 @@ import useAuth from "@/hooks/useAuth";
 import { BsCart4 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { selectCartItems } from "@/features/cartSlice";
-import Carrito from "@/components/Cart/Carrito";
+import CarritoPopUp from "@/components/Cart/CarritoPopUp";
 
 export default function Topbar(props) {
-  const { show, setShow, handleOpen, handleClose } = props;
+  const { show, setShow, handleOpen, handleClose, setBuscador } = props;
   const [scrolled, setScrolled] = useState(false);
   const { auth, logout } = useAuth();
 
   const items = useSelector(selectCartItems);
-
-  console.log(items);
 
   useEffect(() => {
     const onScroll = () => {
@@ -59,7 +57,10 @@ export default function Topbar(props) {
             </div>
           ) : (
             <div className="flex items-center space-x-4">
-              <div className="relative group">
+              <div
+                // onClick={() => setBuscador("Cart")}
+                className="relative group "
+              >
                 <BsCart4 className="text-white text-3xl font-light cursor-pointer" />
                 {items.length ? (
                   <div className="bg-amarillo absolute -bottom-4 -right-2 z-30 rounded-full px-2 py-1 ">
@@ -71,11 +72,11 @@ export default function Topbar(props) {
                 <div
                   className={
                     items.length
-                      ? "absolute -left-48 z-20 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3"
+                      ? "absolute -left-80 z-20 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3"
                       : "absolute -left-28 z-20 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3"
                   }
                 >
-                  <Carrito items={items} />
+                  <CarritoPopUp setBuscador={setBuscador} items={items} />
                 </div>
               </div>
               <IoArrowBackCircleOutline

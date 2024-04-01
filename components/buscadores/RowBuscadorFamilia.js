@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { TableCell, TableRow } from "@mui/material";
-import { FaMinus, FaPlus } from "react-icons/fa";
 import styled from "@emotion/styled";
 import ProductoInfo from "../producto/ProductoInfo";
 import Aplicaciones from "../producto/Aplicaciones";
@@ -17,7 +16,7 @@ import {
 } from "@/features/cartSlice";
 
 export default function RowBuscadorFamilia(props) {
-  const { producto, comparacion, productos } = props;
+  const { producto, comparacion } = props;
   const {
     atributos,
     codigo,
@@ -39,6 +38,7 @@ export default function RowBuscadorFamilia(props) {
     spr_id,
     super_rubro,
   } = producto;
+
   const items = useSelector((state) => selectCartItemsWithId(state, pre_id));
 
   const dispatch = useDispatch();
