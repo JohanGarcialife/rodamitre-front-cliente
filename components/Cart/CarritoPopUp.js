@@ -52,7 +52,7 @@ export default function CarritoPopUp(props) {
                     {items[0]?.marca_articulo}{" "}
                   </p>
                   <p className="text-azul font-bold">
-                    ${items.length * items[0]?.ppa_precio.toFixed(2)}
+                    ${items.length * items[0]?.ppa_precio?.toFixed(2)}
                   </p>
                 </div>
                 <div

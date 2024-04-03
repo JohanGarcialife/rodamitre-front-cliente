@@ -14,7 +14,7 @@ export default function Contador(props) {
           <FaMinus />
         </div>
         <div className="bg-white border border-black rounded-md py-1 px-2">
-          <p className="text-black font-bold">{cantidad.length} </p>
+          <p className="text-black font-bold">{cantidad?.length} </p>
         </div>
         <div
           onClick={addItemToCart}

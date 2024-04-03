@@ -15,10 +15,11 @@ import { viewConsulApi, marcaAutosApi } from "@/pages/api/productos";
 import Carrito from "../Cart/Carrito";
 
 export default function HeroSection(props) {
-  const { isLogin, setIsLogin, buscador } = props;
+  const { buscador, setBuscador } = props;
   const { auth, login, setReloadUser } = useAuth();
   const [comparacion, setComparacion] = useState([]);
   const [marcaAutos, setMarcaAutos] = useState([]);
+  const [buscar, setBuscar] = useState();
 
   const formik = useFormik({
     initialValues: {
@@ -31,19 +32,11 @@ export default function HeroSection(props) {
       const response = await loginApi(formData);
 
       if (response?.token) {
-        setIsLogin(true);
         login(response.token);
         setOpen(false);
       }
     },
   });
-
-  useEffect(() => {
-    (async () => {
-      const response = await viewConsulApi();
-      setComparacion(response);
-    })();
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -164,21 +157,33 @@ CLAVE: WPBMPVHD
         <div className=" pt-72 pb-24">
           {buscador === "Familia" && (
             <BuscadorFamilia
-              comparacion={comparacion}
               marcaAutos={marcaAutos}
+              setMarcaAutos={setMarcaAutos}
               auth={auth}
               setReloadUser={setReloadUser}
+              setBuscar={setBuscar}
+              buscar={buscar}
+              setBuscador={setBuscador}
             />
           )}
           {buscador === "Vehiculo" && (
             <BuscadorVehiculo
-              comparacion={comparacion}
               marcaAutos={marcaAutos}
+              setMarcaAutos={setMarcaAutos}
               auth={auth}
+              setBuscar={setBuscar}
+              buscar={buscar}
+              setBuscador={setBuscador}
             />
           )}
           {buscador === "Rapida" && (
-            <BuscadorRapida auth={auth} comparacion={comparacion} />
+            <BuscadorRapida
+              auth={auth}
+              comparacion={comparacion}
+              buscar={buscar}
+              setBuscar={setBuscar}
+              setBuscador={setBuscador}
+            />
           )}
           {buscador === "Oferta" && <BuscadorOferta />}
           {buscador === "Reclamo" && <Reclamos />}

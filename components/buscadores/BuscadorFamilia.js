@@ -28,7 +28,15 @@ import {
 import RowBuscadorFamilia from "./RowBuscadorFamilia";
 
 export default function BuscadorFamilia(props) {
-  const { comparacion, marcaAutos, auth, setReloadUser } = props;
+  const {
+    comparacion,
+    marcaAutos,
+    auth,
+    setReloadUser,
+    buscar,
+    setBuscar,
+    setBuscador,
+  } = props;
   const [productos1, setProductos1] = useState([]);
   const [productos, setProductos] = useState([]);
   const [marID, setMarID] = useState();
@@ -724,7 +732,9 @@ export default function BuscadorFamilia(props) {
               <RowBuscadorFamilia
                 productos={productos}
                 producto={producto}
-                comparacion={comparacion}
+                setBuscar={setBuscar}
+                buscar={buscar}
+                setBuscador={setBuscador}
               />
             ))}
           </TableBody>

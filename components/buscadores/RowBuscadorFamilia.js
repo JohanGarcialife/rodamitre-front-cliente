@@ -16,7 +16,7 @@ import {
 } from "@/features/cartSlice";
 
 export default function RowBuscadorFamilia(props) {
-  const { producto, comparacion } = props;
+  const { producto, buscar, setBuscar, setBuscador } = props;
   const {
     atributos,
     codigo,
@@ -93,10 +93,20 @@ export default function RowBuscadorFamilia(props) {
       className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
     >
       <TableCell className="w-full ">
-        <ProductoInfo producto={producto} />
+        <ProductoInfo
+          producto={producto}
+          setBuscar={setBuscar}
+          buscar={buscar}
+          setBuscador={setBuscador}
+        />
       </TableCell>
       <TableCell className="w-full text-center">
-        <Aplicaciones comparacion={comparacion} producto={producto} />
+        {producto?.aplicaciones ? (
+          <Aplicaciones
+            aplicaciones={producto.aplicaciones}
+            srubro={producto.super_rubro}
+          />
+        ) : null}
       </TableCell>
       <TableCell className="w-full flex justify-center text-center">
         <Marca producto={producto} />

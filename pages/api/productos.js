@@ -1,57 +1,55 @@
 import { URL } from "@/utils/constantes";
 
 //// todos los productos con sus precios segun su id ///
-export async function productosApi(CLI_ID , LPP_ID) {
-    try {
-      const url = `${URL}/productos/${CLI_ID }/${LPP_ID}`;
-      const params = {
-        headers: {
-            Accept: "*/*",
-        },
-      };
-       const response = await fetch(url, params);
-        const result = await response.json();
-         return result;
-     
-    } catch (error) {
-      console.log(error);
-    } 
+export async function productosApi(CLI_ID, LPP_ID) {
+  try {
+    const url = `${URL}/productos/${CLI_ID}/${LPP_ID}`;
+    const params = {
+      headers: {
+        Accept: "*/*",
+      },
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
   }
+}
 
 //// todos los productos de viewconsult para comparar con sus marcas y modelos ///
 export async function viewConsulApi() {
-        try {
-          const url = `${URL}/viewconsul`;
-          const params = {
-            headers: {
-                Accept: "*/*",
-            },
-          };
-           const response = await fetch(url, params);
-            const result = await response.json();
-             return result;
-         
-        } catch (error) {
-          console.log(error);
-        } 
-      }
- //todas las marcas de los vehiculos///
-      export async function marcaAutosApi() {
-        try {
-          const url = `${URL}/marcautos`;
-          const params = {
-            headers: {
-                Accept: "*/*",
-            },
-          };
-           const response = await fetch(url, params);
-            const result = await response.json();
-             return result;
-         
-        } catch (error) {
-          console.log(error);
-        } 
-      }
+  try {
+    const url = `${URL}/viewconsul`;
+    const params = {
+      headers: {
+        Accept: "*/*",
+      },
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+//todas las marcas de los vehiculos///
+export async function marcaAutosApi() {
+  try {
+    const url = `${URL}/marcautos`;
+    const params = {
+      headers: {
+        Accept: "*/*",
+      },
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 ///////////////// rubros segun la marca del vehiculo y productos/////
 export async function superrubrosMarcId(Dato) {
   try {
@@ -60,33 +58,32 @@ export async function superrubrosMarcId(Dato) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-          Accept: "*/*",
+        Accept: "*/*",
       },
       body: JSON.stringify(Dato),
     };
     const response = await fetch(url, params);
-     const result = await response.json();
-     return result;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
 }
 ////////// productos segun la marca del auto //////
-export async function productosMarcAuto(CLI_ID , LPP_ID, Dato) {
-
+export async function productosMarcAuto(CLI_ID, LPP_ID, Dato) {
   try {
-    const url = `${URL}/productomarcauto/${CLI_ID }/${LPP_ID}`;
+    const url = `${URL}/productomarcauto/${CLI_ID}/${LPP_ID}`;
     const params = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-          Accept: "*/*",
+        Accept: "*/*",
       },
       body: JSON.stringify(Dato),
     };
     const response = await fetch(url, params);
-     const result = await response.json();
-     return result;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -101,13 +98,13 @@ export async function pMarcarticulo(Dato) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-          Accept: "*/*",
+        Accept: "*/*",
       },
       body: JSON.stringify(Dato),
     };
     const response = await fetch(url, params);
-     const result = await response.json();
-     return result;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -120,13 +117,13 @@ export async function rubrosP(Dato) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-          Accept: "*/*",
+        Accept: "*/*",
       },
       body: JSON.stringify(Dato),
     };
     const response = await fetch(url, params);
-     const result = await response.json();
-     return result;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -139,34 +136,32 @@ export async function modelosVeApi(id) {
     const url = `${URL}/modelos/${id}`;
     const params = {
       headers: {
-          Accept: "*/*",
+        Accept: "*/*",
       },
     };
-     const response = await fetch(url, params);
-      const result = await response.json();
-       return result;
-   
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
-  } 
+  }
 }
 ////////////////productos por modelo
 
-export async function productosMarModelo(CLI_ID , LPP_ID, Dato) {
-
+export async function productosMarModelo(CLI_ID, LPP_ID, Dato) {
   try {
-    const url = `${URL}/productomodeloautos/${CLI_ID }/${LPP_ID}`;
+    const url = `${URL}/productomodeloautos/${CLI_ID}/${LPP_ID}`;
     const params = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-          Accept: "*/*",
+        Accept: "*/*",
       },
       body: JSON.stringify(Dato),
     };
     const response = await fetch(url, params);
-     const result = await response.json();
-     return result;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -174,20 +169,20 @@ export async function productosMarModelo(CLI_ID , LPP_ID, Dato) {
 
 //////rubro por modelo///
 
-export async function rubroModeloS( Dato) {
+export async function rubroModeloS(Dato) {
   try {
     const url = `${URL}/rubromod`;
     const params = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-          Accept: "*/*",
+        Accept: "*/*",
       },
       body: JSON.stringify(Dato),
     };
     const response = await fetch(url, params);
-     const result = await response.json();
-     return result;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -195,20 +190,19 @@ export async function rubroModeloS( Dato) {
 ////////////// motor/////////
 
 export async function motorRM(Dato) {
-
   try {
     const url = `${URL}/motorud`;
     const params = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-          Accept: "*/*",
+        Accept: "*/*",
       },
       body: JSON.stringify(Dato),
     };
     const response = await fetch(url, params);
-     const result = await response.json();
-     return result;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -216,21 +210,20 @@ export async function motorRM(Dato) {
 
 //////////productps por codigo/////
 
-export async function productosCodigo(CLI_ID , LPP_ID, Dato) {
-
+export async function productosCodigo(CLI_ID, LPP_ID, Dato) {
   try {
-    const url = `${URL}/busqcogido/${CLI_ID }/${LPP_ID}`;
+    const url = `${URL}/buscador/${CLI_ID}/${LPP_ID}`;
     const params = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-          Accept: "*/*",
+        Accept: "*/*",
       },
       body: JSON.stringify(Dato),
     };
     const response = await fetch(url, params);
-     const result = await response.json();
-     return result;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }

@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { AiFillInfoCircle } from "react-icons/ai";
-import { FaMinus, FaPlus } from "react-icons/fa";
 import {
   Breadcrumbs,
   Link,
@@ -19,18 +16,25 @@ import {
   productosMarModelo,
   rubroModeloS,
   motorRM,
+  marcaAutosApi,
 } from "@/pages/api/productos";
-import ProductoInfo from "../producto/ProductoInfo";
-import Contador from "../producto/Contador";
-import Marca from "../producto/Marca";
-import Precio from "../producto/Precio";
+import RowBuscadorVehiculo from "./RowBuscadorVehiculo";
+import RowBuscadorVehiculo2 from "./RowBuscadorVehiculo2";
 
 export default function BuscadorVehiculo(props) {
-  const { comparacion, productos, marcaAutos, auth } = props;
+  const {
+    comparacion,
+    productos,
+    marcaAutos,
+    setMarcaAutos,
+    auth,
+    buscar,
+    setBuscar,
+    setBuscador,
+  } = props;
   const [modelo, setModelo] = useState(null);
   const [rubro, setRubro] = useState([]);
   const [motor, setMotor] = useState([]);
-  const [cantidad, setCantidad] = useState(0);
   const [producto, setProducto] = useState([]);
   const [producto1, setProducto1] = useState([]);
   const [modId, setModId] = useState([]);
@@ -38,12 +42,13 @@ export default function BuscadorVehiculo(props) {
   const [modeloVh, setModeloVh] = useState([]);
   const [selectRubro, setSelectRubro] = useState([]);
   const [motorSelect, setMotorSelect] = useState([]);
-  const [quantities, setQuantities] = useState(
-    producto?.reduce((acc, producto) => {
-      acc[producto?.pre_id] = 0;
-      return acc;
-    }, {})
-  );
+
+  useEffect(() => {
+    (async () => {
+      const response = await marcaAutosApi();
+      setMarcaAutos(response);
+    })();
+  }, []);
 
   useEffect(() => {
     setModelo(null);
@@ -149,11 +154,10 @@ export default function BuscadorVehiculo(props) {
   function handleSelectMotor(event) {
     setMotor(event);
   }
-
-  function handleChangeCantidad(event) {
-    setCantidad(event.target.value);
+  function handleClick(event) {
+    event.preventDefault();
+    console.info("You clicked a breadcrumb.");
   }
-
   const TableRowStyled = styled(TableRow)`
     &:nth-of-type(odd) {
       background-color: #e8e8ff;
@@ -167,11 +171,6 @@ export default function BuscadorVehiculo(props) {
       text-align: center;
     }
   `;
-
-  function handleClick(event) {
-    event.preventDefault();
-    console.info("You clicked a breadcrumb.");
-  }
 
   return (
     <>
@@ -333,185 +332,25 @@ export default function BuscadorVehiculo(props) {
           </TableHead>
           {rubro.length > 0 ? (
             <TableBody className="bg-white">
-              {rubro?.map((rubro) => (
-                <>
-                  <TableRowStyled className="w-full">
-                    <TableCell colSpan={7}>
-                      <div className="border-b border-black text-center w-full flex justify-center">
-                        <p className="text-3xl text-black font-bold border-b-4 border-amarillo w-fit px-4">
-                          {rubro.label}
-                        </p>
-                      </div>
-                    </TableCell>
-                  </TableRowStyled>
-
-                  {producto?.map((producto) => (
-                    <>
-                      {producto.rubro === rubro.label && (
-                        <TableRowStyled className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center">
-                          <TableCell className="w-full text-center">
-                            {/* <div className="font-bold flex items-center space-x-3">
-                              <Image
-                                src="/VKPC-85097_1_SKF.jpg"
-                                height={100}
-                                width={100}
-                                alt="Imagen"
-                                className="mr-3"
-                              />
-                              <div className="space-y-2">
-                                <div className="flex items-center space-x-2">
-                                  <div className="group">
-                                    {" "}
-                                    <AiFillInfoCircle />
-                                    <div className="absolute z-30 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3">
-                                      <div className="grid grid-cols-3 space-x-3">
-                                        <div className="space-y-3">
-                                          <div className="bg-amarillo w-full px-10 py-1 ">
-                                            <p className="text-azul font-bold">
-                                              Interior
-                                            </p>
-                                          </div>
-                                          <p>20</p>
-                                        </div>
-                                        <div className="space-y-3">
-                                          <div className="bg-amarillo w-full px-10 py-1">
-                                            <p className="text-azul font-bold">
-                                              Exterior
-                                            </p>
-                                          </div>
-                                          <p>20</p>
-                                        </div>
-                                        <div className="space-y-3">
-                                          <div className="bg-amarillo w-full px-10 py-1">
-                                            <p className="text-azul font-bold">
-                                              Altura
-                                            </p>
-                                          </div>
-                                          <p>20</p>
-                                        </div>
-                                      </div>
-                                      <div className="space-y-3">
-                                        <div className="bg-amarillo w-full py-1">
-                                          <p className="text-azul font-bold">
-                                            Notas
-                                          </p>
-                                        </div>
-                                        <p>Notas</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <p>VKPC 85097</p>
-                                </div>
-                                <div>
-                                  <p className="font-bold text-black text-left">
-                                    Es parte de
-                                  </p>
-                                  <div className="flex font-normal items-center space-x-2 text-sm text-left">
-                                    <p className="cursor-pointer hover:border-b-2 hover:border-amarillo">
-                                      VKMC 01107 A1
-                                    </p>
-                                    <span>-</span>
-                                    <p className="cursor-pointer hover:border-b-2 hover:border-amarillo">
-                                      VKMC 01107 A1
-                                    </p>
-                                    <span>-</span>
-                                    <p className="cursor-pointer hover:border-b-2 hover:border-amarillo">
-                                      VKMC 01107 A1
-                                    </p>
-                                  </div>
-                                </div>
-                                <div>
-                                  <p className="font-bold text-black text-left">
-                                    Intercambiable
-                                  </p>
-                                  <div className="flex font-normal items-center space-x-2 text-sm text-left">
-                                    <p className="cursor-pointer hover:border-b-2 hover:border-amarillo">
-                                      BA358 VMG
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div> */}
-                            <ProductoInfo producto={producto} />
-                          </TableCell>
-                          <TableCell className="w-full text-center">
-                            <div className="font-black">
-                              <p>1.6 16v</p>
-                            </div>
-                          </TableCell>
-                          <TableCell className="w-full text-center">
-                            <Marca producto={producto} />
-                          </TableCell>
-                          <TableCell className="w-full text-center">
-                            <div className="font-bold ">
-                              <Precio producto={producto} />
-                            </div>
-                          </TableCell>
-                          <TableCell className="w-full text-center">
-                            <div className="font-bold ">
-                              <p>$ 9.668,68</p>
-                            </div>
-                          </TableCell>
-                          {/* Contador */}
-                          <TableCell className="w-full flex justify-center">
-                            <div className="w-full flex justify-center">
-                              <div className="w-full flex items-center  justify-center space-x-2">
-                                <div
-                                  className="text-amarillo p-1 bg-azul rounded-md cursor-pointer hover:bg-amarillo hover:text-azul"
-                                  onClick={
-                                    cantidad < 1
-                                      ? () => setCantidad(0)
-                                      : () => setCantidad(cantidad - 1)
-                                  }
-                                >
-                                  <FaMinus />
-                                </div>
-                                <input
-                                  type="number"
-                                  min="0"
-                                  max="1000"
-                                  value={cantidad < 1 ? 0 : cantidad}
-                                  onChange={handleChangeCantidad}
-                                  className="px-2 rounded-md border border-black h-full text-center"
-                                />
-                                <div
-                                  className="text-amarillo p-1 bg-azul rounded-md cursor-pointer hover:bg-amarillo hover:text-azul"
-                                  onClick={() => setCantidad(cantidad + 1)}
-                                >
-                                  <FaPlus />
-                                </div>
-                              </div>
-                            </div>
-                          </TableCell>
-                          <TableCell className="w-full text-center space-y-2">
-                            <div className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo">
-                              <p>Pedirrrrr</p>
-                            </div>
-                            <div className="font-bold text-green-600">
-                              <p>Disponible</p>
-                            </div>
-
-                            {/* {producto.pre_stock_actual > 0 && (
-                            <div className="font-bold text-green-600">
-                              <p>Disponible</p>
-                            </div>
-                          )} */}
-                            {/* 
-                          {producto.pre_stock_actual === 0 && (
-                            <div className="font-bold text-red-600">
-                              <p>Sin Stock</p>
-                            </div>
-                          )} */}
-                          </TableCell>
-                        </TableRowStyled>
-                      )}
-                    </>
-                  ))}
-                </>
-              ))}
+              <RowBuscadorVehiculo
+                rubros={rubro}
+                producto={producto}
+                buscar={buscar}
+                setBuscar={setBuscar}
+                setBuscador={setBuscador}
+              />
             </TableBody>
           ) : (
-            <p className="text-black"> No hay productos en la cesta</p>
+            <TableBody className="bg-white">
+              <RowBuscadorVehiculo2
+                selectRubro={selectRubro}
+                rubros={rubro}
+                producto={producto}
+                buscar={buscar}
+                setBuscar={setBuscar}
+                setBuscador={setBuscador}
+              />
+            </TableBody>
           )}
         </Table>
       </div>
