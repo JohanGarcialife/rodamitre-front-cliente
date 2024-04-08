@@ -92,7 +92,7 @@ export default function RowBuscadorFamilia(props) {
       key={producto?.pre_id}
       className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
     >
-      <TableCell className="w-full ">
+      <TableCell className="w-full">
         <ProductoInfo
           producto={producto}
           setBuscar={setBuscar}

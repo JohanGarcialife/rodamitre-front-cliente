@@ -39,3 +39,13 @@ body {
     margin: 0;
   }
 }
+
+
+ .css-3w2yfm-ValueContainer  {
+  max-height: 35px;
+  overflow-y: scroll !important;
+ }
+
+ .css-3w2yfm-ValueContainer::-webkit-scrollbar {
+   display: none;
+ }

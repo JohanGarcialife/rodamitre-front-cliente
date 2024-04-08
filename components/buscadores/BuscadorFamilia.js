@@ -633,7 +633,7 @@ export default function BuscadorFamilia(props) {
           </Breadcrumbs>
         </div>
       </div>
-      <div className="flex font-montserrat mt-5 px-2 rounded-t-md bg-white border border-[#D9D9D9]">
+      <div className="flex font-montserrat  px-2 rounded-t-md bg-white border border-[#D9D9D9]">
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Vehículo</p>
 

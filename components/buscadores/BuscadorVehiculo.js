@@ -148,17 +148,16 @@ export default function BuscadorVehiculo(props) {
         Dato
       );
       setProducto(productAuto);
-      setProducto2(productAuto)
+      setProducto2(productAuto);
     }
   };
 
   const handleSelectMotor = async function (event) {
     setMotor(event);
 
-    if (vehiculo && modelo && rubro && !motor?.label > 0 ) {
+    if (vehiculo && modelo && rubro && !motor?.label > 0) {
       setProducto(producto2);
     }
-
 
     var motor = event.map(function (data) {
       var data = data.value;
@@ -192,19 +191,6 @@ export default function BuscadorVehiculo(props) {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
   }
-  const TableRowStyled = styled(TableRow)`
-    &:nth-of-type(odd) {
-      background-color: #e8e8ff;
-    }
-    &:nth-of-type(even) {
-      background-color: #f5f5f5;
-    }
-    & td,
-    th {
-      width: fit-content;
-      text-align: center;
-    }
-  `;
 
   return (
     <>
@@ -276,7 +262,7 @@ export default function BuscadorVehiculo(props) {
           </Breadcrumbs>
         </div>
       </div>
-      <div className="flex font-montserrat mt-5 px-2 rounded-t-md bg-white border border-[#D9D9D9]">
+      <div className="flex font-montserrat  px-2 rounded-t-md bg-white border border-[#D9D9D9]">
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Marcas</p>
 

@@ -4,6 +4,10 @@ import Topbar from "./topbar/Topbar";
 import Menu from "./menu/Menu";
 import { IoIosArrowDown } from "react-icons/io";
 import useAuth from "@/hooks/useAuth";
+import { BsCart4 } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { selectCartItems } from "@/features/cartSlice";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 export default function Header(props) {
   const {
@@ -18,6 +22,8 @@ export default function Header(props) {
   } = props;
   const [scrolled, setScrolled] = useState(false);
   const { auth, logout } = useAuth();
+
+  const items = useSelector(selectCartItems);
 
   useEffect(() => {
     const onScroll = () => {
@@ -82,17 +88,7 @@ export default function Header(props) {
               className="mr-3"
             />
           </div>
-          <div className="px-12">
-            <Topbar
-              show={show}
-              setShow={setShow}
-              handleOpen={handleOpen}
-              handleClose={handleClose}
-              isLogin={isLogin}
-              setIsLogin={setIsLogin}
-              setBuscador={setBuscador}
-            />
-          </div>
+
           <div className="flex items-end pb-3 justify-between px-12">
             <Image
               src="/rodamitre-logo.png"
@@ -140,28 +136,49 @@ export default function Header(props) {
                 </p>
               </div>
             </div>
-            <div className="flex items-center pb-3 text-lg space-x-5">
-              <div
-                onClick={() => setBuscador("Oferta")}
-                className="flex items-center  space-x-1 cursor-pointer"
-              >
-                <p className="text-white  text-center">OFERTAS</p>
-                <IoIosArrowDown className="text-white text-center" />
-              </div>
 
-              <div
-                onClick={() => setBuscador("Reclamo")}
-                className="flex items-center  space-x-1 cursor-pointer"
-              >
-                <p className="text-white  text-center">RECLAMOS</p>
-                <IoIosArrowDown className="text-white text-center" />
+            <div className=" pb-3 text-lg space-x-5">
+              <div className="py-3 mb-3  w-full">
+                <div className="flex justify-end items-center w-full space-x-4">
+                  <div onClick={() => setBuscador("Cart")} className="relative">
+                    <BsCart4 className="text-white text-3xl font-light cursor-pointer" />
+                    {items.length ? (
+                      <div className="bg-amarillo absolute -bottom-4 -right-2 z-30 rounded-full px-2 py-1 ">
+                        <p className="text-sm text-azul font-bold">
+                          {items.length}
+                        </p>
+                      </div>
+                    ) : null}
+                  </div>
+                  <IoArrowBackCircleOutline
+                    onClick={logout}
+                    className="text-white text-3xl font-light cursor-pointer"
+                  />
+                </div>
               </div>
-              <div
-                onClick={() => setBuscador("Garantia")}
-                className="flex items-center  space-x-1 cursor-pointer"
-              >
-                <p className="text-white text-center">GARANTIAS</p>
-                <IoIosArrowDown className="text-white text-center" />
+              <div className="flex items-center space-x-4">
+                <div
+                  onClick={() => setBuscador("Oferta")}
+                  className="flex items-center  space-x-1 cursor-pointer"
+                >
+                  <p className="text-white  text-center">OFERTAS</p>
+                  <IoIosArrowDown className="text-white text-center" />
+                </div>
+
+                <div
+                  onClick={() => setBuscador("Reclamo")}
+                  className="flex items-center  space-x-1 cursor-pointer"
+                >
+                  <p className="text-white  text-center">RECLAMOS</p>
+                  <IoIosArrowDown className="text-white text-center" />
+                </div>
+                <div
+                  onClick={() => setBuscador("Garantia")}
+                  className="flex items-center  space-x-1 cursor-pointer"
+                >
+                  <p className="text-white text-center">GARANTIAS</p>
+                  <IoIosArrowDown className="text-white text-center" />
+                </div>
               </div>
             </div>
           </div>

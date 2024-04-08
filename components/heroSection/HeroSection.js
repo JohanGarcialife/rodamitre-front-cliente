@@ -154,7 +154,7 @@ CLAVE: WPBMPVHD
         </>
       )}
       {auth && (
-        <div className=" pt-72 pb-24">
+        <div className=" pt-[200px] pb-24">
           {buscador === "Familia" && (
             <BuscadorFamilia
               marcaAutos={marcaAutos}
