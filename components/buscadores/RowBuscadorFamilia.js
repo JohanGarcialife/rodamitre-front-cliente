@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 import ProductoInfo from "../producto/ProductoInfo";
@@ -11,7 +11,6 @@ import Contador from "../producto/Contador";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
-  removeFromCart,
   selectCartItemsWithId,
 } from "@/features/cartSlice";
 
@@ -38,10 +37,20 @@ export default function RowBuscadorFamilia(props) {
     spr_id,
     super_rubro,
   } = producto;
+  const [quantity, setQuantity] = useState(0);
 
   const items = useSelector((state) => selectCartItemsWithId(state, pre_id));
 
   const dispatch = useDispatch();
+
+  const handleAddItem = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleRemoveItem = () => {
+    setQuantity(quantity - 1);
+    if (!quantity > 0) return;
+  };
 
   const addItemToCart = () => {
     dispatch(
@@ -65,13 +74,9 @@ export default function RowBuscadorFamilia(props) {
         rup_id,
         spr_id,
         super_rubro,
+        quantity,
       })
     );
-  };
-
-  const removeItemFromCart = () => {
-    if (!items.length > 0) return;
-    dispatch(removeFromCart({ pre_id }));
   };
 
   const TableRowStyled = styled(TableRow)`
@@ -118,16 +123,17 @@ export default function RowBuscadorFamilia(props) {
       <TableCell className="w-full flex justify-center">
         <Contador
           producto={producto}
-          cantidad={items}
-          addItemToCart={addItemToCart}
-          removeItemFromCart={removeItemFromCart}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          handleAddItem={handleAddItem}
+          handleRemoveItem={handleRemoveItem}
         />
       </TableCell>
       <TableCell className="w-full text-center">
-        <Subtotal producto={producto} cantidad={items} />
+        <Subtotal producto={producto} quantity={quantity} />
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
-        <Pedir producto={producto} />
+        <Pedir producto={producto} addItemToCart={addItemToCart} />
       </TableCell>
     </TableRowStyled>
   );

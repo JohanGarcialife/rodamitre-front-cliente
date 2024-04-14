@@ -12,7 +12,7 @@ import Garantia from "../garantias/Garantia";
 import useAuth from "@/hooks/useAuth";
 import { loginApi } from "@/pages/api/clientes";
 import { viewConsulApi, marcaAutosApi } from "@/pages/api/productos";
-import Carrito from "../Cart/Carrito";
+import Carrito from "../cart/Carrito";
 
 export default function HeroSection(props) {
   const { buscador, setBuscador } = props;

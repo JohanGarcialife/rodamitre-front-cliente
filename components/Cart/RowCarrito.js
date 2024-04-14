@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 import moment from "moment";
 import Contador from "../producto/Contador";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  removeFromCart,
-  selectCartTotal,
-} from "@/features/cartSlice";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "@/features/cartSlice";
 import { IoMdCloseCircle } from "react-icons/io";
+import Subtotal from "../producto/Subtotal";
 
 export default function RowCarrito(props) {
-  const { items } = props;
+  const { items, setNewTotalCarrito, newTotalCarrito } = props;
+  const [quantity, setQuantity] = useState(items[0].quantity);
+
   const {
     atributos,
     codigo,
@@ -51,41 +50,52 @@ export default function RowCarrito(props) {
     }
   `;
 
-  const addItemToCart = () => {
-    dispatch(
-      addToCart({
-        atributos,
-        codigo,
-        comentarios,
-        descuento_marca,
-        descuento_producto,
-        descuento_rubro,
-        es_parte_de,
-        formado_por,
-        intercambiables,
-        mar_id,
-        marca_articulo,
-        notas,
-        ppa_precio,
-        pre_id,
-        pre_stock_actual,
-        rubro,
-        rup_id,
-        spr_id,
-        super_rubro,
-      })
-    );
+  const handleAddItem = () => {
+    setQuantity(quantity + 1);
+    setNewTotalCarrito(newTotalCarrito + items[0].ppa_precio);
+    //   addToCart({
+    //     atributos,
+    //     codigo,
+    //     comentarios,
+    //     descuento_marca,
+    //     descuento_producto,
+    //     descuento_rubro,
+    //     es_parte_de,
+    //     formado_por,
+    //     intercambiables,
+    //     mar_id,
+    //     marca_articulo,
+    //     notas,
+    //     ppa_precio,
+    //     pre_id,
+    //     pre_stock_actual,
+    //     rubro,
+    //     rup_id,
+    //     spr_id,
+    //     super_rubro,
+    //     quantity,
+    //   })
+    // );
+  };
+
+  const handleRemoveItem = () => {
+    setQuantity(quantity - 1);
+    setNewTotalCarrito(newTotalCarrito - items[0].ppa_precio);
+    if (!quantity > 0) return;
   };
 
   const removeItemFromCart = () => {
     if (!items.length > 0) return;
     dispatch(removeFromCart({ pre_id }));
+    setNewTotalCarrito(
+      newTotalCarrito - items[0].ppa_precio * items[0].quantity
+    );
   };
 
   return (
     <TableRowStyled className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center">
       <TableCell className="w-full ">
-        <p className="text-black">{moment().format("L LT")} </p>{" "}
+        <p className="text-black">{moment().format("L HH:mm")}hs </p>{" "}
       </TableCell>
       <TableCell className="w-full text-center font-bold">
         <p className="text-azul font-bold">{items[0]?.codigo} </p>
@@ -96,9 +106,11 @@ export default function RowCarrito(props) {
       <TableCell className="w-full text-center">
         <p className="text-black">
           <Contador
-            cantidad={items}
-            addItemToCart={addItemToCart}
-            removeItemFromCart={removeItemFromCart}
+            producto={items[0]}
+            quantity={quantity}
+            setQuantity={setQuantity}
+            handleAddItem={handleAddItem}
+            handleRemoveItem={handleRemoveItem}
           />
         </p>
       </TableCell>
@@ -110,7 +122,7 @@ export default function RowCarrito(props) {
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
         <p className="text-black font-bold">
-          ${items.length * items[0]?.ppa_precio.toFixed(2)}
+          <Subtotal producto={items[0]} quantity={quantity} />
         </p>
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
@@ -118,9 +130,7 @@ export default function RowCarrito(props) {
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
         <div
-          onClick={() =>
-            dispatch(removeFromCart({ pre_id: JSON.parse(pre_id) }))
-          }
+          onClick={() => dispatch(removeItemFromCart)}
           className="text-red-700 rounded-full text-2xl p-1 cursor-pointer"
         >
           <IoMdCloseCircle />

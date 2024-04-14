@@ -1,11 +1,14 @@
 import React from "react";
 
 export default function Pedir(props) {
-  const { producto } = props;
+  const { producto, addItemToCart } = props;
 
   return (
     <div>
-      <div className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo">
+      <div
+        onClick={addItemToCart}
+        className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo"
+      >
         <p>Pedir</p>
       </div>
 

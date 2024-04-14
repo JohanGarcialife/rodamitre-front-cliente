@@ -1,22 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 import ProductoInfo from "../producto/ProductoInfo";
 import Contador from "../producto/Contador";
 import Marca from "../producto/Marca";
 import Precio from "../producto/Precio";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  removeFromCart,
-  selectCartItemsWithId,
-} from "@/features/cartSlice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/features/cartSlice";
 import Pedir from "../producto/Pedir";
 import Motor from "../productos/Motor";
 
 export default function RowBuscadorVehiculo2(props) {
-  const { rubros, producto, buscar, setBuscar, setBuscador, selectRubro } =
-    props;
+  const { producto, buscar, setBuscar, setBuscador, selectRubro } = props;
 
   const {
     atributos,
@@ -39,10 +34,18 @@ export default function RowBuscadorVehiculo2(props) {
     spr_id,
     super_rubro,
   } = producto;
-
-  const items = useSelector((state) => selectCartItemsWithId(state, pre_id));
+  const [quantity, setQuantity] = useState(0);
 
   const dispatch = useDispatch();
+
+  const handleAddItem = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleRemoveItem = () => {
+    setQuantity(quantity - 1);
+    if (!quantity > 0) return;
+  };
 
   const addItemToCart = () => {
     dispatch(
@@ -66,13 +69,9 @@ export default function RowBuscadorVehiculo2(props) {
         rup_id,
         spr_id,
         super_rubro,
+        quantity,
       })
     );
-  };
-
-  const removeItemFromCart = () => {
-    if (!items.length > 0) return;
-    dispatch(removeFromCart({ pre_id }));
   };
 
   const TableRowStyled = styled(TableRow)`
@@ -88,8 +87,6 @@ export default function RowBuscadorVehiculo2(props) {
       text-align: center;
     }
   `;
-
-  console.log(producto, "vehiculo2")
 
   return (
     <>
@@ -117,7 +114,7 @@ export default function RowBuscadorVehiculo2(props) {
                     />
                   </TableCell>
                   <TableCell className="w-full text-center">
-                    <Motor motor = {producto?.motor}/>
+                    <Motor motor={producto?.motor} />
                     {/* <div className="font-black">
                       <p>1.6 16v</p>
                     </div> */}
@@ -139,13 +136,14 @@ export default function RowBuscadorVehiculo2(props) {
                   <TableCell className="w-full flex justify-center">
                     <Contador
                       producto={producto}
-                      cantidad={items}
-                      addItemToCart={addItemToCart}
-                      removeItemFromCart={removeItemFromCart}
+                      quantity={quantity}
+                      setQuantity={setQuantity}
+                      handleAddItem={handleAddItem}
+                      handleRemoveItem={handleRemoveItem}
                     />
                   </TableCell>
                   <TableCell className="w-full text-center space-y-2">
-                    <Pedir producto={producto} />
+                    <Pedir producto={producto} addItemToCart={addItemToCart} />
                   </TableCell>
                 </TableRowStyled>
               )}

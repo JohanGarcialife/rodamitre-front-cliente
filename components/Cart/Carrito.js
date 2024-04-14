@@ -18,6 +18,8 @@ export default function Carrito() {
 
   const totalCarrito = useSelector(selectCartTotal);
 
+  const [newTotalCarrito, setNewTotalCarrito] = useState(totalCarrito);
+
   useEffect(() => {
     const itemsAgrupados = items.reduce((results, item) => {
       (results[item.pre_id] = results[item.pre_id] || []).push(item);
@@ -88,6 +90,8 @@ export default function Carrito() {
                 <RowCarrito
                   items={items}
                   itemsAgrupadosEnCarrito={itemsAgrupadosEnCarrito}
+                  setNewTotalCarrito={setNewTotalCarrito}
+                  newTotalCarrito={newTotalCarrito}
                 />
               ))}
             </TableBody>
@@ -102,7 +106,9 @@ export default function Carrito() {
 
                 <TableCell>
                   <div className="font-bold text-azul text-lg flex justify-center">
-                    <p>${((totalCarrito.toFixed(2) / 100) * 5).toFixed(2)}</p>
+                    <p>
+                      ${((newTotalCarrito.toFixed(2) / 100) * 5).toFixed(2)}
+                    </p>
                   </div>
                 </TableCell>
                 <TableCell></TableCell>
@@ -151,7 +157,7 @@ export default function Carrito() {
                 <input
                   type="text"
                   name="observaciones"
-                  className="bg-transparent p-3 w-4/5"
+                  className="bg-transparent text-black p-3 w-4/5"
                   placeholder="Observaciones"
                   //onChange={handleSubmit}
                 />
@@ -173,7 +179,7 @@ export default function Carrito() {
                 <p className="text-black">
                   Subtotal:{" "}
                   <span className="text-azul font-bold">
-                    ${totalCarrito.toFixed(2)}
+                    ${newTotalCarrito.toFixed(2)}
                   </span>
                 </p>
                 <p className="text-green-600 ">
@@ -182,7 +188,7 @@ export default function Carrito() {
                 <p className="text-black text-2xl">
                   Subtotal:{" "}
                   <span className="text-azul font-bold">
-                    ${totalCarrito.toFixed(2)}
+                    ${newTotalCarrito.toFixed(2)}
                   </span>
                 </p>
                 <p className="text-black text-2xl">+ Impuestos</p>

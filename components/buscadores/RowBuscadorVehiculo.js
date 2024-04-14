@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 import ProductoInfo from "../producto/ProductoInfo";
@@ -6,16 +6,13 @@ import Contador from "../producto/Contador";
 import Marca from "../producto/Marca";
 import Precio from "../producto/Precio";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  removeFromCart,
-  selectCartItemsWithId,
-} from "@/features/cartSlice";
+import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
 import Motor from "../productos/Motor";
+import Pedir from "../producto/Pedir";
 
 export default function RowBuscadorVehiculo(props) {
-  const { rubros, producto, buscar, setBuscar, setBuscador, selectRubro } =
-    props;
+  const { rubros, producto } = props;
+  const [quantity, setQuantity] = useState(0);
 
   const {
     atributos,
@@ -39,9 +36,16 @@ export default function RowBuscadorVehiculo(props) {
     super_rubro,
   } = producto;
 
-  const items = useSelector((state) => selectCartItemsWithId(state, pre_id));
-
   const dispatch = useDispatch();
+
+  const handleAddItem = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleRemoveItem = () => {
+    setQuantity(quantity - 1);
+    if (!quantity > 0) return;
+  };
 
   const addItemToCart = () => {
     dispatch(
@@ -65,16 +69,11 @@ export default function RowBuscadorVehiculo(props) {
         rup_id,
         spr_id,
         super_rubro,
+        quantity,
       })
     );
   };
 
-console.log(producto, "ver")
-
-  const removeItemFromCart = () => {
-    if (!items.length > 0) return;
-    dispatch(removeFromCart({ pre_id }));
-  };
   const TableRowStyled = styled(TableRow)`
     &:nth-of-type(odd) {
       background-color: #e8e8ff;
@@ -104,8 +103,6 @@ console.log(producto, "ver")
           </TableRowStyled>
 
           {producto?.map((producto) => (
-
-      
             <>
               {producto.rubro === rubro.label && (
                 <TableRowStyled className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center">
@@ -113,10 +110,9 @@ console.log(producto, "ver")
                     <ProductoInfo producto={producto} />
                   </TableCell>
                   <TableCell className="w-full text-center">
+                    <Motor motor={producto?.motor} />
 
-                  <Motor motor = {producto?.motor}/>
-                    
-                   {/*  <div className="font-black">
+                    {/*  <div className="font-black">
                       <p>1.6 16v</p>
                     </div> */}
                   </TableCell>
@@ -137,18 +133,14 @@ console.log(producto, "ver")
                   <TableCell className="w-full flex justify-center">
                     <Contador
                       producto={producto}
-                      cantidad={items}
-                      addItemToCart={addItemToCart}
-                      removeItemFromCart={removeItemFromCart}
+                      quantity={quantity}
+                      setQuantity={setQuantity}
+                      handleAddItem={handleAddItem}
+                      handleRemoveItem={handleRemoveItem}
                     />
                   </TableCell>
                   <TableCell className="w-full text-center space-y-2">
-                    <div className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo">
-                      <p>Pedir</p>
-                    </div>
-                    <div className="font-bold text-green-600">
-                      <p>Disponible</p>
-                    </div>
+                    <Pedir producto={producto} addItemToCart={addItemToCart} />
                   </TableCell>
                 </TableRowStyled>
               )}

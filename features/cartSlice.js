@@ -11,6 +11,7 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       state.items = [...state.items, action.payload];
     },
+
     removeFromCart: (state, action) => {
       const index = state.items.findIndex(
         (item) => item.pre_id === action.payload.pre_id
@@ -32,7 +33,8 @@ export const cartSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, deleteItemFromCart } =
+  cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.items;
 
@@ -40,5 +42,8 @@ export const selectCartItemsWithId = (state, pre_id) =>
   state.cart.items.filter((item) => item.pre_id === pre_id);
 
 export const selectCartTotal = (state) =>
-  state.cart.items.reduce((total, item) => (total += item.ppa_precio), 0);
+  state.cart.items.reduce(
+    (total, item) => (total += item.ppa_precio * item.quantity),
+    0
+  );
 export default cartSlice.reducer;

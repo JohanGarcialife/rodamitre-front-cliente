@@ -35,8 +35,6 @@ export default function BuscadorVehiculo(props) {
   const [modeloVh, setModeloVh] = useState([]);
   const [selectRubro, setSelectRubro] = useState([]);
   const [motorSelect, setMotorSelect] = useState([]);
-  console.log(rubro, "rubro");
-  console.log(modId);
 
   useEffect(() => {
     (async () => {
@@ -140,7 +138,6 @@ export default function BuscadorVehiculo(props) {
     if (event.length > 0) {
       const motorTT = await motorRM(Dato);
       setMotorSelect(motorTT);
-      console.log(motorTT, "value motor");
 
       const productAuto = await productosMarModelo(
         auth.CLI_ID,
