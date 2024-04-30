@@ -14,7 +14,7 @@ import {
   TableFooter,
   TablePagination,
 } from "@mui/material";
-
+import { FaMinus, FaPlus } from "react-icons/fa6";
 import { MdNavigateNext } from "react-icons/md";
 import Select from "react-select";
 import { useTheme } from "@mui/material/styles";
@@ -28,15 +28,8 @@ import {
 import RowBuscadorFamilia from "./RowBuscadorFamilia";
 
 export default function BuscadorFamilia(props) {
-  const {
-    comparacion,
-    marcaAutos,
-    auth,
-    setReloadUser,
-    buscar,
-    setBuscar,
-    setBuscador,
-  } = props;
+  const { marcaAutos, auth, setReloadUser, buscar, setBuscar, setBuscador } =
+    props;
   const [productos1, setProductos1] = useState([]);
   const [productos, setProductos] = useState([]);
   const [marID, setMarID] = useState();
@@ -52,6 +45,7 @@ export default function BuscadorFamilia(props) {
   const [vehiculoName, setVehiculoName] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [expand, setExpand] = useState("noExpand");
 
   useEffect(() => {
     setFamilia(null);
@@ -633,19 +627,37 @@ export default function BuscadorFamilia(props) {
           </Breadcrumbs>
         </div>
       </div>
-      <div className="flex font-montserrat  px-2 rounded-t-md bg-white border border-[#D9D9D9]">
+
+      <div className="grid grid-cols-4 gap-2 font-montserrat  px-2 rounded-t-md bg-white border border-[#D9D9D9]">
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Vehículo</p>
-
-          <Select
-            isMulti
-            name="vehiculos"
-            closeMenuOnSelect={false}
-            options={autoSelect}
-            className="text-black font-montserrat"
-            placeholder="Todos los vehículos..."
-            onChange={handleChangeVehiculo}
-          />
+          <div className="flex space-x-2 w-full items-center">
+            <Select
+              isMulti
+              name="vehiculos"
+              closeMenuOnSelect={false}
+              options={autoSelect}
+              className={
+                expand === "expand"
+                  ? "text-black font-montserrat w-full expand"
+                  : "text-black font-montserrat w-full"
+              }
+              placeholder="Todos los vehículos..."
+              onChange={handleChangeVehiculo}
+            />
+            {expand === "noExpand" && (
+              <FaPlus
+                onClick={() => setExpand("expand")}
+                className="text-base text-azul cursor-pointer plus"
+              />
+            )}
+            {expand === "expand" && (
+              <FaMinus
+                onClick={() => setExpand("noExpand")}
+                className="text-base text-azul cursor-pointer"
+              />
+            )}
+          </div>
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Familias</p>
@@ -660,17 +672,34 @@ export default function BuscadorFamilia(props) {
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Marcas</p>
-
-          <Select
-            value={marcaId}
-            isMulti
-            name="marcas"
-            closeMenuOnSelect={false}
-            options={marcaArticuloSelect}
-            className="text-black font-montserrat"
-            placeholder="Todas las marcas..."
-            onChange={handleChangeMarca}
-          />
+          <div className="flex space-x-2 w-full items-center">
+            <Select
+              value={marcaId}
+              isMulti
+              name="marcas"
+              closeMenuOnSelect={false}
+              options={marcaArticuloSelect}
+              className={
+                expand === "expand"
+                  ? "text-black font-montserrat w-full expand"
+                  : "text-black font-montserrat w-full"
+              }
+              placeholder="Todas las marcas..."
+              onChange={handleChangeMarca}
+            />
+            {expand === "noExpand" && (
+              <FaPlus
+                onClick={() => setExpand("expand")}
+                className="text-base text-azul cursor-pointer plus"
+              />
+            )}
+            {expand === "expand" && (
+              <FaMinus
+                onClick={() => setExpand("noExpand")}
+                className="text-base text-azul cursor-pointer"
+              />
+            )}
+          </div>
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Rubros</p>
@@ -684,6 +713,7 @@ export default function BuscadorFamilia(props) {
           />
         </div>
       </div>
+
       <div className=" font-montserrat">
         <Table>
           <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">

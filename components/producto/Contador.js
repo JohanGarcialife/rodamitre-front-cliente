@@ -20,14 +20,16 @@ export default function Contador(props) {
           </div>
         )}
         <div className="bg-white border flex justify-center border-black rounded-md py-1 px-2">
-          {/* <p className="text-black font-bold">{cantidad?.length} </p> */}
           <input
-            value={quantity < 0 ? 0 : quantity}
+            type="number"
             onChange={(e) => {
               e.target.value === "-"
                 ? setQuantity(0)
+                : setQuantity(parseInt(e.target.value)) || e.target.value === ""
+                ? setQuantity(0)
                 : setQuantity(parseInt(e.target.value));
             }}
+            value={quantity < 0 ? 0 : quantity}
             className="text-black text-center font-bold"
           />
         </div>

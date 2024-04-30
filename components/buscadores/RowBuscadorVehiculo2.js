@@ -88,6 +88,8 @@ export default function RowBuscadorVehiculo2(props) {
     }
   `;
 
+  console.log(selectRubro);
+
   return (
     <>
       {selectRubro?.map((rubro) => (
@@ -129,7 +131,7 @@ export default function RowBuscadorVehiculo2(props) {
                   </TableCell>
                   <TableCell className="w-full text-center">
                     <div className="font-bold ">
-                      <p>$ 9.668,68</p>
+                      <p>$ 9.668,6800000</p>
                     </div>
                   </TableCell>
                   {/* { Contador } */}

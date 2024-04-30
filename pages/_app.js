@@ -3,10 +3,12 @@ import { jwtDecode } from "jwt-decode";
 import { ToastContainer } from "react-toastify";
 import AuthContext from "../context/AuthContext.js";
 import { setToken, getToken, removeToken } from "./api/token";
-import "@/styles/globals.css";
-import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import { store } from "./store.js";
+import "@/styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
+import "../components/buscadores/BuscadorFamilia.scss";
+// import "../components/buscadores/BuscadorVehiculo.scss";
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);

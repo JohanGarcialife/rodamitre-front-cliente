@@ -18,6 +18,7 @@ import {
   motorRM,
   marcaAutosApi,
 } from "@/pages/api/productos";
+import { FaMinus, FaPlus } from "react-icons/fa6";
 import RowBuscadorVehiculo from "./RowBuscadorVehiculo";
 import RowBuscadorVehiculo2 from "./RowBuscadorVehiculo2";
 
@@ -35,6 +36,7 @@ export default function BuscadorVehiculo(props) {
   const [modeloVh, setModeloVh] = useState([]);
   const [selectRubro, setSelectRubro] = useState([]);
   const [motorSelect, setMotorSelect] = useState([]);
+  const [expand, setExpand] = useState("noExpand");
 
   useEffect(() => {
     (async () => {
@@ -259,7 +261,7 @@ export default function BuscadorVehiculo(props) {
           </Breadcrumbs>
         </div>
       </div>
-      <div className="flex font-montserrat  px-2 rounded-t-md bg-white border border-[#D9D9D9]">
+      <div className="grid grid-cols-4 gap-2 font-montserrat  px-2 rounded-t-md bg-white border border-[#D9D9D9]">
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Marcas</p>
 
@@ -283,31 +285,65 @@ export default function BuscadorVehiculo(props) {
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Rubros</p>
-
-          <Select
-            isMulti
-            value={rubro}
-            closeMenuOnSelect={false}
-            name="rubros"
-            options={rubroSelect}
-            className="text-black font-montserrat"
-            placeholder="Todos los rubros..."
-            onChange={handleSelectRubro}
-          />
+          <div className="flex space-x-2 w-full items-center">
+            <Select
+              isMulti
+              value={rubro}
+              closeMenuOnSelect={false}
+              name="rubros"
+              options={rubroSelect}
+              className={
+                expand === "expand"
+                  ? "text-black font-montserrat w-full expand"
+                  : "text-black font-montserrat w-full"
+              }
+              placeholder="Todos los rubros..."
+              onChange={handleSelectRubro}
+            />
+            {expand === "noExpand" && (
+              <FaPlus
+                onClick={() => setExpand("expand")}
+                className="text-base text-azul cursor-pointer plus"
+              />
+            )}
+            {expand === "expand" && (
+              <FaMinus
+                onClick={() => setExpand("noExpand")}
+                className="text-base text-azul cursor-pointer"
+              />
+            )}
+          </div>
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Motores</p>
-
-          <Select
-            isMulti
-            value={motor}
-            closeMenuOnSelect={false}
-            name="motores"
-            options={motSelect}
-            className="text-black font-montserrat"
-            placeholder="Todos los motores..."
-            onChange={handleSelectMotor}
-          />
+          <div className="flex space-x-2 w-full items-center">
+            <Select
+              isMulti
+              value={motor}
+              closeMenuOnSelect={false}
+              name="motores"
+              options={motSelect}
+              className={
+                expand === "expand"
+                  ? "text-black font-montserrat w-full expand"
+                  : "text-black font-montserrat w-full"
+              }
+              placeholder="Todos los motores..."
+              onChange={handleSelectMotor}
+            />
+            {expand === "noExpand" && (
+              <FaPlus
+                onClick={() => setExpand("expand")}
+                className="text-base text-azul cursor-pointer plus"
+              />
+            )}
+            {expand === "expand" && (
+              <FaMinus
+                onClick={() => setExpand("noExpand")}
+                className="text-base text-azul cursor-pointer"
+              />
+            )}
+          </div>
         </div>
       </div>
       <div className=" flex justify-center font-montserrat">
