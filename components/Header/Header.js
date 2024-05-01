@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Topbar from "./topbar/Topbar";
 import Menu from "./menu/Menu";
-import { IoIosArrowDown } from "react-icons/io";
 import useAuth from "@/hooks/useAuth";
 import { BsCart4 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { selectCartItems } from "@/features/cartSlice";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import MenuMulti from "./MenuMulti/MenuMulti";
 
 export default function Header(props) {
   const {
@@ -22,8 +21,8 @@ export default function Header(props) {
     buscador,
   } = props;
   const [scrolled, setScrolled] = useState(false);
-  const { auth, logout } = useAuth();
 
+  const { auth, logout } = useAuth();
   const items = useSelector(selectCartItems);
 
   useEffect(() => {
@@ -160,46 +159,8 @@ export default function Header(props) {
                   />
                 </div>
               </div>
-
-              <div className="flex justify-start items-center space-x-4">
-                {/* Ofertas */}
-                <div
-                  onClick={() => setBuscador("Oferta")}
-                  className="flex items-center  space-x-1 cursor-pointer"
-                >
-                  <p className="text-white  text-center">OFERTAS</p>
-                  <IoIosArrowDown className="text-white text-center" />
-                </div>
-
-                {/* Reclamos */}
-                <div className="group">
-                  <div
-                    onClick={() => setBuscador("Reclamo")}
-                    className="flex items-center  space-x-1 cursor-pointer"
-                  >
-                    <p className="text-white  text-center">RECLAMOS</p>
-                    <IoIosArrowDown className="text-white text-center" />
-                  </div>
-                  {/* Dentro de reclamos */}
-                  <div className="absolute z-30 hidden group-hover:block bg-white text-black py-3 rounded-md border border-gris space-y-3">
-                    {/* Reclamos Operativos */}
-                    <div className="group px-3 flex items-center space-x-3 hover:bg-amarillo cursor-pointer">
-                      <p className="text-black text-bold m-0 font-bold">
-                        Reclamos operativos
-                      </p>
-                      <MdOutlineKeyboardArrowRight className="text-black font-bold m-0 text-2xl" />
-                    </div>
-                    {/* Garantías */}
-                    <div className="group px-3 flex items-center space-x-3 hover:bg-amarillo cursor-pointer">
-                      <p className="text-black text-bold m-0 font-bold">
-                        Garantías
-                      </p>
-                      <MdOutlineKeyboardArrowRight className="text-black font-bold m-0 text-2xl" />
-                    </div>
-                  </div>
-                </div>
-                {/* Administración */}
-              </div>
+              
+              <MenuMulti buscador={buscador} setBuscador={setBuscador} />
             </div>
           </div>
         </div>
