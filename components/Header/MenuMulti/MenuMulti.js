@@ -11,38 +11,38 @@ export default function MenuMulti(props) {
       submenu: [
         {
           title: "Artículos en oferta",
-          url: "/",
+          buscador: "/",
           submenu: [
             {
               title: "Todo",
-              url: "/",
+              buscador: "/",
             },
             {
               title: "Bomba de Agua",
-              url: "/",
+              buscador: "/",
             },
             {
               title: "Kit de distribución",
-              url: "/",
+              buscador: "/",
             },
             {
               title: "Líquido de frenos",
-              url: "/",
+              buscador: "/",
             },
             {
               title: "Líquido refrigerante",
-              url: "/",
+              buscador: "/",
             },
           ],
         },
 
         {
           title: "Flyers",
-          url: "/",
+          buscador: "/",
         },
         {
           title: "Novedades",
-          url: "/",
+          buscador: "/",
         },
       ],
     },
@@ -53,29 +53,29 @@ export default function MenuMulti(props) {
       submenu: [
         {
           title: "Reclamos operativos",
-          url: "/",
+          buscador: "Reclamo",
           submenu: [
             {
               title: "Nuevo Reclamo",
-              url: "/",
+              buscador: "Reclamo",
             },
             {
               title: "Seguimiento",
-              url: "/",
+              buscador: "Reclamo",
             },
           ],
         },
         {
           title: "Garantías",
-          url: "/",
+          buscador: "Garantia",
           submenu: [
             {
               title: "Nueva Garantía",
-              url: "/",
+              buscador: "Garantia",
             },
             {
               title: "Seguimiento",
-              url: "/",
+              buscador: "Garantia",
             },
           ],
         },
@@ -88,11 +88,11 @@ export default function MenuMulti(props) {
       submenu: [
         {
           title: "Lista de precios",
-          url: "/",
+          buscador: "/",
         },
         {
           title: "Panel de control",
-          url: "/",
+          buscador: "/",
         },
       ],
     },
