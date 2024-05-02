@@ -4,9 +4,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import Dropdown from "./Dropdown";
 
 export default function MenuItems(props) {
-  const { setBuscador, buscador, items, depthLevel } = props;
+  const { setBuscador, buscador, items, depthLevel, url } = props;
   const [dropdown, setDropdown] = useState(false);
-  console.log(buscador);
 
   const onMouseEnter = () => {
     setDropdown(true);
@@ -21,7 +20,11 @@ export default function MenuItems(props) {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       className="flex items-center  space-x-1 cursor-pointer"
-      onClick={() => setBuscador(items.buscador)}
+      onClick={
+        items.busquedaId === items.buscador
+          ? () => setBuscador(items.buscador)
+          : null
+      }
     >
       {items.submenu ? (
         <div className="w-full">
@@ -29,11 +32,15 @@ export default function MenuItems(props) {
             type="button"
             aria-haspopup="menu"
             aria-expanded={dropdown ? "true" : "false"}
-            onClick={() => setBuscador(items.buscador)}
+            onClick={
+              items.busquedaId === items.buscador
+                ? () => setBuscador(items.buscador)
+                : null
+            }
             className={
               depthLevel > 0
-                ? "flex items-center hover:bg-amarillo px-2 w-full"
-                : "flex items-center space-x-2 w-full"
+                ? "flex items-center hover:bg-amarillo px-2 w-full text-black"
+                : "flex items-center space-x-2 w-full text-white"
             }
           >
             {items.title}{" "}
@@ -54,7 +61,11 @@ export default function MenuItems(props) {
       ) : (
         <p
           className="hover:bg-amarillo px-2 w-full"
-          onClick={() => setBuscador(items.buscador)}
+          onClick={
+            items.busquedaId === items.buscador
+              ? () => setBuscador(items.buscador)
+              : null
+          }
         >
           {items.title}
         </p>

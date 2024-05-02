@@ -187,7 +187,7 @@ CLAVE: WPBMPVHD
           )}
           {buscador === "Oferta" && <BuscadorOferta />}
           {buscador === "Reclamo" && <Reclamos />}
-          {buscador === "Garantia" && <Garantia />}
+          {buscador === "Garantías" && <Garantia />}
           {buscador === "Cart" && <Carrito />}
         </div>
       )}

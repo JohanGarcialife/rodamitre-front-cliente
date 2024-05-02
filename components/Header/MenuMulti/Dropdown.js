@@ -4,7 +4,8 @@ import MenuItems from "./MenuItems";
 export default function Dropdown(props) {
   const { setBuscador, buscador, submenus, dropdown, depthLevel } = props;
   const newDepthLevel = depthLevel + 1;
-  const dropdownClass = newDepthLevel > 1 ? "top-0 left-full " : "";
+  const dropdownClass =
+    newDepthLevel > 1 ? "top-0 left-full text-black" : "text-black";
 
   return (
     <div>
