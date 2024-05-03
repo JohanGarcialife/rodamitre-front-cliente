@@ -39,7 +39,7 @@ export default function HeroSection(props) {
     },
   });
 
-  useEffect(() => {
+  useEffect(() => { 
     (async () => {
       const response = await marcaAutosApi();
       setMarcaAutos(response);
