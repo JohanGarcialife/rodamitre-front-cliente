@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { selectCartItems } from "@/features/cartSlice";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import MenuMulti from "./MenuMulti/MenuMulti";
+import Link from "next/link";
 
 export default function Header(props) {
   const {
@@ -107,36 +108,42 @@ export default function Header(props) {
                 </p>
               </div>
               <div className="flex items-center space-x-5">
-                <p
-                  onClick={() => setBuscador("Familia")}
-                  className={
-                    buscador === "Familia"
-                      ? "text-white text-lg text-center cursor-pointer border-b-2 border-amarillo"
-                      : "text-white text-lg text-center cursor-pointer"
-                  }
-                >
-                  FAMILIA
-                </p>
-                <p
-                  onClick={() => setBuscador("Vehiculo")}
-                  className={
-                    buscador === "Vehiculo"
-                      ? "text-white text-lg text-center cursor-pointer border-b-2 border-amarillo"
-                      : "text-white text-lg text-center cursor-pointer"
-                  }
-                >
-                  VEHICULO
-                </p>
-                <p
-                  onClick={() => setBuscador("Rapida")}
-                  className={
-                    buscador === "Rapida"
-                      ? "text-white text-lg text-center cursor-pointer border-b-2 border-amarillo"
-                      : "text-white text-lg text-center cursor-pointer"
-                  }
-                >
-                  RAPIDA
-                </p>
+                <Link href="/buscadorFamilia">
+                  <p
+                    //onClick={() => setBuscador("Familia")}
+                    className={
+                      buscador === "Familia"
+                        ? "text-white text-lg text-center cursor-pointer border-b-2 border-amarillo"
+                        : "text-white text-lg text-center cursor-pointer"
+                    }
+                  >
+                    FAMILIA
+                  </p>
+                </Link>
+                <Link href="/buscadorVehiculo">
+                  <p
+                    //onClick={() => setBuscador("Vehiculo")}
+                    className={
+                      buscador === "Vehiculo"
+                        ? "text-white text-lg text-center cursor-pointer border-b-2 border-amarillo"
+                        : "text-white text-lg text-center cursor-pointer"
+                    }
+                  >
+                    VEHICULO
+                  </p>
+                </Link>
+                <Link href="/busquedaRapida">
+                  <p
+                    //onClick={() => setBuscador("Rapida")}
+                    className={
+                      buscador === "Rapida"
+                        ? "text-white text-lg text-center cursor-pointer border-b-2 border-amarillo"
+                        : "text-white text-lg text-center cursor-pointer"
+                    }
+                  >
+                    RAPIDA
+                  </p>
+                </Link>
               </div>
             </div>
 
@@ -159,7 +166,7 @@ export default function Header(props) {
                   />
                 </div>
               </div>
-              
+
               <MenuMulti buscador={buscador} setBuscador={setBuscador} />
             </div>
           </div>

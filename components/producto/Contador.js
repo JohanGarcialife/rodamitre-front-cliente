@@ -2,7 +2,8 @@ import React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
 export default function Contador(props) {
-  const { quantity, setQuantity, handleAddItem, handleRemoveItem } = props;
+  const { quantity, setQuantity, handleAddItem, handleRemoveItem, producto } =
+    props;
 
   return (
     <div className="w-full flex justify-center">
@@ -21,7 +22,7 @@ export default function Contador(props) {
         )}
         <div className="bg-white border flex justify-center border-black rounded-md py-1 px-2">
           <input
-            type="number"
+            //type="number"
             onChange={(e) => {
               e.target.value === "-"
                 ? setQuantity(0)

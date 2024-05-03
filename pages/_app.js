@@ -8,7 +8,6 @@ import { store } from "./store.js";
 import "@/styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import "../components/buscadores/BuscadorFamilia.scss";
-// import "../components/buscadores/BuscadorVehiculo.scss";
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);

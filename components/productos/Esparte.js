@@ -4,8 +4,7 @@ export default function Esparte(props) {
   const { esparte, setBuscar, setBuscador } = props;
 
   let arr = esparte?.split(",");
-  
-  
+
   function handlebuscar(event) {
     setBuscar(event);
     //router.push(`/?query=${event}`)
@@ -13,14 +12,14 @@ export default function Esparte(props) {
   }
 
   return (
-    <div className="flex font-normal ">
+    <div className="grid grid-cols-5 gap-2">
       {arr?.map((ar) => (
-        <div className="flex flex-row ">
+        <div className="text-center ">
           <p
-            className="cursor-pointer hover:border-b-2 hover:border-amarillo "
+            className="cursor-pointer hover:border-b-2 hover:border-amarillo flex flex-wrap "
             onClick={() => handlebuscar(ar)}
           >
-            {ar}&nbsp;&nbsp;
+            {ar}
           </p>
         </div>
       ))}

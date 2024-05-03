@@ -7,12 +7,13 @@ import BuscadorFamilia from "../buscadores/BuscadorFamilia";
 import BuscadorVehiculo from "../buscadores/BuscadorVehiculo";
 import BuscadorRapida from "../buscadores/BuscadorRapida";
 import BuscadorOferta from "../buscadores/BuscadorOferta";
-import Reclamos from "../reclamos/Reclamos";
+import Reclamos from "../reclamos/NuevoReclamo";
 import Garantia from "../garantias/Garantia";
 import useAuth from "@/hooks/useAuth";
 import { loginApi } from "@/pages/api/clientes";
 import { viewConsulApi, marcaAutosApi } from "@/pages/api/productos";
 import Carrito from "../cart/Carrito";
+import NuevaGarantia from "../garantias/NuevaGarantia";
 
 export default function HeroSection(props) {
   const { buscador, setBuscador } = props;
@@ -188,6 +189,7 @@ CLAVE: WPBMPVHD
           {buscador === "Oferta" && <BuscadorOferta />}
           {buscador === "Reclamo" && <Reclamos />}
           {buscador === "Garantías" && <Garantia />}
+          {buscador === "NuevaGarantia" && <NuevaGarantia />}
           {buscador === "Cart" && <Carrito />}
         </div>
       )}

@@ -6,89 +6,89 @@ export default function MenuMulti(props) {
 
   const menuItemsData = [
     {
-      busquedaId: "Oferta",
+      busquedaId: "ofertas",
       title: "OFERTA",
-      buscador: "Oferta",
+      buscador: "ofertas",
       submenu: [
         {
-          busquedaId: "Oferta",
+          busquedaId: "ofertas",
           title: "Artículos en oferta",
-          buscador: "/",
-          submenu: [
-            {
-              busquedaId: "Oferta",
-              title: "Todo",
-              buscador: "/",
-            },
-            {
-              busquedaId: "Oferta",
-              title: "Bomba de Agua",
-              buscador: "/",
-            },
-            {
-              busquedaId: "Oferta",
-              title: "Kit de distribución",
-              buscador: "/",
-            },
-            {
-              busquedaId: "Oferta",
-              title: "Líquido de frenos",
-              buscador: "/",
-            },
-            {
-              busquedaId: "Oferta",
-              title: "Líquido refrigerante",
-              buscador: "/",
-            },
-          ],
+          buscador: "ofertas",
+          // submenu: [
+          //   {
+          //     busquedaId: "Oferta",
+          //     title: "Todo",
+          //     buscador: "/",
+          //   },
+          //   {
+          //     busquedaId: "Oferta",
+          //     title: "Bomba de Agua",
+          //     buscador: "/",
+          //   },
+          //   {
+          //     busquedaId: "Oferta",
+          //     title: "Kit de distribución",
+          //     buscador: "/",
+          //   },
+          //   {
+          //     busquedaId: "Oferta",
+          //     title: "Líquido de frenos",
+          //     buscador: "/",
+          //   },
+          //   {
+          //     busquedaId: "Oferta",
+          //     title: "Líquido refrigerante",
+          //     buscador: "/",
+          //   },
+          // ],
         },
 
         {
           title: "Flyers",
-          buscador: "/",
+          buscador: "ofertas",
         },
         {
           title: "Novedades",
-          buscador: "/",
+          buscador: "ofertas",
         },
       ],
     },
 
     {
       title: "RECLAMOS",
-      buscador: "Reclamo",
+      buscador: "seguimientoReclamo",
       submenu: [
         {
           busquedaId: "Reclamo",
           title: "Reclamos operativos",
-          buscador: "Reclamo",
+          buscador: "seguimientoReclamo",
           submenu: [
             {
-              busquedaId: "Reclamo",
+              busquedaId: "nuevoReclamo",
               title: "Nuevo Reclamo",
-              buscador: "Reclamo",
+              buscador: "nuevoReclamo",
             },
             {
-              busquedaId: "Reclamo",
+              busquedaId: "seguimientoReclamo",
               title: "Seguimiento",
-              buscador: "Reclamo",
+              buscador: "seguimientoReclamo",
             },
           ],
         },
         {
           busquedaId: "Garantías",
           title: "Garantías",
-          buscador: "Garantías",
+          buscador: "seguimientoGarantia",
           submenu: [
             {
-              busquedaId: "Garantías",
+              busquedaId: "nuevaGarantia",
               title: "Nueva Garantía",
-              buscador: "Garantías",
+              buscador: "nuevaGarantia",
             },
             {
-              busquedaId: "Garantías",
+              busquedaId: "seguimientoGarantia",
               title: "Seguimiento",
-              buscador: "Garantías",
+              buscador: "seguimientoGarantia",
             },
           ],
         },

@@ -192,7 +192,7 @@ export default function BuscadorVehiculo(props) {
   }
 
   return (
-    <>
+    <div className=" pt-[200px] pb-24 bg-white">
       <div className="font-montserrat px-2">
         <div className="bg-white w-fit py-2 px-3 rounded-md">
           <Breadcrumbs separator={<MdNavigateNext />} aria-label="breadcrumb">
@@ -407,6 +407,6 @@ export default function BuscadorVehiculo(props) {
           )}
         </Table>
       </div>
-    </>
+    </div>
   );
 }

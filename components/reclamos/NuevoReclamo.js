@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Reclamos() {
+export default function NuevoReclamo() {
   const [origen, setOrigen] = useState(null);
   const [fecha, setFecha] = useState(null);
   const [pedido, setPedido] = useState(null);
@@ -18,7 +18,7 @@ export default function Reclamos() {
   }
 
   return (
-    <>
+    <div className=" pt-[200px] pb-24 bg-white">
       <div className="flex space-x-5 font-montserrat">
         <div className="rounded-md bg-white border border-[#D9D9D9] w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase ">
@@ -76,6 +76,6 @@ export default function Reclamos() {
       <button className="bg-amarillo hover:bg-azul text-white rounded-md px-4 py-2 mt-5 font-montserrat uppercase">
         Enviar
       </button>
-    </>
+    </div>
   );
 }

@@ -18,6 +18,7 @@ export default function Home() {
   const [buscador, setBuscador] = useState("Familia");
   const { auth, login } = useAuth();
   console.log(buscador);
+
   const formik = useFormik({
     initialValues: {
       CLI_CUIT: "",

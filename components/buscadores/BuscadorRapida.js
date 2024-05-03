@@ -57,9 +57,7 @@ export default function BuscadorRapida(props) {
   }, [buscar]);
 
   const formik = useFormik({
-    initialValues: initialValues(
-      buscar ? buscar : ""   
-    ),
+    initialValues: initialValues(buscar ? buscar : ""),
 
     /*    initialValues: {
       p: buscar ? buscar : "",
@@ -87,7 +85,7 @@ export default function BuscadorRapida(props) {
   };
 
   return (
-    <>
+    <div className=" pt-[200px] pb-24 bg-white">
       <form
         className="flex space-x-10 px-2 w-full font-montserrat"
         onSubmit={formik.handleSubmit}
@@ -267,7 +265,7 @@ export default function BuscadorRapida(props) {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 

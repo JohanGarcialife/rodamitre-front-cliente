@@ -32,13 +32,13 @@ body {
   }
 }
 
-@layer base {
+/* @layer base {
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-}
+} */
 
  .css-3w2yfm-ValueContainer {
   max-height: 35px;

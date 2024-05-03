@@ -88,7 +88,7 @@ export default function RowBuscadorVehiculo2(props) {
     }
   `;
 
-  console.log(selectRubro);
+  console.log(producto);
 
   return (
     <>
@@ -106,7 +106,10 @@ export default function RowBuscadorVehiculo2(props) {
           {producto?.map((producto) => (
             <>
               {rubro.rup_descripcion === producto.rubro && (
-                <TableRowStyled className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center">
+                <TableRowStyled
+                  key={producto?.pre_id}
+                  className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
+                >
                   <TableCell className="w-full ">
                     <ProductoInfo
                       producto={producto}
@@ -131,13 +134,13 @@ export default function RowBuscadorVehiculo2(props) {
                   </TableCell>
                   <TableCell className="w-full text-center">
                     <div className="font-bold ">
-                      <p>$ 9.668,6800000</p>
+                      <p>$ 9.668,68</p>
                     </div>
                   </TableCell>
                   {/* { Contador } */}
                   <TableCell className="w-full flex justify-center">
                     <Contador
-                      producto={producto}
+                      producto={producto.pre_id}
                       quantity={quantity}
                       setQuantity={setQuantity}
                       handleAddItem={handleAddItem}
