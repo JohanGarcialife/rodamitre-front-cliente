@@ -1,27 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { AutoComplete } from "primereact/autocomplete";
+import {
+  codigoP,
+  modelosVeApi,
+  marcaP,
+  motorVeApi,
+  marcaAutosApi
+} from "@/pages/api/productos";
 
 export default function NuevaGarantia() {
   const [vehiculo, setVehiculo] = useState(null);
   const [motivo, setMotivo] = useState(null);
+  const [marca, setMarca] = useState([]);
+  const [modelo, setModelo] = useState([]);
+  const [motor, setMotor] = useState([]);
+  const [marcaAutos, setMarcaAutos] = useState([]);
 
-  function handleSelectVehiculo(event) {
+
+  const handleSelectVehiculo = async function (event) {
     setVehiculo(event.target.value);
-  }
+    const modeloV = await modelosVeApi(event.target.value);
+    setModelo(modeloV);
+  };
+
+  const handleModelo = async function (event) {
+    const mot = await motorVeApi(event.target.value);
+    setMotor(mot);
+  };
+
   function handleSelectMotivo(event) {
     setMotivo(event.target.value);
   }
+
+  function handlemarca(event) {
+    console.log(event.target.value);
+  }
+
+  const [value, setValue] = useState("");
+  const [items, setItems] = useState([]);
+
+  const search = async (event) => {
+    if (event.query.length > 2) {
+      const Dato = {
+        p: event.query,
+      };
+      const response = await codigoP(Dato);
+      var a = response?.map(function (o) {
+        // var p = o.CODIGO_EQUIVALENTE
+        var p = o.CODIGO;
+        return p;
+      });
+      setItems(a);
+    } else {
+      setItems([]);
+    }
+  };
+
+  useEffect(() => {
+    if (value.length > 3) {
+      (async () => {
+        const Dato = {
+          p: value,
+        };
+        const response = await marcaP(Dato);
+        setMarca(response);
+      })();
+    }
+  }, [value]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await marcaAutosApi();
+      setMarcaAutos(response);
+    })();
+  }, []);
+
+
 
   return (
     <div className=" pt-[200px] pb-24 bg-white">
       <div>
         <div className="flex items-center justify-center w-full h-fit font-montserrat ">
           <div className="bg-white rounded-lg w-fit p-5 relative">
-            {/* <div
-              //onClick={() => setOpen(!open)}
-              className="absolute top-3 right-3  bg-gray-200 text-black rounded-full text-lg p-3 cursor-pointer hover:bg-gray-400  "
-            >
-              <AiOutlineClose />
-            </div> */}
+           
             <div className="border-b-2 border-gris flex justify-center items-center mb-5">
               <p className="text-black text-4xl border-b-4 border-amarillo">
                 Nueva Garantía
@@ -58,22 +119,26 @@ export default function NuevaGarantia() {
                     <p className="text-[#969696] font-bold text-sm ">
                       Designación*
                     </p>
-                    <input
-                      type="text"
-                      placeholder="Designación*"
-                      className="pl-4 w-full"
-                    />
+                    <AutoComplete
+                          class="element"
+                          value={value}
+                          suggestions={items}
+                          completeMethod={search}
+                          onChange={(e) => setValue(e.value)}
+                        />
                   </div>
                   <div className="rounded-md bg-white border border-[#D9D9D9] w-full p-2">
-                    {/* <p className="text-[#969696] font-bold text-sm ">
-                        Vehículo
-                      </p> */}
-                    <select
-                      className="pl-4 w-full text-black border-0"
-                      // label={vehiculo}
-                      // value={vehiculo}
-                      // onChange={handleSelectVehiculo}
-                    ></select>
+                  <select
+                          className="pl-4 w-full text-black border-0"
+                          placeholder="Designación*"
+                          /*  label={vehiculo}
+                           value={vehiculo} */
+                          onChange={handlemarca}
+                        >
+                          {marca.map((m) => (
+                            <option value={m.marca}>{m.marca}</option>
+                          ))}
+                        </select>
                   </div>
                   <div className="rounded-md bg-white border border-[#D9D9D9] w-full p-2">
                     <p className="text-[#969696] font-bold text-sm ">
@@ -107,39 +172,51 @@ export default function NuevaGarantia() {
                       Vehículo
                     </p>
                     <select
-                      className="pl-4 w-full text-black border-0"
-                      label={vehiculo}
-                      value={vehiculo}
-                      onChange={handleSelectVehiculo}
-                    >
-                      <option value="Chevrolet">Chevrolet</option>
-                      <option value="Citroen">Citroen</option>
-                      <option value="Fiat">Fiat</option>
-                      <option value="Ford">Ford</option>
-                    </select>
+                          className="pl-4 w-full text-black border-0"
+                          label={vehiculo}
+                          //value={vehiculo}
+                          onChange={handleSelectVehiculo}
+                        >
+                          <option value=""></option>
+                          {marcaAutos.map((m) => (
+                            <option value={m.MAU_ID}>
+                              {m.MAU_DESCRIPCION}
+                            </option>
+                          ))}
+                        </select>
                   </div>
                   <div className="rounded-md bg-white border border-[#D9D9D9] w-full p-2">
-                    {/* <p className="text-[#969696] font-bold text-sm ">
-                        Vehículo
-                      </p> */}
+                  
                     <select
-                      className="pl-4 w-full text-black border-0"
-                      // label={vehiculo}
-                      // value={vehiculo}
-                      // onChange={handleSelectVehiculo}
-                    ></select>
+                          className="pl-4 w-full text-black border-0"
+                          // label={vehiculo}
+                          // value={vehiculo}
+                          onChange={handleModelo}
+                        > 
+                          <option value={""}></option>
+                          {modelo.map((m) => (
+                            <option value={m.MOD_ID}>
+                              {m.MOD_DESCRIPCION}
+                            </option>
+                          ))}
+                        </select>
                   </div>
                   <div className="flex space-x-5 ">
                     <div className="rounded-md bg-white border border-[#D9D9D9] w-full p-2">
-                      {/* <p className="text-[#969696] font-bold text-sm ">
-                        Vehículo
-                      </p> */}
-                      <select
-                        className="pl-4 w-full text-black border-0"
-                        // label={vehiculo}
-                        // value={vehiculo}
-                        // onChange={handleSelectVehiculo}
-                      ></select>
+                      
+                    <select
+                            className="pl-4 w-full text-black border-0"
+                            // label={vehiculo}
+                            // value={vehiculo}
+                            // onChange={handleSelectVehiculo}
+                          >
+                            <option value=""></option>
+                            {motor?.map((m) => (
+                              <option value={m.mde_descripcion}>
+                                {m.mde_descripcion}
+                              </option>
+                            ))}
+                          </select>
                     </div>
                     <div className="rounded-md bg-white border border-[#D9D9D9] w-full p-2">
                       <p className="text-[#969696] font-bold text-sm ">Año</p>

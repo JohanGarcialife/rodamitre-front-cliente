@@ -228,3 +228,59 @@ export async function productosCodigo(CLI_ID, LPP_ID, Dato) {
     console.log(error);
   }
 }
+////////////////
+
+export async function codigoP(Dato) {
+  console.log("vine aqui a consultar")
+  try {
+    const url = `${URL}/codigo`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify(Dato),
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function marcaP(Dato) {
+  try {
+    const url = `${URL}/marcaproduct`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify(Dato),
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function motorVeApi(id) {
+  try {
+    const url = `${URL}/motorcar/${id}`;
+    const params = {
+      headers: {
+        Accept: "*/*",
+      },
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}

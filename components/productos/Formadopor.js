@@ -1,14 +1,20 @@
 import React from "react";
+import { useRouter } from "next/router";
+
 
 export default function Formadopor(props) {
   const { formadopor, setBuscar, setBuscador } = props;
+  const router = useRouter();
+
 
   let arr = formadopor?.split(",");
 
   function handlebuscar(event) {
-    setBuscar(event);
+   
+    router.push(`/busquedaRapida?query=${event}`)
+    //setBuscar(event);
     //router.push(`/?query=${event}`)
-    setBuscador("Rapida");
+    //setBuscador("Rapida");
   }
 
   return (
