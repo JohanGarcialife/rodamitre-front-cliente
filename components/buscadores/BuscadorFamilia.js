@@ -25,6 +25,7 @@ import {
   pMarcarticulo,
   rubrosP,
 } from "@/pages/api/productos";
+import CircularProgress from "@mui/material/CircularProgress";
 import RowBuscadorFamilia from "./RowBuscadorFamilia";
 
 export default function BuscadorFamilia(props) {
@@ -715,90 +716,99 @@ export default function BuscadorFamilia(props) {
       </div>
 
       <div className=" font-montserrat">
-        <Table>
-          <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
-            <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  Artículo
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  Aplicaciones
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  Marca
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  Costo
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  Cantidad
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  SUB-TOTAL
-                </div>
-              </TableCell>
-              <TableCell>{""}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody className="bg-white">
-            {(rowsPerPage > 0
-              ? productos?.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : productos
-            )?.map((producto) => (
-              <RowBuscadorFamilia
-                productos={productos}
-                producto={producto}
-                setBuscar={setBuscar}
-                buscar={buscar}
-                setBuscador={setBuscador}
-              />
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[
-                  5,
-                  10,
-                  25,
-                  50,
-                  { label: "All", value: -1 },
-                ]}
-                labelRowsPerPage="Productos por página:"
-                colSpan={7}
-                count={productos?.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                slotProps={{
-                  select: {
-                    inputProps: {
-                      "aria-label": "Productos por página",
-                      label: "Productos por página",
+        {!productos.length ? (
+          <div className="mt-20 flex item-center justify-center w-full text-center">
+            <CircularProgress />
+          </div>
+        ) : (
+          <Table>
+            <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
+              <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    Artículo
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    Aplicaciones
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    Marca
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    Costo
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    Cantidad
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div></div>
+                  <div className="font-bold text-white flex justify-center">
+                    SUB-TOTAL
+                  </div>
+                </TableCell>
+                <TableCell>{""}</TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody className="bg-white">
+              {(rowsPerPage > 0
+                ? productos?.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : productos
+              )?.map((producto) => (
+                <RowBuscadorFamilia
+                  productos={productos}
+                  producto={producto}
+                  setBuscar={setBuscar}
+                  buscar={buscar}
+                  setBuscador={setBuscador}
+                />
+              ))}
+            </TableBody>
+
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    50,
+                    { label: "All", value: -1 },
+                  ]}
+                  labelRowsPerPage="Productos por página:"
+                  colSpan={7}
+                  count={productos?.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  slotProps={{
+                    select: {
+                      inputProps: {
+                        "aria-label": "Productos por página",
+                        label: "Productos por página",
+                      },
+                      native: true,
                     },
-                    native: true,
-                  },
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        )}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import Intercambiables from "../productos/Intercambiables";
 import Formadopor from "../productos/Formadopor";
 
 export default function ProductoInfo(props) {
-  const { producto, setBuscar, buscar, setBuscador } = props;
+  const { producto } = props;
   return (
     <div className="font-bold flex items-center justify-start space-x-3">
       <Image
@@ -44,12 +44,7 @@ export default function ProductoInfo(props) {
           {producto?.es_parte_de ? (
             <div className="flex flex-col">
               <p className="font-bold text-black text-left">Es parte de</p>
-              <Esparte
-                esparte={producto?.es_parte_de}
-                setBuscar={setBuscar}
-                buscar={buscar}
-                setBuscador={setBuscador}
-              />
+              <Esparte esparte={producto?.es_parte_de} />
             </div>
           ) : (
             <></>
@@ -59,12 +54,7 @@ export default function ProductoInfo(props) {
           {producto?.intercambiables ? (
             <div className="flex flex-col">
               <p className="font-bold text-black text-left">Intercambiable</p>
-              <Intercambiables
-                intercambiable={producto?.intercambiables}
-                setBuscar={setBuscar}
-                buscar={buscar}
-                setBuscador={setBuscador}
-              />
+              <Intercambiables intercambiable={producto?.intercambiables} />
             </div>
           ) : (
             <></>
@@ -74,12 +64,7 @@ export default function ProductoInfo(props) {
           {producto?.formado_por ? (
             <div className="flex flex-col">
               <p className="font-bold text-black text-left">Formado por</p>
-              <Formadopor
-                formadopor={producto?.formado_por}
-                setBuscar={setBuscar}
-                buscar={buscar}
-                setBuscador={setBuscador}
-              />
+              <Formadopor formadopor={producto?.formado_por} />
             </div>
           ) : (
             <></>

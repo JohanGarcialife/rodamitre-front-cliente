@@ -1,20 +1,14 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-
 export default function Esparte(props) {
-  const { esparte, setBuscar, setBuscador } = props;
+  const { esparte } = props;
   const router = useRouter();
-  
-
 
   let arr = esparte?.split(",");
 
   function handlebuscar(event) {
-    //setBuscar(event);
-    //router.push(`/?query=${event}`)
-    //setBuscador("Rapida");
-    router.push(`/busquedaRapida?query=${event}`);
+    router.push(`/busquedaRapida?query=${event.trim()}`);
   }
 
   return (

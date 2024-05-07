@@ -7,23 +7,11 @@ import { useRouter } from "next/router";
 
 
 export default function buscquedaRapida() {
-  const { auth, login, setReloadUser } = useAuth();
+  const { auth, login, setReloadUser } = useAuth()
   const [comparacion, setComparacion] = useState([]);
-  const [marcaAutos, setMarcaAutos] = useState([]);
-  const [buscar, setBuscar] = useState(false);
-
+  const [buscar, setBuscar] = useState(null);
   const data = useRouter();
   
-  
-  console.log(data.query.query, "valor bucador")
-
-
-  useEffect(() => {
-    (async () => {
-      const response = await marcaAutosApi();
-      setMarcaAutos(response);
-    })();
-  }, []);
 
   return (
     <Layout>
@@ -33,8 +21,7 @@ export default function buscquedaRapida() {
         buscar={buscar}
         setBuscar={setBuscar}
         data={data}
-        //data = {data.query.query}
-        // setBuscador={setBuscador}
+        setReloadUser={setReloadUser}
       />
     </Layout>
   );

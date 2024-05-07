@@ -3,24 +3,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FaCheck } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
-import BuscadorFamilia from "../buscadores/BuscadorFamilia";
-import BuscadorVehiculo from "../buscadores/BuscadorVehiculo";
-import BuscadorRapida from "../buscadores/BuscadorRapida";
-import BuscadorOferta from "../buscadores/BuscadorOferta";
-import Reclamos from "../reclamos/NuevoReclamo";
-import Garantia from "../garantias/Garantia";
+import { useRouter } from "next/router";
 import useAuth from "@/hooks/useAuth";
 import { loginApi } from "@/pages/api/clientes";
-import { viewConsulApi, marcaAutosApi } from "@/pages/api/productos";
-import Carrito from "../cart/Carrito";
-import NuevaGarantia from "../garantias/NuevaGarantia";
 
-export default function HeroSection(props) {
-  const { buscador, setBuscador } = props;
-  const { auth, login, setReloadUser } = useAuth();
-  const [comparacion, setComparacion] = useState([]);
-  const [marcaAutos, setMarcaAutos] = useState([]);
-  const [buscar, setBuscar] = useState();
+export default function HeroSection() {
+  const { auth, login } = useAuth();
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -29,28 +18,16 @@ export default function HeroSection(props) {
     },
     validationSchema: basicSchema,
     onSubmit: async (formData) => {
-      /*inicio sesion base de datos */
       const response = await loginApi(formData);
-
       if (response?.token) {
+        router.push("/buscadorFamilia");
         login(response.token);
         setOpen(false);
       }
     },
   });
 
-  useEffect(() => { 
-    (async () => {
-      const response = await marcaAutosApi();
-      setMarcaAutos(response);
-    })();
-  }, []);
-
-  /*DATOS USUARIO BASE DE DATOS
-USUARIO: 20-12789811-2
-CLAVE: WPBMPVHD
-
- */
+  auth && router.push("/buscadorFamilia");
 
   return (
     <div
@@ -153,45 +130,6 @@ CLAVE: WPBMPVHD
             </div>
           </div>
         </>
-      )}
-      {auth && (
-        <div className=" pt-[200px] pb-24">
-          {buscador === "Familia" && (
-            <BuscadorFamilia
-              marcaAutos={marcaAutos}
-              setMarcaAutos={setMarcaAutos}
-              auth={auth}
-              setReloadUser={setReloadUser}
-              setBuscar={setBuscar}
-              buscar={buscar}
-              setBuscador={setBuscador}
-            />
-          )}
-          {buscador === "Vehiculo" && (
-            <BuscadorVehiculo
-              marcaAutos={marcaAutos}
-              setMarcaAutos={setMarcaAutos}
-              auth={auth}
-              setBuscar={setBuscar}
-              buscar={buscar}
-              setBuscador={setBuscador}
-            />
-          )}
-          {buscador === "Rapida" && (
-            <BuscadorRapida
-              auth={auth}
-              comparacion={comparacion}
-              buscar={buscar}
-              setBuscar={setBuscar}
-              setBuscador={setBuscador}
-            />
-          )}
-          {buscador === "Oferta" && <BuscadorOferta />}
-          {buscador === "Reclamo" && <Reclamos />}
-          {buscador === "Garantías" && <Garantia />}
-          {buscador === "NuevaGarantia" && <NuevaGarantia />}
-          {buscador === "Cart" && <Carrito />}
-        </div>
       )}
     </div>
   );
