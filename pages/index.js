@@ -11,13 +11,13 @@ import useAuth from "../hooks/useAuth.js";
 import { Modal } from "@mui/material";
 import { IoClose } from "react-icons/io5";
 import { loginApi } from "./api/clientes";
+import BuscadorFamilia from "@/components/buscadores/BuscadorFamilia.js";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [buscador, setBuscador] = useState("Familia");
   const { auth, login } = useAuth();
-  console.log(buscador);
 
   const formik = useFormik({
     initialValues: {
@@ -50,16 +50,22 @@ export default function Home() {
         setBuscador={setBuscador}
         buscador={buscador}
       >
-        <HeroSection
-          isLogin={isLogin}
-          setIsLogin={setIsLogin}
-          buscador={buscador}
-          setBuscador={setBuscador}
-        />
-        {!auth && <Distribuidores />}
-        {!auth && <Nosotros />}
-        {!auth && <Productos />}
-        {!auth && <Contacto />}
+        {auth ? (
+          <BuscadorFamilia auth={auth} />
+        ) : (
+          <>
+            <HeroSection
+              isLogin={isLogin}
+              setIsLogin={setIsLogin}
+              buscador={buscador}
+              setBuscador={setBuscador}
+            />
+            <Distribuidores />
+            <Nosotros />
+            <Productos />
+            <Contacto />
+          </>
+        )}
       </Layout>
       <Modal open={open} onClose={handleClose} className="max-w-screen">
         <div className="flex items-center justify-center w-screen h-screen font-montserrat">

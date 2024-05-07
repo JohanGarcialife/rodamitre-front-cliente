@@ -12,7 +12,7 @@ import Garantia from "../garantias/Garantia";
 import useAuth from "@/hooks/useAuth";
 import { loginApi } from "@/pages/api/clientes";
 import { viewConsulApi, marcaAutosApi } from "@/pages/api/productos";
-import Carrito from "../cart/Carrito";
+import Carrito from "../Cart/Carrito";
 import NuevaGarantia from "../garantias/NuevaGarantia";
 
 export default function HeroSection(props) {
@@ -39,7 +39,7 @@ export default function HeroSection(props) {
     },
   });
 
-  useEffect(() => { 
+  useEffect(() => {
     (async () => {
       const response = await marcaAutosApi();
       setMarcaAutos(response);

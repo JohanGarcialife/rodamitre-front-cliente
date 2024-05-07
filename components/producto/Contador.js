@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
 export default function Contador(props) {
   const { quantity, setQuantity, handleAddItem, handleRemoveItem, producto } =
     props;
+  const [valor, setValor] = useState(0);
+  const newQuantity = setQuantity(valor);
+  console.log(valor);
 
   return (
     <div className="w-full flex justify-center">
@@ -22,15 +25,13 @@ export default function Contador(props) {
         )}
         <div className="bg-white border flex justify-center border-black rounded-md py-1 px-2">
           <input
-            //type="number"
+            type="number"
+            min={0}
+            max={5000}
             onChange={(e) => {
-              e.target.value === "-"
-                ? setQuantity(0)
-                : setQuantity(parseInt(e.target.value)) || e.target.value === ""
-                ? setQuantity(0)
-                : setQuantity(parseInt(e.target.value));
+              setValor(e.target.value);
             }}
-            value={quantity < 0 ? 0 : quantity}
+            // value={quantity < 0 ? 0 : quantity}
             className="text-black text-center font-bold"
           />
         </div>

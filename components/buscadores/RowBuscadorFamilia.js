@@ -9,10 +9,8 @@ import Pedir from "../producto/Pedir";
 import Precio from "../producto/Precio";
 import Contador from "../producto/Contador";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  selectCartItemsWithId,
-} from "@/features/cartSlice";
+import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 export default function RowBuscadorFamilia(props) {
   const { producto, buscar, setBuscar, setBuscador } = props;
@@ -38,17 +36,18 @@ export default function RowBuscadorFamilia(props) {
     super_rubro,
   } = producto;
   const [quantity, setQuantity] = useState(0);
+  const [value, setValue] = useState(0);
 
   const items = useSelector((state) => selectCartItemsWithId(state, pre_id));
 
   const dispatch = useDispatch();
 
   const handleAddItem = () => {
-    setQuantity(quantity + 1);
+    setQuantity(e.target.value + 1);
   };
 
   const handleRemoveItem = () => {
-    setQuantity(quantity - 1);
+    setQuantity(e.target.value - 1);
     if (!quantity > 0) return;
   };
 
@@ -121,13 +120,15 @@ export default function RowBuscadorFamilia(props) {
       </TableCell>
       {/* contador */}
       <TableCell className="w-full flex justify-center">
-        <Contador
-          producto={producto}
-          quantity={quantity}
-          setQuantity={setQuantity}
-          handleAddItem={handleAddItem}
-          handleRemoveItem={handleRemoveItem}
-        />
+        <div className="w-full flex justify-center">
+          <Contador
+            producto={producto}
+            quantity={quantity}
+            setQuantity={setQuantity}
+            handleAddItem={handleAddItem}
+            handleRemoveItem={handleRemoveItem}
+          />
+        </div>
       </TableCell>
       <TableCell className="w-full text-center">
         <Subtotal producto={producto} quantity={quantity} />
