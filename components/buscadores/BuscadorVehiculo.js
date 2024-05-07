@@ -8,7 +8,6 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import styled from "@emotion/styled";
 import Select from "react-select";
 import { MdNavigateNext } from "react-icons/md";
 import {
@@ -19,6 +18,7 @@ import {
   marcaAutosApi,
 } from "@/pages/api/productos";
 import { FaMinus, FaPlus } from "react-icons/fa6";
+import CircularProgress from "@mui/material/CircularProgress";
 import RowBuscadorVehiculo from "./RowBuscadorVehiculo";
 import RowBuscadorVehiculo2 from "./RowBuscadorVehiculo2";
 
@@ -37,6 +37,7 @@ export default function BuscadorVehiculo(props) {
   const [selectRubro, setSelectRubro] = useState([]);
   const [motorSelect, setMotorSelect] = useState([]);
   const [expand, setExpand] = useState("noExpand");
+  const [loade, setLoade] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -110,6 +111,8 @@ export default function BuscadorVehiculo(props) {
     const rubromodV = await rubroModeloS(Dato);
     setSelectRubro(rubromodV);
 
+    setLoade(true);
+
     const productAuto = await productosMarModelo(
       auth.CLI_ID,
       auth.LPP_ID,
@@ -117,6 +120,7 @@ export default function BuscadorVehiculo(props) {
     );
     setProducto(productAuto);
     setProducto1(productAuto);
+    setLoade(false);
   };
 
   const handleSelectRubro = async function (event) {
@@ -141,6 +145,8 @@ export default function BuscadorVehiculo(props) {
       const motorTT = await motorRM(Dato);
       setMotorSelect(motorTT);
 
+      setLoade(true);
+
       const productAuto = await productosMarModelo(
         auth.CLI_ID,
         auth.LPP_ID,
@@ -148,6 +154,7 @@ export default function BuscadorVehiculo(props) {
       );
       setProducto(productAuto);
       setProducto2(productAuto);
+      setLoade(false);
     }
   };
 
@@ -177,12 +184,15 @@ export default function BuscadorVehiculo(props) {
     };
 
     if (event.length > 0) {
+      setLoade(true);
+
       const productAuto = await productosMarModelo(
         auth.CLI_ID,
         auth.LPP_ID,
         Dato
       );
       setProducto(productAuto);
+      setLoade(false);
     }
   };
 
@@ -347,65 +357,71 @@ export default function BuscadorVehiculo(props) {
         </div>
       </div>
       <div className=" flex justify-center font-montserrat">
-        <Table>
-          <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
-            <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  ARTÍCULO
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  MOTORIZACIÓN
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  MARCA
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  COSTO
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  VENTA
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-bold text-white flex justify-center">
-                  CANTIDAD
-                </div>
-              </TableCell>
-              <TableCell>{""}</TableCell>
-            </TableRow>
-          </TableHead>
-          {rubro.length > 0 ? (
-            <TableBody className="bg-white">
-              <RowBuscadorVehiculo
-                rubros={rubro}
-                producto={producto}
-                buscar={buscar}
-                setBuscar={setBuscar}
-                setBuscador={setBuscador}
-              />
-            </TableBody>
-          ) : (
-            <TableBody className="bg-white">
-              <RowBuscadorVehiculo2
-                selectRubro={selectRubro}
-                rubros={rubro}
-                producto={producto}
-                buscar={buscar}
-                setBuscar={setBuscar}
-                setBuscador={setBuscador}
-              />
-            </TableBody>
-          )}
-        </Table>
+        {loade ? (
+          <div className="mt-20 flex item-center justify-center w-full text-center">
+            <CircularProgress />
+          </div>
+        ) : (
+          <Table>
+            <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
+              <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    ARTÍCULO
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    MOTORIZACIÓN
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    MARCA
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    COSTO
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    VENTA
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-bold text-white flex justify-center">
+                    CANTIDAD
+                  </div>
+                </TableCell>
+                <TableCell>{""}</TableCell>
+              </TableRow>
+            </TableHead>
+            {rubro.length > 0 ? (
+              <TableBody className="bg-white">
+                <RowBuscadorVehiculo
+                  rubros={rubro}
+                  producto={producto}
+                  buscar={buscar}
+                  setBuscar={setBuscar}
+                  setBuscador={setBuscador}
+                />
+              </TableBody>
+            ) : (
+              <TableBody className="bg-white">
+                <RowBuscadorVehiculo2
+                  selectRubro={selectRubro}
+                  rubros={rubro}
+                  producto={producto}
+                  buscar={buscar}
+                  setBuscar={setBuscar}
+                  setBuscador={setBuscador}
+                />
+              </TableBody>
+            )}
+          </Table>
+        )}
       </div>
     </div>
   );

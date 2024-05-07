@@ -47,6 +47,9 @@ export default function BuscadorFamilia(props) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [expand, setExpand] = useState("noExpand");
+  const [loade, setLoade] = useState(false);
+
+  
 
   useEffect(() => {
     setFamilia(null);
@@ -66,9 +69,11 @@ export default function BuscadorFamilia(props) {
 
   useEffect(() => {
     (async () => {
+      setLoade(true);
       const response = await productosApi(auth.CLI_ID, auth.LPP_ID);
       setProductos1(response);
       setProductos(response);
+      setLoade(false);
     })();
   }, []);
 
@@ -115,12 +120,14 @@ export default function BuscadorFamilia(props) {
         const Dato = {
           mau_id: marid,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
 
         const listrubro = await superrubrosMarcId(Dato);
         setSelectSrubro(listrubro);
@@ -140,12 +147,14 @@ export default function BuscadorFamilia(props) {
           mau_id: marid,
           rud_id: rudID.value,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
         const pArticulo = await pMarcarticulo(Dato);
         setSelectMarId(pArticulo);
         const psRubro = await rubrosP(Dato);
@@ -158,12 +167,14 @@ export default function BuscadorFamilia(props) {
         const Dato = {
           rud_id: rudID.value,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
         const pArticulo = await pMarcarticulo(Dato);
         setSelectMarId(pArticulo);
         const psRubro = await rubrosP(Dato);
@@ -202,12 +213,14 @@ export default function BuscadorFamilia(props) {
           rud_id: rudID.value,
           mar_id: marcid,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
         /* const psRubro = await rubrosP(Dato);
             setSelecRubro(psRubro); */
       })();
@@ -226,12 +239,14 @@ export default function BuscadorFamilia(props) {
           mar_id: "",
           rubro: "",
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
         /* const pArticulo = await pMarcarticulo(Dato);
             setSelectMarId(pArticulo);
             const psRubro = await rubrosP(Dato);
@@ -259,12 +274,14 @@ export default function BuscadorFamilia(props) {
           mar_id: marcid,
           rubro: "",
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
     if (marID?.length > 0 && !rudID && !marcaId?.length && !rubroId) {
@@ -280,12 +297,14 @@ export default function BuscadorFamilia(props) {
           mar_id: "",
           rubro: "",
         };
+         setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
 
@@ -303,12 +322,14 @@ export default function BuscadorFamilia(props) {
           mar_id: marcid,
           rubro: "",
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
 
@@ -320,12 +341,14 @@ export default function BuscadorFamilia(props) {
           mar_id: "",
           rubro: "",
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
 
@@ -343,12 +366,14 @@ export default function BuscadorFamilia(props) {
           mar_id: marcid,
           rubro: rubroId.value,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
     if (!marID?.length > 0 && rudID && !marcaId?.length > 0 && rubroId) {
@@ -359,12 +384,14 @@ export default function BuscadorFamilia(props) {
           mar_id: "",
           rubro: rubroId.value,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
         const pArticulo = await pMarcarticulo(Dato);
         setSelectMarId(pArticulo);
       })();
@@ -384,12 +411,14 @@ export default function BuscadorFamilia(props) {
           mar_id: marcid,
           rubro: "",
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
 
@@ -417,12 +446,14 @@ export default function BuscadorFamilia(props) {
           mar_id: marcid,
           rubro: rubroId.value,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
 
@@ -440,12 +471,14 @@ export default function BuscadorFamilia(props) {
           mar_id: "",
           rubro: rubroId.value,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
   }, [marcaId]);
@@ -471,12 +504,14 @@ export default function BuscadorFamilia(props) {
           mar_id: marcid,
           rubro: rubroId.value,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
 
@@ -494,12 +529,14 @@ export default function BuscadorFamilia(props) {
           mar_id: "",
           rubro: rubroId.value,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
       })();
     }
 
@@ -511,12 +548,14 @@ export default function BuscadorFamilia(props) {
           mar_id: "",
           rubro: rubroId.value,
         };
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
+        setLoade(false);
         const pArticulo = await pMarcarticulo(Dato);
         setSelectMarId(pArticulo);
       })();
@@ -716,7 +755,7 @@ export default function BuscadorFamilia(props) {
       </div>
 
       <div className=" font-montserrat">
-        {!productos.length ? (
+        {loade ? (
           <div className="mt-20 flex item-center justify-center w-full text-center">
             <CircularProgress />
           </div>
