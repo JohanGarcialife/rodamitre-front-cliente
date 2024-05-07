@@ -5,9 +5,8 @@ import { viewConsulApi, marcaAutosApi } from "@/pages/api/productos";
 import useAuth from "@/hooks/useAuth";
 
 export default function buscadorFamilia() {
-  const { auth, login, setReloadUser } = useAuth();
+  const { auth, setReloadUser } = useAuth();
   const [marcaAutos, setMarcaAutos] = useState([]);
-  const [buscar, setBuscar] = useState();
 
   useEffect(() => {
     (async () => {
@@ -23,9 +22,6 @@ export default function buscadorFamilia() {
         setMarcaAutos={setMarcaAutos}
         auth={auth}
         setReloadUser={setReloadUser}
-        setBuscar={setBuscar}
-        buscar={buscar}
-        //setBuscador={setBuscador}
       />
     </Layout>
   );

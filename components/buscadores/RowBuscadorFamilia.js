@@ -13,7 +13,7 @@ import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
 export default function RowBuscadorFamilia(props) {
-  const { producto, buscar, setBuscar, setBuscador } = props;
+  const { producto } = props;
   const {
     atributos,
     codigo,
@@ -99,9 +99,6 @@ export default function RowBuscadorFamilia(props) {
       <TableCell className="w-full">
         <ProductoInfo
           producto={producto}
-          setBuscar={setBuscar}
-          buscar={buscar}
-          setBuscador={setBuscador}
         />
       </TableCell>
       <TableCell className="w-full text-center">

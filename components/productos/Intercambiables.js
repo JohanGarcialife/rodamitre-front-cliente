@@ -1,21 +1,14 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-
 export default function Intercambiables(props) {
-  const { intercambiable, setBuscar, setBuscador } = props;
+  const { intercambiable } = props;
   const router = useRouter();
-
 
   let arr = intercambiable?.split(",");
 
   function handlebuscar(event) {
-   // setBuscar(event);
-    router.push(`/busquedaRapida?query=${event}`);
-
-    
-    //router.push(`/?query=${event}`)
-    //setBuscador("Rapida");
+    router.push(`/busquedaRapida?query=${event.trim()}`);
   }
 
   return (

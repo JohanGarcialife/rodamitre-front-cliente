@@ -10,8 +10,6 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Breadcrumbs,
-  Link,
   IconButton,
   Box,
   TableFooter,
@@ -31,18 +29,27 @@ export default function BuscadorRapida(props) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [search, setSearch] = useState([]);
 
-  setBuscar(data.query.query);
   const router = useRouter();
 
+  setBuscar(data.query.query);
+
+  function initialValues() {
+    return {
+      p: data.query.query || "",
+      interior: "",
+      exterior: "",
+      altura: "",
+    };
+  }
 
   useEffect(() => {
     if (data?.query?.query) {
+      formik.values.p = data.query.query;
       setLoade(true);
       (async () => {
         const Dato = {
-          p: buscar,
+          p: data.query.query,
         };
-
         const productAuto = await productosCodigo(
           auth.CLI_ID,
           auth.LPP_ID,
@@ -52,48 +59,38 @@ export default function BuscadorRapida(props) {
         setBuscar(null);
         setLoade(false);
       })();
+      setSearch([]);
     }
-    setLoade(false);
     setSearch([]);
   }, [data]);
 
-
   const formik = useFormik({
-    initialValues: initialValues(data.query.query ? data.query.query : ""),
+    initialValues: initialValues(),
     onSubmit: async (Dato) => {
       setSearch([]);
       setLoade(true);
-      /*inicio sesion base de datos */
       const productAuto = await productosCodigo(auth.CLI_ID, auth.LPP_ID, Dato);
-      setProductos(productAuto);
+      if (productAuto.length > 0) {
+        setProductos(productAuto);
+      } else {
+        console.log(productAuto);
+      }
       setLoade(false);
       setBuscar(null);
     },
   });
 
-  console.log(formik?.values?.p , "valor")
-  //////
   useEffect(() => {
-
-    console.log("entre aqui")
-    if (formik?.values?.p.length > 2) {
+    if (formik?.values?.p?.length > 2) {
       (async () => {
-
-        console.log("asyn")
         const Dato = {
           p: formik?.values?.p,
         };
-        console.log(Dato, "ver");
         const response = await codigoP(Dato);
         setSearch(response);
-        console.log(response, "probando");
       })();
     }
-
-    console.log("estoy aqui")
-   
-  }, [formik.values.p]);
-  ////////
+  }, [formik?.values?.p]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -105,11 +102,9 @@ export default function BuscadorRapida(props) {
   };
 
   function handlebuscar(event) {
-   
-    router.push(`/busquedaRapida?query=${event}`)
-    //setBuscar(event);
-    //router.push(`/?query=${event}`)
-    //setBuscador("Rapida");
+    setBuscar(event);
+    formik.values.p = event;
+    router.push(`/busquedaRapida?query=${event}`);
   }
 
   return (
@@ -117,7 +112,6 @@ export default function BuscadorRapida(props) {
       <form
         className="flex space-x-10 px-2 w-full font-montserrat"
         onSubmit={formik.handleSubmit}
-        //  onClick={() => setSearch([])}
       >
         <div className="w-full space-y-5">
           <div className="bg-white rounded-lg border border-black flex">
@@ -132,6 +126,7 @@ export default function BuscadorRapida(props) {
                 placeholder="Código del artículo y/o ubicación. Ej: VKM 1258 / Mazda Ford Fiesta / VKM Fiat"
                 onChange={formik.handleChange}
                 value={formik.values.p}
+                autocomplete="off"
               />
               {search?.length > 0 ? (
                 <div className=" absolute z-10 w-full flex-col bg-white rounded-lg border border-black mt-14 ">
@@ -213,10 +208,7 @@ export default function BuscadorRapida(props) {
         </div>
       </form>
       {productos?.length <= 0 ? (
-        <div
-          className="flex items-center justify-center font-montserrat text-center mt-20 text-4xl text-azul"
-          /* onClick={() => setSearch([])} */
-        >
+        <div className="flex items-center justify-center font-montserrat text-center mt-20 text-4xl text-azul">
           {loade === true ? (
             <CircularProgress />
           ) : (
@@ -224,9 +216,7 @@ export default function BuscadorRapida(props) {
           )}
         </div>
       ) : (
-        <div
-          className=" font-montserrat mt-10" /* onClick={() => setSearch([])} */
-        >
+        <div className=" font-montserrat mt-10">
           {loade === true ? (
             <div className="flex items-center justify-center">
               <CircularProgress />
@@ -383,13 +373,4 @@ function TablePaginationActions(props) {
       </IconButton>
     </Box>
   );
-}
-
-function initialValues(buscar) {
-  return {
-    p: buscar || "",
-    interior: "",
-    exterior: "",
-    altura: "",
-  };
 }
