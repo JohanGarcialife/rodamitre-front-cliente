@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import Subtotal from "./Subtotal";
-import Pedir from "./Pedir";
 
-export default function Contador(props) {
+export default function ContadorCarrito(props) {
   const {
     quantity,
     setQuantity,
@@ -11,8 +9,8 @@ export default function Contador(props) {
     handleRemoveItem,
     producto,
     addItemToCart,
+    valor,
   } = props;
-  const [valor, setValor] = useState("0");
 
   return (
     <div className="w-full flex items-center justify-around">
@@ -47,17 +45,6 @@ export default function Contador(props) {
         >
           <FaPlus />
         </div>
-      </div>
-      <div className="">
-        <Subtotal producto={producto} valor={parseInt(valor)} />
-      </div>
-      <div className="">
-        <Pedir
-          setQuantity={setQuantity}
-          producto={producto}
-          valor={parseInt(valor)}
-          addItemToCart={addItemToCart}
-        />
       </div>
     </div>
   );

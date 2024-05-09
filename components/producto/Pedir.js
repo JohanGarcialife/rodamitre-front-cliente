@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Pedir(props) {
-  const { producto, addItemToCart } = props;
+  const { producto, addItemToCart, setQuantity, valor } = props;
+  const [pedir, setPedir] = useState(false);
+
+  // useEffect(() => {
+  //   setQuantity(valor);
+  //   addItemToCart;
+  //   console.log("pidio", valor);
+  //   setPedir(false);
+  // }, [pedir === true]);
 
   return (
     <div>

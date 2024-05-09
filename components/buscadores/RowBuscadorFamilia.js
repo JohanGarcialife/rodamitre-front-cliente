@@ -10,7 +10,6 @@ import Precio from "../producto/Precio";
 import Contador from "../producto/Contador";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
-import { FaMinus, FaPlus } from "react-icons/fa";
 
 export default function RowBuscadorFamilia(props) {
   const { producto } = props;
@@ -36,7 +35,6 @@ export default function RowBuscadorFamilia(props) {
     super_rubro,
   } = producto;
   const [quantity, setQuantity] = useState(0);
-  const [value, setValue] = useState(0);
 
   const items = useSelector((state) => selectCartItemsWithId(state, pre_id));
 
@@ -74,7 +72,7 @@ export default function RowBuscadorFamilia(props) {
         spr_id,
         super_rubro,
         quantity,
-      })
+              })
     );
   };
 
@@ -97,9 +95,7 @@ export default function RowBuscadorFamilia(props) {
       className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
     >
       <TableCell className="w-full">
-        <ProductoInfo
-          producto={producto}
-        />
+        <ProductoInfo producto={producto} />
       </TableCell>
       <TableCell className="w-full text-center">
         {producto?.aplicaciones ? (
@@ -116,7 +112,7 @@ export default function RowBuscadorFamilia(props) {
         <Precio producto={producto} />
       </TableCell>
       {/* contador */}
-      <TableCell className="w-full flex justify-center">
+      <TableCell colSpan={3} className="w-full flex justify-center">
         <div className="w-full flex justify-center">
           <Contador
             producto={producto}
@@ -124,15 +120,16 @@ export default function RowBuscadorFamilia(props) {
             setQuantity={setQuantity}
             handleAddItem={handleAddItem}
             handleRemoveItem={handleRemoveItem}
+            addItemToCart={addItemToCart}
           />
         </div>
       </TableCell>
-      <TableCell className="w-full text-center">
+      {/* <TableCell className="w-full text-center">
         <Subtotal producto={producto} quantity={quantity} />
-      </TableCell>
-      <TableCell className="w-full text-center space-y-2">
+      </TableCell> */}
+      {/* <TableCell className="w-full text-center space-y-2">
         <Pedir producto={producto} addItemToCart={addItemToCart} />
-      </TableCell>
+      </TableCell> */}
     </TableRowStyled>
   );
 }

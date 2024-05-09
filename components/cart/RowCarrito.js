@@ -12,6 +12,8 @@ export default function RowCarrito(props) {
   const { items, setNewTotalCarrito, newTotalCarrito } = props;
   const [quantity, setQuantity] = useState(items[0].quantity);
 
+  console.log(items);
+
   const {
     atributos,
     codigo,

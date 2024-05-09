@@ -30,7 +30,7 @@ export default function Carrito() {
   }, [items]);
 
   return (
-    <>
+    <div className="pt-[200px] pb-24 bg-white">
       {items.length === 0 ? (
         <div className="w-full flex justify-center items-center">
           <p className="text-azul font-bold text-montserrat text-2xl">
@@ -197,6 +197,6 @@ export default function Carrito() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -150,15 +150,17 @@ export default function Header(props) {
             <div className=" pb-3 text-lg w-1/3 space-x-5">
               <div className="py-3 mb-3  w-full">
                 <div className="flex justify-end items-center w-full space-x-4">
-                  <div onClick={() => setBuscador("Cart")} className="relative">
-                    <BsCart4 className="text-white text-3xl font-light cursor-pointer" />
-                    {items.length ? (
-                      <div className="bg-amarillo absolute -bottom-4 -right-2 z-30 rounded-full px-2 py-1 ">
-                        <p className="text-sm text-azul font-bold">
-                          {items.length}
-                        </p>
-                      </div>
-                    ) : null}
+                  <div className="relative">
+                    <Link href="/carrito">
+                      <BsCart4 className="text-white text-3xl font-light cursor-pointer" />
+                      {items.length ? (
+                        <div className="bg-amarillo absolute -bottom-4 -right-2 z-30 rounded-full px-2 py-1 ">
+                          <p className="text-sm text-azul font-bold">
+                            {items.length}
+                          </p>
+                        </div>
+                      ) : null}
+                    </Link>
                   </div>
                   <IoArrowBackCircleOutline
                     onClick={logout}
