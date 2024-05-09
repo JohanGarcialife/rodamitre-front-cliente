@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "@/features/cartSlice";
 import { IoMdCloseCircle } from "react-icons/io";
 import Subtotal from "../producto/Subtotal";
+import ContadorCarrito from "./ContadorCarrito";
 
 export default function RowCarrito(props) {
   const { items, setNewTotalCarrito, newTotalCarrito } = props;
@@ -107,7 +108,7 @@ export default function RowCarrito(props) {
       </TableCell>
       <TableCell className="w-full text-center">
         <p className="text-black">
-          <Contador
+          <ContadorCarrito
             producto={items[0]}
             quantity={quantity}
             setQuantity={setQuantity}

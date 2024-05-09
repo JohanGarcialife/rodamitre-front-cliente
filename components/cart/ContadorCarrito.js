@@ -9,8 +9,8 @@ export default function ContadorCarrito(props) {
     handleRemoveItem,
     producto,
     addItemToCart,
-    valor,
   } = props;
+  const [valor, setValor] = useState("0");
 
   return (
     <div className="w-full flex items-center justify-around">
