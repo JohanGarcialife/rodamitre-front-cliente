@@ -43,7 +43,7 @@ export const selectCartItemsWithId = (state, pre_id) =>
 
 export const selectCartTotal = (state) =>
   state.cart.items.reduce(
-    (total, item) => (total += item.ppa_precio * item.quantity),
+    (total, item) => (total += item.ppa_precio * item.valor),
     0
   );
 export default cartSlice.reducer;

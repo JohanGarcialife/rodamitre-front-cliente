@@ -10,8 +10,8 @@ import Subtotal from "../producto/Subtotal";
 import ContadorCarrito from "./ContadorCarrito";
 
 export default function RowCarrito(props) {
-  const { items, setNewTotalCarrito, newTotalCarrito } = props;
-  const [quantity, setQuantity] = useState(items[0].quantity);
+  const { items, setNewTotalCarrito, newTotalCarrito, valor } = props;
+  const [quantity, setQuantity] = useState(items[0].valor);
 
   console.log(items);
 
@@ -56,29 +56,6 @@ export default function RowCarrito(props) {
   const handleAddItem = () => {
     setQuantity(quantity + 1);
     setNewTotalCarrito(newTotalCarrito + items[0].ppa_precio);
-    //   addToCart({
-    //     atributos,
-    //     codigo,
-    //     comentarios,
-    //     descuento_marca,
-    //     descuento_producto,
-    //     descuento_rubro,
-    //     es_parte_de,
-    //     formado_por,
-    //     intercambiables,
-    //     mar_id,
-    //     marca_articulo,
-    //     notas,
-    //     ppa_precio,
-    //     pre_id,
-    //     pre_stock_actual,
-    //     rubro,
-    //     rup_id,
-    //     spr_id,
-    //     super_rubro,
-    //     quantity,
-    //   })
-    // );
   };
 
   const handleRemoveItem = () => {
@@ -125,7 +102,7 @@ export default function RowCarrito(props) {
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
         <p className="text-black font-bold">
-          <Subtotal producto={items[0]} quantity={quantity} />
+          <Subtotal producto={items[0]} valor={quantity} />
         </p>
       </TableCell>
       <TableCell className="w-full text-center space-y-2">

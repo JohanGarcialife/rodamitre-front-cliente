@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/features/cartSlice";
 import Pedir from "../producto/Pedir";
 import Motor from "../productos/Motor";
+import ContadorVehiculo from "../producto/ContadorVehiculo";
 
 export default function RowBuscadorVehiculo2(props) {
   const { producto, buscar, setBuscar, setBuscador, selectRubro } = props;
@@ -47,6 +48,7 @@ export default function RowBuscadorVehiculo2(props) {
     if (!quantity > 0) return;
   };
 
+  //Pasa addItemToCart al componente Pedir
   const addItemToCart = () => {
     dispatch(
       addToCart({
@@ -87,8 +89,6 @@ export default function RowBuscadorVehiculo2(props) {
       text-align: center;
     }
   `;
-
-  console.log(producto);
 
   return (
     <>
@@ -138,18 +138,18 @@ export default function RowBuscadorVehiculo2(props) {
                     </div>
                   </TableCell>
                   {/* { Contador } */}
-                  <TableCell className="w-full flex justify-center">
-                    <Contador
-                      producto={producto.pre_id}
+                  <TableCell colSpan={2} className="w-full flex justify-center">
+                    <ContadorVehiculo
+                      producto={producto}
                       quantity={quantity}
                       setQuantity={setQuantity}
                       handleAddItem={handleAddItem}
                       handleRemoveItem={handleRemoveItem}
                     />
                   </TableCell>
-                  <TableCell className="w-full text-center space-y-2">
+                  {/* <TableCell className="w-full text-center space-y-2">
                     <Pedir producto={producto} addItemToCart={addItemToCart} />
-                  </TableCell>
+                  </TableCell> */}
                 </TableRowStyled>
               )}
             </>

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 import ProductoInfo from "../producto/ProductoInfo";
-import Contador from "../producto/Contador";
 import Marca from "../producto/Marca";
 import Precio from "../producto/Precio";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
 import Motor from "../productos/Motor";
 import Pedir from "../producto/Pedir";
+import ContadorVehiculo from "../producto/ContadorVehiculo";
 
 export default function RowBuscadorVehiculo(props) {
   const { rubros, producto } = props;
@@ -126,12 +126,12 @@ export default function RowBuscadorVehiculo(props) {
                   </TableCell>
                   <TableCell className="w-full text-center">
                     <div className="font-bold ">
-                      <p>$ 9.668,687777</p>
+                      <p>$ 9.668,68</p>
                     </div>
                   </TableCell>
                   {/* Contador */}
                   <TableCell className="w-full flex justify-center">
-                    <Contador
+                    <ContadorVehiculo
                       producto={producto}
                       quantity={quantity}
                       setQuantity={setQuantity}

@@ -1,15 +1,60 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/features/cartSlice";
 
 export default function Pedir(props) {
-  const { producto, addItemToCart, setQuantity, valor } = props;
+  const { producto, setQuantity, valor } = props;
   const [pedir, setPedir] = useState(false);
+  const {
+    atributos,
+    codigo,
+    comentarios,
+    descuento_marca,
+    descuento_producto,
+    descuento_rubro,
+    es_parte_de,
+    formado_por,
+    intercambiables,
+    mar_id,
+    marca_articulo,
+    notas,
+    ppa_precio,
+    pre_id,
+    pre_stock_actual,
+    rubro,
+    rup_id,
+    spr_id,
+    super_rubro,
+  } = producto;
 
-  // useEffect(() => {
-  //   setQuantity(valor);
-  //   addItemToCart;
-  //   console.log("pidio", valor);
-  //   setPedir(false);
-  // }, [pedir === true]);
+  const dispatch = useDispatch();
+
+  const addItemToCart = () => {
+    dispatch(
+      addToCart({
+        atributos,
+        codigo,
+        comentarios,
+        descuento_marca,
+        descuento_producto,
+        descuento_rubro,
+        es_parte_de,
+        formado_por,
+        intercambiables,
+        mar_id,
+        marca_articulo,
+        notas,
+        ppa_precio,
+        pre_id,
+        pre_stock_actual,
+        rubro,
+        rup_id,
+        spr_id,
+        super_rubro,
+        valor,
+      })
+    );
+  };
 
   return (
     <div>

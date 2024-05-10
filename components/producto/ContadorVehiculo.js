@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import Subtotal from "./Subtotal";
+
 import Pedir from "./Pedir";
 
-export default function Contador(props) {
+export default function ContadorVehiculo(props) {
   const {
     quantity,
     setQuantity,
@@ -41,15 +41,12 @@ export default function Contador(props) {
             className="text-black text-center font-bold"
           />
         </div>
-        <div
+        <button
           onClick={() => setValor(parseInt(valor) + 1)}
           className="text-amarillo p-1 bg-azul rounded-md cursor-pointer hover:bg-amarillo hover:text-azul"
         >
           <FaPlus />
-        </div>
-      </div>
-      <div className="">
-        <Subtotal producto={producto} valor={parseInt(valor)} />
+        </button>
       </div>
       <div className="">
         <Pedir

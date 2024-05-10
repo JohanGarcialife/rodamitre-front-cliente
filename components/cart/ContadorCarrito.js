@@ -35,7 +35,7 @@ export default function ContadorCarrito(props) {
             onChange={(e) => {
               setValor(e.target.value);
             }}
-            value={valor}
+            value={quantity}
             className="text-black text-center font-bold"
           />
         </div>

@@ -20,6 +20,8 @@ export default function Carrito() {
 
   const [newTotalCarrito, setNewTotalCarrito] = useState(totalCarrito);
 
+  console.log(newTotalCarrito);
+
   useEffect(() => {
     const itemsAgrupados = items.reduce((results, item) => {
       (results[item.pre_id] = results[item.pre_id] || []).push(item);
