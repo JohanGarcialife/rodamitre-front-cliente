@@ -19,6 +19,7 @@ import { useTheme } from "@mui/material/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import { productosCodigo, codigoP } from "@/pages/api/productos";
 import RowBuscadorFamilia from "./RowBuscadorFamilia";
+import RecommendablesRow from "../productos/RecommendablesRow";
 import { useRouter } from "next/router";
 
 export default function BuscadorRapida(props) {
@@ -28,6 +29,8 @@ export default function BuscadorRapida(props) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [search, setSearch] = useState([]);
+  const [equivalente, setEquivalente] = useState([]);
+
 
   const router = useRouter();
 
@@ -55,7 +58,13 @@ export default function BuscadorRapida(props) {
           auth.LPP_ID,
           Dato
         );
-        setProductos(productAuto);
+        if (productAuto[0]?.m) {
+          setProductos(productAuto[0].m);
+          setEquivalente(productAuto[1]);
+        } else if (productAuto.length > 0 && !productAuto[0].m) {
+          setProductos(productAuto);
+          setEquivalente(null);
+        }
         setBuscar(null);
         setLoade(false);
       })();
@@ -70,10 +79,21 @@ export default function BuscadorRapida(props) {
       setSearch([]);
       setLoade(true);
       const productAuto = await productosCodigo(auth.CLI_ID, auth.LPP_ID, Dato);
-      if (productAuto.length > 0) {
+      if (productAuto.length <= 0) {
+        console.log("mardito");
         setProductos(productAuto);
-      } else {
-        console.log(productAuto);
+        setLoade(false);
+      }
+
+      if (productAuto[0]?.m) {
+        console.log("PRODUCTOS M");
+        setProductos(productAuto[0].m);
+        setEquivalente(productAuto[1]);
+      } else if (!productAuto[0].m) {
+        console.log("PRODUCTOS NORMALES");
+        setProductos(productAuto);
+        setEquivalente(null);
+        
       }
       setLoade(false);
       setBuscar(null);
@@ -81,7 +101,7 @@ export default function BuscadorRapida(props) {
   });
 
   useEffect(() => {
-    if (formik?.values?.p?.length > 2) {
+    if (formik?.values?.p?.length > 2 && formik?.values?.p?.length < 12 ) {
       (async () => {
         const Dato = {
           p: formik?.values?.p,
@@ -274,6 +294,9 @@ export default function BuscadorRapida(props) {
                     setBuscador={setBuscador}
                   />
                 ))}
+                {equivalente
+                  ? equivalente?.map((eq) => <RecommendablesRow eq={eq} />)
+                  : ""}
               </TableBody>
               <TableFooter>
                 <TableRow>

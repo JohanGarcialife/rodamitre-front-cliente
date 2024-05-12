@@ -24,12 +24,14 @@ import {
   productosMarcAuto,
   pMarcarticulo,
   rubrosP,
+  marcaAutosApi
+
 } from "@/pages/api/productos";
 import CircularProgress from "@mui/material/CircularProgress";
 import RowBuscadorFamilia from "./RowBuscadorFamilia";
 
 export default function BuscadorFamilia(props) {
-  const { marcaAutos, auth, setReloadUser, buscar, setBuscar, setBuscador } =
+  const {auth, setReloadUser, buscar, setBuscar, setBuscador } =
     props;
   const [productos1, setProductos1] = useState([]);
   const [productos, setProductos] = useState([]);
@@ -48,8 +50,14 @@ export default function BuscadorFamilia(props) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [expand, setExpand] = useState("noExpand");
   const [loade, setLoade] = useState(false);
+  const [marcaAutos, setMarcaAutos] = useState([]);
 
-  
+  useEffect(() => {
+    (async () => {
+      const response = await marcaAutosApi();
+      setMarcaAutos(response);
+    })();
+  }, []);
 
   useEffect(() => {
     setFamilia(null);

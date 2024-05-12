@@ -12,7 +12,7 @@ export default function Esparte(props) {
   }
 
   return (
-    <div className="grid grid-cols-5 gap-2">
+    <div className="flex font-normal gap-x-2">
       {arr?.map((ar) => (
         <div className="text-center ">
           <p

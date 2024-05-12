@@ -101,7 +101,7 @@ export default function RowBuscadorFamilia(props) {
         {producto?.aplicaciones ? (
           <Aplicaciones
             aplicaciones={producto.aplicaciones}
-            srubro={producto.super_rubro}
+            srubro={producto.rubro}
           />
         ) : null}
       </TableCell>
