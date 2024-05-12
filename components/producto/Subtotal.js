@@ -1,11 +1,12 @@
 import React from "react";
 
 export default function Subtotal(props) {
-  const { producto, quantity, valor } = props;
+  const { producto, valor } = props;
 
-  return (
-    <div className="font-bold ">
-      ${valor < 0 ? 0 : valor * producto?.ppa_precio.toFixed(2)}
-    </div>
-  );
+  console.log(producto?.ppa_precio);
+  console.log(valor);
+
+  const subtotal = valor < 0 ? 0 : valor * producto?.ppa_precio;
+
+  return <div className="font-bold ">$ {subtotal.toFixed(2)}</div>;
 }

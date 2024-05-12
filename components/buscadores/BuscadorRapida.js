@@ -31,7 +31,6 @@ export default function BuscadorRapida(props) {
   const [search, setSearch] = useState([]);
   const [equivalente, setEquivalente] = useState([]);
 
-
   const router = useRouter();
 
   setBuscar(data.query.query);
@@ -93,7 +92,6 @@ export default function BuscadorRapida(props) {
         console.log("PRODUCTOS NORMALES");
         setProductos(productAuto);
         setEquivalente(null);
-        
       }
       setLoade(false);
       setBuscar(null);
@@ -101,7 +99,7 @@ export default function BuscadorRapida(props) {
   });
 
   useEffect(() => {
-    if (formik?.values?.p?.length > 2 && formik?.values?.p?.length < 12 ) {
+    if (formik?.values?.p?.length > 2 && formik?.values?.p?.length < 12) {
       (async () => {
         const Dato = {
           p: formik?.values?.p,
@@ -142,7 +140,7 @@ export default function BuscadorRapida(props) {
               <input
                 type="text"
                 name="p"
-                className="bg-transparent p-3 w-full"
+                className="bg-transparent p-3 w-full font-black"
                 placeholder="Código del artículo y/o ubicación. Ej: VKM 1258 / Mazda Ford Fiesta / VKM Fiat"
                 onChange={formik.handleChange}
                 value={formik.values.p}
@@ -153,7 +151,7 @@ export default function BuscadorRapida(props) {
                   {search?.map((c) => {
                     return (
                       <p
-                        className="hover:bg-slate-200 cursor-pointer px-2"
+                        className="hover:bg-slate-200 cursor-pointer px-2 font-black"
                         // onClick={() => setBuscar(c.CODIGO_EQUIVALENTE)}
                         onClick={() => handlebuscar(c.CODIGO)}
                       >
@@ -170,12 +168,12 @@ export default function BuscadorRapida(props) {
           </div>
           <div className="w-full flex space-x-5">
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 font-black">
                 <p>Interior</p>
               </div>
               <input
                 type="text"
-                className="bg-transparent p-3 "
+                className="bg-transparent p-3 font-black"
                 placeholder="Interior"
                 name="interior"
                 onChange={formik.handleChange}
@@ -183,12 +181,12 @@ export default function BuscadorRapida(props) {
               />
             </div>
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 font-black">
                 <p>Exterior</p>
               </div>
               <input
                 type="text"
-                className="bg-transparent p-3 "
+                className="bg-transparent p-3 font-black"
                 placeholder="Exterior"
                 name="exterior"
                 onChange={formik.handleChange}
@@ -196,13 +194,13 @@ export default function BuscadorRapida(props) {
               />
             </div>
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 font-black">
                 <p>Altura</p>
               </div>
               <input
                 name="altura"
                 type="text"
-                className="bg-transparent p-3 "
+                className="bg-transparent p-3 font-black"
                 placeholder="Altura"
                 onChange={formik.handleChange}
                 value={formik.values.altura}
@@ -219,7 +217,7 @@ export default function BuscadorRapida(props) {
             <FaSearch />
           </button>
           <div
-            className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-r-lg cursor-pointer "
+            className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-r-lg cursor-pointer font-black"
             onClick={() => formik.resetForm()}
           >
             <p>Limpiar</p>

@@ -130,7 +130,7 @@ export default function RowBuscadorVehiculo(props) {
                     </div>
                   </TableCell>
                   {/* Contador */}
-                  <TableCell className="w-full flex justify-center">
+                  <TableCell colSpan={2} className="w-full flex justify-center">
                     <ContadorVehiculo
                       producto={producto}
                       quantity={quantity}
@@ -139,9 +139,9 @@ export default function RowBuscadorVehiculo(props) {
                       handleRemoveItem={handleRemoveItem}
                     />
                   </TableCell>
-                  <TableCell className="w-full text-center space-y-2">
+                  {/* <TableCell className="w-full text-center space-y-2">
                     <Pedir producto={producto} addItemToCart={addItemToCart} />
-                  </TableCell>
+                  </TableCell> */}
                 </TableRowStyled>
               )}
             </>
