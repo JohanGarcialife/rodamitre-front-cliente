@@ -51,14 +51,14 @@ th {
       {/* contador */}
        <TableCell colSpan={3} className="w-full flex justify-center">
         <div className="w-full flex justify-center">
-          <Contador
+        {/*   <Contador
             producto={eq}
            /*  quantity={quantity}
             setQuantity={setQuantity}
             handleAddItem={handleAddItem}
             handleRemoveItem={handleRemoveItem}
-            addItemToCart={addItemToCart} */
-          />
+            addItemToCart={addItemToCart} 
+          /> */}
         </div>
       </TableCell> 
      
