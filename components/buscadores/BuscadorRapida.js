@@ -80,7 +80,6 @@ export default function BuscadorRapida(props) {
       setLoade(true);
       const productAuto = await productosCodigo(auth.CLI_ID, auth.LPP_ID, Dato);
       if (productAuto.length <= 0) {
-        console.log("mardito");
         setProductos(productAuto);
         setLoade(false);
       }

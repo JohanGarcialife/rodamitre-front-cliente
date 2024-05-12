@@ -5,7 +5,7 @@ export default function Subtotal(props) {
 
   return (
     <div className="font-bold ">
-      ${valor < 0 ? 0 : valor * producto?.ppa_precio.toFixed(2)}
+      ${valor < 0 ? 0 : valor * producto?.ppa_precio?.toFixed(2)}
     </div>
   );
 }
