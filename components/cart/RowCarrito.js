@@ -82,7 +82,7 @@ export default function RowCarrito(props) {
         <p className="text-amarillo font-bold">{items?.marca_articulo} </p>
       </TableCell>
       <TableCell className="w-full text-center">
-        <p className="text-black">
+        <p className="text-black font-bold">
           {/* <ContadorCarrito
             producto={items}
             quantity={valor}
