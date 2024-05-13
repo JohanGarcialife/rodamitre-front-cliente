@@ -29,9 +29,9 @@ export default function Contador(props) {
             min={0}
             max={5000}
             onChange={(e) => {
-              setValor(e.target.value);
+              e.target.value === "" ? setValor(0) : setValor(e.target.value);
             }}
-            value={valor}
+            value={valor === "" ? 0 : valor}
             className="text-black text-center font-bold"
           />
         </div>

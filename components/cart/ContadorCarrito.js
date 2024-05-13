@@ -38,7 +38,7 @@ export default function ContadorCarrito(props) {
             min={0}
             max={5000}
             onChange={handleChange}
-            value={valor}
+            value={valor === "" ? 0 : valor}
             className="text-black text-center font-bold"
           />
         </div>

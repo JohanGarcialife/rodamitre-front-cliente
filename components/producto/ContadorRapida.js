@@ -8,7 +8,7 @@ export default function ContadorRapida(props) {
   const [valor, setValor] = useState("0");
 
   console.log(producto);
-  console.log(valor); 
+  console.log(valor);
 
   return (
     <div className="w-full flex items-center justify-around">
@@ -31,9 +31,9 @@ export default function ContadorRapida(props) {
             min={0}
             max={5000}
             onChange={(e) => {
-              setValor(e.target.value);
+              e.target.value === "" ? setValor(0) : setValor(e.target.value);
             }}
-            value={valor}
+            value={valor === "" ? 0 : valor}
             className="text-black text-center font-bold"
           />
         </div>

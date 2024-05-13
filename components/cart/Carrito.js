@@ -29,7 +29,7 @@ export default function Carrito() {
     setItemsAgrupadosEnCarrito(itemsAgrupados);
   }, [items]);
 
-  // console.log(items);
+  console.log(items);
 
   return (
     <div className="pt-[200px] pb-24 bg-white">
