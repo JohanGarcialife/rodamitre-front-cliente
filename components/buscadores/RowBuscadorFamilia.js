@@ -14,7 +14,6 @@ import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
 export default function RowBuscadorFamilia(props) {
   const { producto, productos } = props;
 
-  console.log(producto);
   const {
     atributos,
     codigo,

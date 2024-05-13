@@ -15,8 +15,6 @@ export default function ContadorRapida(props) {
     setValor,
   } = props;
 
-  console.log(valor);
-
   return (
     <div className="w-full flex items-center justify-around">
       <div className=" flex items-center justify-center space-x-2">

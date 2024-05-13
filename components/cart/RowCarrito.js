@@ -10,10 +10,9 @@ import Subtotal from "../producto/Subtotal";
 import ContadorCarrito from "./ContadorCarrito";
 
 export default function RowCarrito(props) {
-  const { items, setNewTotalCarrito, newTotalCarrito, valor } = props;
-  const [quantity, setQuantity] = useState(items[0].valor);
+  const { items, setNewTotalCarrito, newTotalCarrito, producto } = props;
+  const [quantity, setQuantity] = useState(items.valor);
 
-  console.log(items);
 
   const {
     atributos,
@@ -35,7 +34,8 @@ export default function RowCarrito(props) {
     rup_id,
     spr_id,
     super_rubro,
-  } = items[0];
+    valor,
+  } = items;
 
   const dispatch = useDispatch();
 
@@ -55,21 +55,19 @@ export default function RowCarrito(props) {
 
   const handleAddItem = () => {
     setQuantity(quantity + 1);
-    setNewTotalCarrito(newTotalCarrito + items[0].ppa_precio);
+    setNewTotalCarrito(newTotalCarrito + items.ppa_precio);
   };
 
   const handleRemoveItem = () => {
     setQuantity(quantity - 1);
-    setNewTotalCarrito(newTotalCarrito - items[0].ppa_precio);
+    setNewTotalCarrito(newTotalCarrito - items.ppa_precio);
     if (!quantity > 0) return;
   };
 
   const removeItemFromCart = () => {
     if (!items.length > 0) return;
     dispatch(removeFromCart({ pre_id }));
-    setNewTotalCarrito(
-      newTotalCarrito - items[0].ppa_precio * items[0].quantity
-    );
+    setNewTotalCarrito(newTotalCarrito - items.ppa_precio * items.quantity);
   };
 
   return (
@@ -78,16 +76,16 @@ export default function RowCarrito(props) {
         <p className="text-black">{moment().format("L HH:mm")}hs </p>{" "}
       </TableCell>
       <TableCell className="w-full text-center font-bold">
-        <p className="text-azul font-bold">{items[0]?.codigo} </p>
+        <p className="text-azul font-bold">{items?.codigo} </p>
       </TableCell>
       <TableCell className="w-full flex justify-center text-center font-bold">
-        <p className="text-amarillo font-bold">{items[0]?.marca_articulo} </p>
+        <p className="text-amarillo font-bold">{items?.marca_articulo} </p>
       </TableCell>
       <TableCell className="w-full text-center">
         <p className="text-black">
           <ContadorCarrito
-            producto={items[0]}
-            quantity={quantity}
+            producto={items}
+            quantity={valor}
             setQuantity={setQuantity}
             handleAddItem={handleAddItem}
             handleRemoveItem={handleRemoveItem}
@@ -95,14 +93,14 @@ export default function RowCarrito(props) {
         </p>
       </TableCell>
       <TableCell className="w-full flex justify-center font-bold">
-        <p className="text-black font-bold">${items[0]?.ppa_precio} </p>
+        <p className="text-black font-bold">${items?.ppa_precio} </p>
       </TableCell>
       <TableCell className="w-full text-center font-bold">
-        <p className="text-black font-bold">${items[0]?.ppa_precio}</p>
+        <p className="text-black font-bold">${items?.ppa_precio}</p>
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
         <p className="text-black font-bold">
-          <Subtotal producto={items[0]} valor={quantity} />
+          <Subtotal producto={items} valor={items?.valor} />
         </p>
       </TableCell>
       <TableCell className="w-full text-center space-y-2">

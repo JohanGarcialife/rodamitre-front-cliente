@@ -20,8 +20,6 @@ export default function Carrito() {
 
   const [newTotalCarrito, setNewTotalCarrito] = useState(totalCarrito);
 
-  console.log(newTotalCarrito);
-
   useEffect(() => {
     const itemsAgrupados = items.reduce((results, item) => {
       (results[item.pre_id] = results[item.pre_id] || []).push(item);
@@ -30,6 +28,8 @@ export default function Carrito() {
 
     setItemsAgrupadosEnCarrito(itemsAgrupados);
   }, [items]);
+
+  // console.log(items);
 
   return (
     <div className="pt-[200px] pb-24 bg-white">
@@ -88,9 +88,10 @@ export default function Carrito() {
               </TableRow>
             </TableHead>
             <TableBody className="bg-white">
-              {Object.entries(itemsAgrupadosEnCarrito).map(([key, items]) => (
+              {items.map((item) => (
                 <RowCarrito
-                  items={items}
+                  items={item}
+                  producto={item}
                   itemsAgrupadosEnCarrito={itemsAgrupadosEnCarrito}
                   setNewTotalCarrito={setNewTotalCarrito}
                   newTotalCarrito={newTotalCarrito}
