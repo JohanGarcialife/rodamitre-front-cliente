@@ -125,7 +125,10 @@ export default function BuscadorRapida(props) {
   }
 
   return (
-    <div className=" pt-[200px] pb-24 bg-white" onClick={() => setSearch([])}>
+    <div
+      className=" pt-[200px] pb-24 bg-white"
+      //onClick={() => setSearch([])}
+    >
       <form
         className="flex space-x-10 px-2 w-full font-montserrat"
         onSubmit={formik.handleSubmit}

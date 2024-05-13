@@ -8,7 +8,7 @@ export default function ContadorRapida(props) {
   const [valor, setValor] = useState("0");
 
   console.log(producto);
-  console.log(valor);
+  console.log(valor); 
 
   return (
     <div className="w-full flex items-center justify-around">
