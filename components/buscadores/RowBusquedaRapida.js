@@ -3,18 +3,16 @@ import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 import ProductoInfo from "../producto/ProductoInfo";
 import Aplicaciones from "../producto/Aplicaciones";
-import Subtotal from "../producto/Subtotal";
 import Marca from "../producto/Marca";
-import Pedir from "../producto/Pedir";
 import Precio from "../producto/Precio";
-import Contador from "../producto/Contador";
+import ContadorRapida from "../producto/ContadorRapida";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
 
-export default function RowBuscadorFamilia(props) {
+export default function RowBusquedaRapida(props) {
   const { producto, productos } = props;
+  const [valor, setValor] = useState("0");
 
-  console.log(producto);
   const {
     atributos,
     codigo,
@@ -116,13 +114,11 @@ export default function RowBuscadorFamilia(props) {
       {/* contador */}
       <TableCell colSpan={3} className="w-full flex justify-center">
         <div className="w-full flex justify-center">
-          <Contador
+          <ContadorRapida
             producto={producto}
-            quantity={quantity}
-            setQuantity={setQuantity}
-            handleAddItem={handleAddItem}
-            handleRemoveItem={handleRemoveItem}
             addItemToCart={addItemToCart}
+            valor={valor}
+            setValor={setValor}
           />
         </div>
       </TableCell>

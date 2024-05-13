@@ -18,9 +18,9 @@ import {
 import { useTheme } from "@mui/material/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import { productosCodigo, codigoP } from "@/pages/api/productos";
-import RowBuscadorFamilia from "./RowBuscadorFamilia";
 import RecommendablesRow from "../productos/RecommendablesRow";
 import { useRouter } from "next/router";
+import RowBusquedaRapida from "./RowBusquedaRapida";
 
 export default function BuscadorRapida(props) {
   const { auth, setBuscar, buscar, setBuscador, data } = props;
@@ -139,7 +139,7 @@ export default function BuscadorRapida(props) {
               <input
                 type="text"
                 name="p"
-                className="bg-transparent p-3 w-full font-black"
+                className="bg-transparent p-3 w-full text-black"
                 placeholder="Código del artículo y/o ubicación. Ej: VKM 1258 / Mazda Ford Fiesta / VKM Fiat"
                 onChange={formik.handleChange}
                 value={formik.values.p}
@@ -150,7 +150,7 @@ export default function BuscadorRapida(props) {
                   {search?.map((c) => {
                     return (
                       <p
-                        className="hover:bg-slate-200 cursor-pointer px-2 font-black"
+                        className="hover:bg-slate-200 cursor-pointer px-2 text-black"
                         // onClick={() => setBuscar(c.CODIGO_EQUIVALENTE)}
                         onClick={() => handlebuscar(c.CODIGO)}
                       >
@@ -167,12 +167,12 @@ export default function BuscadorRapida(props) {
           </div>
           <div className="w-full flex space-x-5">
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 font-black">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 text-black">
                 <p>Interior</p>
               </div>
               <input
                 type="text"
-                className="bg-transparent p-3 font-black"
+                className="bg-transparent p-3 text-black"
                 placeholder="Interior"
                 name="interior"
                 onChange={formik.handleChange}
@@ -180,12 +180,12 @@ export default function BuscadorRapida(props) {
               />
             </div>
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 font-black">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 text-black">
                 <p>Exterior</p>
               </div>
               <input
                 type="text"
-                className="bg-transparent p-3 font-black"
+                className="bg-transparent p-3 text-black"
                 placeholder="Exterior"
                 name="exterior"
                 onChange={formik.handleChange}
@@ -193,13 +193,13 @@ export default function BuscadorRapida(props) {
               />
             </div>
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 font-black">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 text-black">
                 <p>Altura</p>
               </div>
               <input
                 name="altura"
                 type="text"
-                className="bg-transparent p-3 font-black"
+                className="bg-transparent p-3 text-black"
                 placeholder="Altura"
                 onChange={formik.handleChange}
                 value={formik.values.altura}
@@ -216,7 +216,7 @@ export default function BuscadorRapida(props) {
             <FaSearch />
           </button>
           <div
-            className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-r-lg cursor-pointer font-black"
+            className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-r-lg cursor-pointer text-white"
             onClick={() => formik.resetForm()}
           >
             <p>Limpiar</p>
@@ -283,12 +283,9 @@ export default function BuscadorRapida(props) {
                     )
                   : productos
                 )?.map((producto) => (
-                  <RowBuscadorFamilia
+                  <RowBusquedaRapida
                     productos={productos}
                     producto={producto}
-                    setBuscar={setBuscar}
-                    buscar={buscar}
-                    setBuscador={setBuscador}
                   />
                 ))}
                 {equivalente

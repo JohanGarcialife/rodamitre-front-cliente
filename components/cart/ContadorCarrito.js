@@ -2,14 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
 export default function ContadorCarrito(props) {
-  const {
-    quantity,
-    setQuantity,
-    handleAddItem,
-    handleRemoveItem,
-    producto,
-    addItemToCart,
-  } = props;
+  const { quantity, setQuantity } = props;
   const [valor, setValor] = useState("0");
 
   return (
@@ -21,7 +14,7 @@ export default function ContadorCarrito(props) {
           </div>
         ) : (
           <div
-            // onClick={handleRemoveItem}
+            onClick={() => setValor(parseInt(quantity) - 1)}
             className="text-amarillo p-1 bg-azul rounded-md cursor-pointer hover:bg-amarillo hover:text-azul"
           >
             <FaMinus />
@@ -40,7 +33,7 @@ export default function ContadorCarrito(props) {
           />
         </div>
         <div
-          // onClick={handleAddItem}
+          onClick={() => setValor(parseInt(quantity) + 1)}
           className="text-amarillo p-1 bg-azul rounded-md cursor-pointer hover:bg-amarillo hover:text-azul"
         >
           <FaPlus />

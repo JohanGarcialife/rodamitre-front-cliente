@@ -3,7 +3,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import Subtotal from "./Subtotal";
 import Pedir from "./Pedir";
 
-export default function Contador(props) {
+export default function ContadorRapida(props) {
   const {
     quantity,
     setQuantity,
@@ -11,9 +11,11 @@ export default function Contador(props) {
     handleRemoveItem,
     producto,
     addItemToCart,
+    valor,
+    setValor,
   } = props;
 
-  const [valor, setValor] = useState("0");
+  console.log(valor);
 
   return (
     <div className="w-full flex items-center justify-around">
