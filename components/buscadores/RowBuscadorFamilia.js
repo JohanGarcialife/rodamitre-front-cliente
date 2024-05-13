@@ -35,6 +35,7 @@ export default function RowBuscadorFamilia(props) {
     spr_id,
     super_rubro,
   } = producto;
+
   const [quantity, setQuantity] = useState(0);
 
   const items = useSelector((state) => selectCartItemsWithId(state, pre_id));

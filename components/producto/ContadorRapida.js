@@ -7,9 +7,6 @@ export default function ContadorRapida(props) {
   const { setQuantity, producto, addItemToCart } = props;
   const [valor, setValor] = useState("0");
 
-  console.log(producto);
-  console.log(valor);
-
   return (
     <div className="w-full flex items-center justify-around">
       <div className=" flex items-center justify-center space-x-2">

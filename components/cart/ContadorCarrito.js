@@ -5,8 +5,6 @@ export default function ContadorCarrito(props) {
   const { quantity, setQuantity } = props;
   const [valor, setValor] = useState(quantity);
 
-  console.log(quantity);
-
   const handleChange = (e) => {
     setValor(e.target.value);
 

@@ -14,7 +14,7 @@ export const cartSlice = createSlice({
 
     removeFromCart: (state, action) => {
       const index = state.items.findIndex(
-        (item) => item.pre_id === action.payload.pre_id
+        (item) => item.codigo === action.payload.codigo
       );
 
       let newCart = [...state.items];
@@ -23,7 +23,7 @@ export const cartSlice = createSlice({
         newCart.splice(index, 1);
       } else {
         console.warn(
-          `No se pudo remover el producto (pre_id: ${action.payload.pre_id}), no está en el carrito!`
+          `No se pudo remover el producto (codigo: ${action.payload.codigo}), no está en el carrito!`
         );
       }
 

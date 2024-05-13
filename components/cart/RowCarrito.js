@@ -10,31 +10,15 @@ import Subtotal from "../producto/Subtotal";
 import ContadorCarrito from "./ContadorCarrito";
 
 export default function RowCarrito(props) {
-  const { items, setNewTotalCarrito, newTotalCarrito, producto } = props;
+  const {
+    items,
+    setNewTotalCarrito,
+    newTotalCarrito,
+    itemsAgrupadosEnCarrito,
+  } = props;
   const [quantity, setQuantity] = useState(items.valor);
 
-  const {
-    atributos,
-    codigo,
-    comentarios,
-    descuento_marca,
-    descuento_producto,
-    descuento_rubro,
-    es_parte_de,
-    formado_por,
-    intercambiables,
-    mar_id,
-    marca_articulo,
-    notas,
-    ppa_precio,
-    pre_id,
-    pre_stock_actual,
-    rubro,
-    rup_id,
-    spr_id,
-    super_rubro,
-    valor,
-  } = items;
+  const { pre_id, valor } = items;
 
   const dispatch = useDispatch();
 
@@ -52,21 +36,10 @@ export default function RowCarrito(props) {
     }
   `;
 
-  const handleAddItem = () => {
-    setQuantity(quantity + 1);
-    setNewTotalCarrito(newTotalCarrito + items.ppa_precio);
-  };
-
-  const handleRemoveItem = () => {
-    setQuantity(quantity - 1);
-    setNewTotalCarrito(newTotalCarrito - items.ppa_precio);
-    if (!quantity > 0) return;
-  };
-
   const removeItemFromCart = () => {
-    console.log("quitar");
+    console.log(items?.pre_id);
     if (!items.length > 0) return;
-    dispatch(removeFromCart({ pre_id }));
+    dispatch(removeFromCart({ codigo }));
     setNewTotalCarrito(newTotalCarrito - items.ppa_precio * items.quantity);
   };
 
