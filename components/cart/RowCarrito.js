@@ -13,7 +13,6 @@ export default function RowCarrito(props) {
   const { items, setNewTotalCarrito, newTotalCarrito, producto } = props;
   const [quantity, setQuantity] = useState(items.valor);
 
-
   const {
     atributos,
     codigo,
@@ -65,6 +64,7 @@ export default function RowCarrito(props) {
   };
 
   const removeItemFromCart = () => {
+    console.log("quitar");
     if (!items.length > 0) return;
     dispatch(removeFromCart({ pre_id }));
     setNewTotalCarrito(newTotalCarrito - items.ppa_precio * items.quantity);
@@ -83,13 +83,15 @@ export default function RowCarrito(props) {
       </TableCell>
       <TableCell className="w-full text-center">
         <p className="text-black">
-          <ContadorCarrito
+          {/* <ContadorCarrito
             producto={items}
             quantity={valor}
             setQuantity={setQuantity}
             handleAddItem={handleAddItem}
             handleRemoveItem={handleRemoveItem}
-          />
+          /> */}
+
+          {valor}
         </p>
       </TableCell>
       <TableCell className="w-full flex justify-center font-bold">

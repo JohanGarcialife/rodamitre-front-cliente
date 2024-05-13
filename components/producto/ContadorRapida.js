@@ -4,16 +4,11 @@ import Subtotal from "./Subtotal";
 import Pedir from "./Pedir";
 
 export default function ContadorRapida(props) {
-  const {
-    quantity,
-    setQuantity,
-    handleAddItem,
-    handleRemoveItem,
-    producto,
-    addItemToCart,
-    valor,
-    setValor,
-  } = props;
+  const { setQuantity, producto, addItemToCart } = props;
+  const [valor, setValor] = useState("0");
+
+  console.log(producto);
+  console.log(valor);
 
   return (
     <div className="w-full flex items-center justify-around">

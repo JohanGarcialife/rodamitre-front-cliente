@@ -167,7 +167,7 @@ export default function BuscadorRapida(props) {
           </div>
           <div className="w-full flex space-x-5">
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 text-black">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
                 <p>Interior</p>
               </div>
               <input
@@ -180,7 +180,7 @@ export default function BuscadorRapida(props) {
               />
             </div>
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 text-black">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
                 <p>Exterior</p>
               </div>
               <input
@@ -193,7 +193,7 @@ export default function BuscadorRapida(props) {
               />
             </div>
             <div className="bg-white rounded-lg border border-black flex">
-              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 text-black">
+              <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
                 <p>Altura</p>
               </div>
               <input

@@ -11,7 +11,6 @@ import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
 
 export default function RowBusquedaRapida(props) {
   const { producto, productos } = props;
-  const [valor, setValor] = useState("0");
 
   const {
     atributos,
@@ -39,15 +38,6 @@ export default function RowBusquedaRapida(props) {
   const items = useSelector((state) => selectCartItemsWithId(state, pre_id));
 
   const dispatch = useDispatch();
-
-  const handleAddItem = () => {
-    setQuantity(e.target.value + 1);
-  };
-
-  const handleRemoveItem = () => {
-    setQuantity(e.target.value - 1);
-    if (!quantity > 0) return;
-  };
 
   const addItemToCart = () => {
     dispatch(
@@ -117,8 +107,8 @@ export default function RowBusquedaRapida(props) {
           <ContadorRapida
             producto={producto}
             addItemToCart={addItemToCart}
-            valor={valor}
-            setValor={setValor}
+            quantity={quantity}
+            setQuantity={setQuantity}
           />
         </div>
       </TableCell>

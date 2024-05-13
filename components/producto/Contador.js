@@ -4,14 +4,7 @@ import Subtotal from "./Subtotal";
 import Pedir from "./Pedir";
 
 export default function Contador(props) {
-  const {
-    quantity,
-    setQuantity,
-    handleAddItem,
-    handleRemoveItem,
-    producto,
-    addItemToCart,
-  } = props;
+  const { setQuantity, producto, addItemToCart } = props;
 
   const [valor, setValor] = useState("0");
 

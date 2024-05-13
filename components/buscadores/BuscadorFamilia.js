@@ -812,7 +812,7 @@ export default function BuscadorFamilia(props) {
                     page * rowsPerPage,
                     page * rowsPerPage + rowsPerPage
                   )
-                : productos
+                : productos 
               )?.map((producto) => (
                 <RowBuscadorFamilia
                   productos={productos}
