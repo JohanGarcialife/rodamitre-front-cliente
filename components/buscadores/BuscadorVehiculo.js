@@ -213,17 +213,19 @@ export default function BuscadorVehiculo(props) {
               href="/"
               onClick={handleClick}
             >
-              Busqueda Vehículos
+              <p key="" className="text-gris text-xs">
+                Busqueda Vehículos
+              </p>
             </Link>
             ,
             {!vehiculo ? null : (
-              <p key="" className="text-gris">
+              <p key="" className="text-gris text-xs">
                 {vehiculo.label}
               </p>
             )}
             ,
             {!modelo ? null : (
-              <p key="" className="text-gris">
+              <p key="" className="text-gris text-xs">
                 {modelo.label}
               </p>
             )}
@@ -236,9 +238,9 @@ export default function BuscadorVehiculo(props) {
                 href="/"
                 onClick={handleClick}
               >
-                <div className="flex space-x-2 items-center">
+                <div className="flex space-x-1 items-center">
                   {rubro?.map((rubro) => (
-                    <p key="" className="text-gris">
+                    <p key="" className="text-gris text-xs">
                       {rubro.label}
                     </p>
                   ))}
@@ -254,9 +256,9 @@ export default function BuscadorVehiculo(props) {
                 href="/"
                 onClick={handleClick}
               >
-                <div className="flex space-x-2 items-center">
+                <div className="flex space-x-1 items-center">
                   {motor?.map((motor) => (
-                    <p key="" className="text-gris">
+                    <p key="" className="text-gris text-xs">
                       {motor.label}
                     </p>
                   ))}
@@ -264,7 +266,7 @@ export default function BuscadorVehiculo(props) {
               </Link>
             ) : null}
             ,
-            <p key="" className="text-gris">
+            <p key="" className="text-gris text-xs">
               Página 1 de 1
             </p>
             ,

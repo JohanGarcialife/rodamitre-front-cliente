@@ -29,8 +29,6 @@ export default function Carrito() {
     setItemsAgrupadosEnCarrito(itemsAgrupados);
   }, [items]);
 
-  console.log(items);
-
   return (
     <div className="pt-[200px] pb-24 bg-white">
       {items.length === 0 ? (
@@ -91,7 +89,7 @@ export default function Carrito() {
               {items.map((item) => (
                 <RowCarrito
                   items={item}
-                  producto={item}
+                  productos={items}
                   itemsAgrupadosEnCarrito={itemsAgrupadosEnCarrito}
                   setNewTotalCarrito={setNewTotalCarrito}
                   newTotalCarrito={newTotalCarrito}

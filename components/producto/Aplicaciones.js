@@ -89,14 +89,14 @@ export default function Aplicaciones(props) {
           {!verMas ? (
             <p
               onClick={() => setVerMas(true)}
-              className="text-sm hover:underline hover:cursor-pointer mt-2"
+              className="text-sm text-left hover:underline hover:cursor-pointer mt-2"
             >
               Ver más
             </p>
           ) : (
             <p
               onClick={() => setVerMas(false)}
-              className="text-sm hover:underline hover:cursor-pointer mt-2"
+              className="text-sm text-left  hover:underline hover:cursor-pointer mt-2"
             >
               Ver menos
             </p>

@@ -19,6 +19,7 @@ export default function RowCarrito(props) {
   const [quantity, setQuantity] = useState(items.valor);
 
   const { pre_id, valor } = items;
+  console.log(items);
 
   const dispatch = useDispatch();
 

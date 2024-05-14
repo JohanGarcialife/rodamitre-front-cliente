@@ -24,15 +24,13 @@ import {
   productosMarcAuto,
   pMarcarticulo,
   rubrosP,
-  marcaAutosApi
-
+  marcaAutosApi,
 } from "@/pages/api/productos";
 import CircularProgress from "@mui/material/CircularProgress";
 import RowBuscadorFamilia from "./RowBuscadorFamilia";
 
 export default function BuscadorFamilia(props) {
-  const {auth, setReloadUser, buscar, setBuscar, setBuscador } =
-    props;
+  const { auth, setReloadUser, buscar, setBuscar, setBuscador } = props;
   const [productos1, setProductos1] = useState([]);
   const [productos, setProductos] = useState([]);
   const [marID, setMarID] = useState();
@@ -305,7 +303,7 @@ export default function BuscadorFamilia(props) {
           mar_id: "",
           rubro: "",
         };
-         setLoade(true);
+        setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
@@ -616,7 +614,9 @@ export default function BuscadorFamilia(props) {
               href="/"
               onClick={handleClick}
             >
-              Busqueda Familias
+              <p key="" className="text-gris text-xs">
+                Busqueda Familias
+              </p>
             </Link>
             ,
             {vehiculoName?.length > 0 ? (
@@ -626,10 +626,11 @@ export default function BuscadorFamilia(props) {
                 color="inherit"
                 href="/"
                 onClick={handleClick}
+                className="text-xs"
               >
-                <div className="flex space-x-2 items-center">
+                <div className="flex space-x-1 items-center">
                   {vehiculoName?.map((vehiculo) => (
-                    <p key="" className="text-gris">
+                    <p key="" className="text-gris text-xs">
                       {vehiculo?.label}
                     </p>
                   ))}
@@ -638,7 +639,7 @@ export default function BuscadorFamilia(props) {
             ) : null}
             ,
             {!familia ? null : (
-              <p key="" className="text-gris">
+              <p key="" className="text-gris text-xs">
                 {familia}
               </p>
             )}
@@ -650,10 +651,11 @@ export default function BuscadorFamilia(props) {
                 color="inherit"
                 href="/"
                 onClick={handleClick}
+                className="text-xs"
               >
-                <div className="flex space-x-2 items-center">
+                <div className="flex space-x-1 items-center">
                   {marca?.map((marca) => (
-                    <p key="" className="text-gris">
+                    <p key="" className="text-gris text-xs">
                       {marca.label}
                     </p>
                   ))}
@@ -662,12 +664,12 @@ export default function BuscadorFamilia(props) {
             ) : null}
             ,
             {!rubroId ? null : (
-              <p key="" className="text-gris">
+              <p key="" className="text-gris text-xs">
                 {rubro}
               </p>
             )}
             ,
-            <p key="" className="text-gris">
+            <p key="" className="text-gris text-xs">
               Página {page + 1} de{" "}
               {(productos?.length / rowsPerPage).toFixed(0)}
             </p>
@@ -812,7 +814,7 @@ export default function BuscadorFamilia(props) {
                     page * rowsPerPage,
                     page * rowsPerPage + rowsPerPage
                   )
-                : productos 
+                : productos
               )?.map((producto) => (
                 <RowBuscadorFamilia
                   productos={productos}

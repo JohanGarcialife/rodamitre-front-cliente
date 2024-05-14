@@ -95,7 +95,9 @@ export default function BuscadorOferta() {
               href="/"
               onClick={handleClick}
             >
-              Busqueda Familias
+              <p key="" className="text-gris text-xs">
+                Busqueda Ofertas
+              </p>
             </Link>
             ,
             {vehiculo.length > 0 ? (
@@ -106,9 +108,9 @@ export default function BuscadorOferta() {
                 href="/"
                 onClick={handleClick}
               >
-                <div className="flex space-x-2 items-center">
+                <div className="flex space-x-1 items-center">
                   {vehiculo?.map((vehiculo) => (
-                    <p key="" className="text-gris">
+                    <p key="" className="text-gris text-xs">
                       {vehiculo.label}
                     </p>
                   ))}
@@ -124,9 +126,9 @@ export default function BuscadorOferta() {
                 href="/"
                 onClick={handleClick}
               >
-                <div className="flex space-x-2 items-center">
+                <div className="flex space-x-1 items-center">
                   {marca?.map((marca) => (
-                    <p key="" className="text-gris">
+                    <p key="" className="text-gris text-xs">
                       {marca.label}
                     </p>
                   ))}
@@ -134,7 +136,7 @@ export default function BuscadorOferta() {
               </Link>
             ) : null}
             ,
-            <p key="" className="text-gris">
+            <p key="" className="text-gris text-xs">
               Página 1 de 1
             </p>
             ,
