@@ -721,6 +721,17 @@ export default function BuscadorFamilia(props) {
           />
         </div>
         <div className="w-full p-2">
+          <p className="text-[#969696] font-bold text-xs uppercase">Rubros</p>
+
+          <Select
+            value={rubroId}
+            options={rubroSelect}
+            placeholder="Todos los rubros..."
+            className="text-black font-montserrat"
+            onChange={handleSelectRubro}
+          />
+        </div>
+        <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Marcas</p>
           <div className="flex space-x-2 w-full items-center">
             <Select
@@ -750,17 +761,6 @@ export default function BuscadorFamilia(props) {
               />
             )}
           </div>
-        </div>
-        <div className="w-full p-2">
-          <p className="text-[#969696] font-bold text-xs uppercase">Rubros</p>
-
-          <Select
-            value={rubroId}
-            options={rubroSelect}
-            placeholder="Todos los rubros..."
-            className="text-black font-montserrat"
-            onChange={handleSelectRubro}
-          />
         </div>
       </div>
 
