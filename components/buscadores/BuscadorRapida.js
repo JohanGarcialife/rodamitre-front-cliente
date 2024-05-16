@@ -22,6 +22,7 @@ import RecommendablesRow from "../productos/RecommendablesRow";
 import { useRouter } from "next/router";
 import RowBusquedaRapida from "./RowBusquedaRapida";
 
+
 export default function BuscadorRapida(props) {
   const { auth, setBuscar, buscar, setBuscador, data } = props;
   const [loade, setLoade] = useState(false);
@@ -124,14 +125,16 @@ export default function BuscadorRapida(props) {
     router.push(`/busquedaRapida?query=${event}`);
   }
 
+  
   return (
     <div
       className=" pt-[200px] pb-24 bg-white"
-      //onClick={() => setSearch([])}
+      ///onClick={() => setSearch([])}
     >
       <form
         className="flex space-x-10 px-2 w-full font-montserrat"
         onSubmit={formik.handleSubmit}
+        //onClick={() => setSearch([])}
       >
         <div className="w-full space-y-5">
           <div className="bg-white rounded-lg border border-black flex">
@@ -154,11 +157,11 @@ export default function BuscadorRapida(props) {
                     return (
                       <p
                         className="hover:bg-slate-200 cursor-pointer px-2 text-black"
-                        // onClick={() => setBuscar(c.CODIGO_EQUIVALENTE)}
+                        // onClsick={() => setBuscar(c.CODIGO_EQUIVALENTE)}
                         onClick={() => handlebuscar(c.CODIGO)}
                       >
                         {c?.CODIGO}
-                        {/*  {c?.CODIGO_EQUIVALENTE} */}
+                       
                       </p>
                     );
                   })}
@@ -213,7 +216,7 @@ export default function BuscadorRapida(props) {
         <div className="flex h-fit bg-azul text-white rounded-lg  ">
           <button
             className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-l-lg cursor-pointer"
-            type="submit"
+           // type="submit"
           >
             <p>Buscar</p>
             <FaSearch />
@@ -228,7 +231,10 @@ export default function BuscadorRapida(props) {
         </div>
       </form>
       {productos?.length <= 0 ? (
-        <div className="flex items-center justify-center font-montserrat text-center mt-20 text-4xl text-azul">
+        <div
+          className="flex items-center justify-center font-montserrat text-center mt-20 text-4xl text-azul"
+          onClick={() => setSearch([])}
+        >
           {loade === true ? (
             <CircularProgress />
           ) : (
@@ -242,7 +248,7 @@ export default function BuscadorRapida(props) {
               <CircularProgress />
             </div>
           ) : (
-            <Table>
+            <Table onClick={() => setSearch([])} className="relative">
               <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
                 <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
                   <TableCell>

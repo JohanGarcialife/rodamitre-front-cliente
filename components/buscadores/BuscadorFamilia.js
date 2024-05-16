@@ -70,8 +70,8 @@ export default function BuscadorFamilia(props) {
   }, [rudID]);
 
   useEffect(() => {
-    setRubroId(null);
-  }, [marcaId]);
+    setMarcaId([]);
+  }, [rubroId]);
 
   useEffect(() => {
     (async () => {
