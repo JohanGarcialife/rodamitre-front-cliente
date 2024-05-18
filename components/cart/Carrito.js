@@ -87,9 +87,9 @@ export default function Carrito() {
               </TableRow>
             </TableHead>
             <TableBody className="bg-white">
-              {items.map((item) => (
+              {Object.entries(itemsAgrupadosEnCarrito).map(([key, items]) => (
                 <RowCarrito
-                  items={item}
+                  items={items}
                   productos={items}
                   itemsAgrupadosEnCarrito={itemsAgrupadosEnCarrito}
                   setNewTotalCarrito={setNewTotalCarrito}

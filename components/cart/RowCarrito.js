@@ -33,7 +33,7 @@ export default function RowCarrito(props) {
   `;
 
   const removeItemFromCart = () => {
-    console.log(items?.pre_id);
+    console.log(items?.codigo);
     if (!items.length > 0) return;
     dispatch(removeFromCart({ codigo }));
     setNewTotalCarrito(newTotalCarrito - items.ppa_precio * items.quantity);
