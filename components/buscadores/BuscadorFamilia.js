@@ -602,6 +602,8 @@ export default function BuscadorFamilia(props) {
     setPage(0);
   };
 
+  console.log(productos);
+
   return (
     <div className=" pt-[200px] pb-24 bg-white">
       <div className="font-montserrat px-2">

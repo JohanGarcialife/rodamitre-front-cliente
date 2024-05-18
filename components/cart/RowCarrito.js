@@ -10,16 +10,11 @@ import Subtotal from "../producto/Subtotal";
 import ContadorCarrito from "./ContadorCarrito";
 
 export default function RowCarrito(props) {
-  const {
-    items,
-    setNewTotalCarrito,
-    newTotalCarrito,
-    itemsAgrupadosEnCarrito,
-  } = props;
+  const { items, setNewTotalCarrito, newTotalCarrito, productos } = props;
   const [quantity, setQuantity] = useState(items.valor);
 
   const { pre_id, valor } = items;
-  console.log(items);
+  console.log(productos);
 
   const dispatch = useDispatch();
 
