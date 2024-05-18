@@ -108,9 +108,7 @@ export default function Carrito() {
 
                 <TableCell>
                   <div className="font-bold text-azul text-lg flex justify-center">
-                    <p>
-                      ${((newTotalCarrito.toFixed(2) / 100) * 5).toFixed(2)}
-                    </p>
+                    <p>${((totalCarrito.toFixed(2) / 100) * 5).toFixed(2)}</p>
                   </div>
                 </TableCell>
                 <TableCell></TableCell>
@@ -181,7 +179,7 @@ export default function Carrito() {
                 <p className="text-black">
                   Subtotal:{" "}
                   <span className="text-azul font-bold">
-                    ${newTotalCarrito.toFixed(2)}
+                    ${totalCarrito.toFixed(2)}
                   </span>
                 </p>
                 <p className="text-green-600 ">
@@ -190,7 +188,7 @@ export default function Carrito() {
                 <p className="text-black text-2xl">
                   Subtotal:{" "}
                   <span className="text-azul font-bold">
-                    ${newTotalCarrito.toFixed(2)}
+                    ${totalCarrito.toFixed(2)}
                   </span>
                 </p>
                 <p className="text-black text-2xl">+ Impuestos</p>

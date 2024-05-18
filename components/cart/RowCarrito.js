@@ -14,7 +14,6 @@ export default function RowCarrito(props) {
   const [quantity, setQuantity] = useState(items.valor);
 
   const { pre_id, valor } = items;
-  console.log(productos);
 
   const dispatch = useDispatch();
 
@@ -33,10 +32,11 @@ export default function RowCarrito(props) {
   `;
 
   const removeItemFromCart = () => {
-    console.log(items?.codigo);
+    console.log(items[0].codigo);
+    const codigo = items[0].codigo;
     if (!items.length > 0) return;
     dispatch(removeFromCart({ codigo }));
-    setNewTotalCarrito(newTotalCarrito - items.ppa_precio * items.quantity);
+    // setNewTotalCarrito(newTotalCarrito - items.ppa_precio * items.quantity);
   };
 
   return (
@@ -45,10 +45,10 @@ export default function RowCarrito(props) {
         <p className="text-black">{moment().format("L HH:mm")}hs </p>{" "}
       </TableCell>
       <TableCell className="w-full text-center font-bold">
-        <p className="text-azul font-bold">{items?.codigo} </p>
+        <p className="text-azul font-bold">{items[0]?.codigo} </p>
       </TableCell>
       <TableCell className="w-full flex justify-center text-center font-bold">
-        <p className="text-amarillo font-bold">{items?.marca_articulo} </p>
+        <p className="text-amarillo font-bold">{items[0]?.marca_articulo} </p>
       </TableCell>
       <TableCell className="w-full text-center">
         <p className="text-black font-bold">
@@ -60,18 +60,18 @@ export default function RowCarrito(props) {
             handleRemoveItem={handleRemoveItem}
           /> */}
 
-          {valor}
+          {items[0].valor}
         </p>
       </TableCell>
       <TableCell className="w-full flex justify-center font-bold">
-        <p className="text-black font-bold">${items?.ppa_precio} </p>
+        <p className="text-black font-bold">${items[0]?.ppa_precio} </p>
       </TableCell>
       <TableCell className="w-full text-center font-bold">
-        <p className="text-black font-bold">${items?.ppa_precio}</p>
+        <p className="text-black font-bold">${items[0]?.ppa_precio}</p>
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
         <p className="text-black font-bold">
-          <Subtotal producto={items} valor={items?.valor} />
+          <Subtotal producto={items[0]} valor={items[0]?.valor} />
         </p>
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
