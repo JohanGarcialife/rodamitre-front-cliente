@@ -22,7 +22,6 @@ import RecommendablesRow from "../productos/RecommendablesRow";
 import { useRouter } from "next/router";
 import RowBusquedaRapida from "./RowBusquedaRapida";
 
-
 export default function BuscadorRapida(props) {
   const { auth, setBuscar, buscar, setBuscador, data } = props;
   const [loade, setLoade] = useState(false);
@@ -125,7 +124,6 @@ export default function BuscadorRapida(props) {
     router.push(`/busquedaRapida?query=${event}`);
   }
 
-  
   return (
     <div
       className=" pt-[200px] pb-24 bg-white"
@@ -161,7 +159,6 @@ export default function BuscadorRapida(props) {
                         onClick={() => handlebuscar(c.CODIGO)}
                       >
                         {c?.CODIGO}
-                       
                       </p>
                     );
                   })}
@@ -216,7 +213,7 @@ export default function BuscadorRapida(props) {
         <div className="flex h-fit bg-azul text-white rounded-lg  ">
           <button
             className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-l-lg cursor-pointer"
-           // type="submit"
+            // type="submit"
           >
             <p>Buscar</p>
             <FaSearch />
@@ -233,7 +230,7 @@ export default function BuscadorRapida(props) {
       {productos?.length <= 0 ? (
         <div
           className="flex items-center justify-center font-montserrat text-center mt-20 text-4xl text-azul"
-          onClick={() => setSearch([])}
+          /// onClick={() => setSearch([])}
         >
           {loade === true ? (
             <CircularProgress />
@@ -248,7 +245,7 @@ export default function BuscadorRapida(props) {
               <CircularProgress />
             </div>
           ) : (
-            <Table onClick={() => setSearch([])} className="relative">
+            <Table /*  onClick={() => setSearch([])} */ className="relative">
               <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
                 <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
                   <TableCell>
@@ -292,14 +289,17 @@ export default function BuscadorRapida(props) {
                     )
                   : productos
                 )?.map((producto) => (
-                  <RowBusquedaRapida
-                    productos={productos}
-                    producto={producto}
-                  />
+                  <>
+                    <RowBusquedaRapida
+                      productos={productos}
+                      producto={producto}
+                      equivalente={equivalente}
+                    />
+                    {equivalente
+                      ? equivalente?.map((eq) => <RecommendablesRow eq={eq} producto={producto} />)
+                      : ""}
+                  </>
                 ))}
-                {equivalente
-                  ? equivalente?.map((eq) => <RecommendablesRow eq={eq} />)
-                  : ""}
               </TableBody>
               <TableFooter>
                 <TableRow>

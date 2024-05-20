@@ -7,63 +7,67 @@ import ProductoInfo from "../producto/ProductoInfo";
 import Contador from "../producto/Contador";
 
 export default function RecommendablesRow(props) {
-const { eq } = props
+  const { eq, producto } = props;
+  console.log(eq);
+  console.log(producto);
 
-const TableRowStyled = styled(TableRow)`
-&:nth-of-type(odd) {
-  background-color: #e8e8ff;
-}
-&:nth-of-type(even) {
-  background-color: #f5f5f5;
-}
-& td,
-th {
-  width: fit-content;
-  text-align: center;
-}
-`;
+  const TableRowStyled = styled(TableRow)`
+
+    &:nth-of-type(odd) {
+      background-color: #f5f5f5;
+    }
+    &:nth-of-type(even) {
+      background-color: #f5f5f5;
+    }
+    & td,
+    th {
+      width: fit-content;
+      text-align: center;
+      border: hidden
+    }
+  `;
 
   return (
-
-
-
     <TableRowStyled
-     // key={producto?.pre_id}
+      // key={producto?.pre_id}
       className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
     >
-      <TableCell className="w-full">
-         <ProductoInfo producto={eq} /> 
-      </TableCell>
-      <TableCell className="w-full text-center">
-       {/*  {producto?.aplicaciones ? (
+      {producto?.codigo === eq.codigo ? null : (
+        <>
+          <TableCell className="w-full">
+            <ProductoInfo producto={eq} />
+          </TableCell>
+          <TableCell className="w-full text-center">
+            {/*  {producto?.aplicaciones ? (
           <Aplicaciones
             aplicaciones={producto.aplicaciones}
             srubro={producto.rubro}
           />
         ) : null} */}
-      </TableCell>
-      <TableCell className="w-full flex justify-center text-center">
-        <Marca producto={eq} />
-      </TableCell>
-      <TableCell className="w-full text-center">
-        <Precio producto={eq} />
-      </TableCell>
-      {/* contador */}
-       <TableCell colSpan={3} className="w-full flex justify-center">
-        <div className="w-full flex justify-center">
-        {/*   <Contador
+          </TableCell>
+          <TableCell className="w-full flex justify-center text-center">
+            <Marca producto={eq} />
+          </TableCell>
+          <TableCell className="w-full text-center">
+            <Precio producto={eq} />
+          </TableCell>
+          {/* contador */}
+          <TableCell colSpan={3} className="w-full flex justify-center">
+            <div className="w-full flex justify-center">
+                <Contador
             producto={eq}
-           /*  quantity={quantity}
+            /* quantity={quantity}
             setQuantity={setQuantity}
             handleAddItem={handleAddItem}
             handleRemoveItem={handleRemoveItem}
-            addItemToCart={addItemToCart} 
-          /> */}
-        </div>
-      </TableCell> 
-     
+            addItemToCart={addItemToCart} */
+          />
+            </div>
+          </TableCell>
+        </>
+      )}
     </TableRowStyled>
-   /*  <div className="flex flex-row gap-8">
+    /*  <div className="flex flex-row gap-8">
         <text>
             Imagen producto
         </text>
@@ -80,5 +84,5 @@ th {
 
 
     </div> */
-  )
+  );
 }

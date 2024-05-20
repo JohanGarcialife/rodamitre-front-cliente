@@ -8,7 +8,7 @@ export default function Motor(props) {
   return (
     <div className="font-black">
       {array?.map((a) => (
-        <p>{a?.motor}</p>
+        <p>{a?.mde_descripcion}</p>
       ))}
     </div>
   );

@@ -73,6 +73,7 @@ export default function RowBuscadorVehiculo(props) {
       })
     );
   };
+  console.log(producto)
 
   const TableRowStyled = styled(TableRow)`
     &:nth-of-type(odd) {
