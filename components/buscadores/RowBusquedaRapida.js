@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
 
 export default function RowBusquedaRapida(props) {
-  const { producto, productos } = props;
+  const { producto, productos, equivalente } = props;
 
   const {
     atributos,
@@ -65,6 +65,7 @@ export default function RowBusquedaRapida(props) {
       })
     );
   };
+  
 
   const TableRowStyled = styled(TableRow)`
     &:nth-of-type(odd) {
@@ -79,8 +80,63 @@ export default function RowBusquedaRapida(props) {
       text-align: center;
     }
   `;
+
+  const TableRowStyled2 = styled(TableRow)`
+    &:nth-of-type(odd) {
+      background-color: #f5f5f5;
+    }
+    &:nth-of-type(even) {
+      background-color: #f5f5f5;
+    }
+    & td,
+    th {
+      width: fit-content;
+      text-align: center;
+      border: hidden
+
+    }
+  `;
+
+
   return (
-    <TableRowStyled
+    <>
+    { equivalente ? 
+     < TableRowStyled2
+     key={producto?.pre_id}
+     className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
+   >
+     <TableCell className="w-full">
+       <ProductoInfo producto={producto} />
+     </TableCell>
+     <TableCell className="w-full text-center">
+       {producto?.aplicaciones ? (
+         <Aplicaciones
+           aplicaciones={producto.aplicaciones}
+           srubro={producto.rubro}
+         />
+       ) : null}
+     </TableCell>
+     <TableCell className="w-full flex justify-center text-center">
+       <Marca producto={producto} />
+     </TableCell>
+     <TableCell className="w-full text-center">
+       <Precio producto={producto} />
+     </TableCell>
+     {/* contador */}
+     <TableCell colSpan={3} className="w-full flex justify-center">
+       <div className="w-full flex justify-center">
+         <ContadorRapida
+           producto={producto}
+           addItemToCart={addItemToCart}
+           quantity={quantity}
+           setQuantity={setQuantity}
+         />
+       </div>
+     </TableCell>
+   </TableRowStyled2> : 
+
+      
+    < TableRowStyled
       key={producto?.pre_id}
       className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
     >
@@ -112,12 +168,9 @@ export default function RowBusquedaRapida(props) {
           />
         </div>
       </TableCell>
-      {/* <TableCell className="w-full text-center">
-        <Subtotal producto={producto} quantity={quantity} />
-      </TableCell> */}
-      {/* <TableCell className="w-full text-center space-y-2">
-        <Pedir producto={producto} addItemToCart={addItemToCart} />
-      </TableCell> */}
     </TableRowStyled>
+    }
+    </>
+
   );
 }
