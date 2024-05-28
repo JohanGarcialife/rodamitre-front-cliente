@@ -115,7 +115,7 @@ export default function RowBuscadorFamilia(props) {
       </TableCell>
       {/* contador */}
       <TableCell colSpan={3} className="w-full flex justify-center">
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-around">
           <Contador
             producto={producto}
             quantity={quantity}
