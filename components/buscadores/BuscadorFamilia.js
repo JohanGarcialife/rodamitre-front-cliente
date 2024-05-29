@@ -801,7 +801,7 @@ export default function BuscadorFamilia(props) {
                 </TableCell>
                 <TableCell>
                   <div></div>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-start">
                     SUB-TOTAL
                   </div>
                 </TableCell>

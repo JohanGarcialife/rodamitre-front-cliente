@@ -3,14 +3,11 @@ import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 import ProductoInfo from "../producto/ProductoInfo";
 import Aplicaciones from "../producto/Aplicaciones";
-import Subtotal from "../producto/Subtotal";
 import Marca from "../producto/Marca";
-import Pedir from "../producto/Pedir";
 import Precio from "../producto/Precio";
 import Contador from "../producto/Contador";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
-import Equivalente from "../productos/Equivalente";
 
 export default function RowBuscadorFamilia(props) {
   const { producto } = props;
@@ -127,30 +124,30 @@ export default function RowBuscadorFamilia(props) {
           {equivalencia?.map((e) => (
             <>
               {e?.codigo === producto?.codigo ? null : (
-                <div className="mt-8">{equivalencia && <Marca producto={e} />}</div>
+                <div className="mt-8">
+                  {equivalencia && <Marca producto={e} />}
+                </div>
               )}
             </>
           ))}
-
-
         </TableCell>
-        <TableCell className="w-full text-center gap-5">
+        <TableCell className="w-full text-center ">
           <div>
-
-          <Precio producto={producto} />
-          {equivalencia?.map((e) => (
-            <>
-              {e?.codigo === producto?.codigo ? null : (
-                <div className="mt-8">{equivalencia && <Precio producto={e} />}</div>
-              )}
-            </>
-          ))}
-
+            <Precio producto={producto} />
+            {equivalencia?.map((e) => (
+              <>
+                {e?.codigo === producto?.codigo ? null : (
+                  <div className="mt-8">
+                    {equivalencia && <Precio producto={e} />}
+                  </div>
+                )}
+              </>
+            ))}
           </div>
         </TableCell>
         {/* contador */}
         <TableCell colSpan={3} className="w-full flex justify-center">
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-around">
             <Contador
               producto={producto}
               quantity={quantity}
@@ -161,9 +158,9 @@ export default function RowBuscadorFamilia(props) {
             />
           </div>
           {equivalencia?.map((e) => (
-            <div className="w-full flex justify-center  gap-y-3">
+            <div className="w-full flex justify-center ">
               {e?.codigo === producto?.codigo ? null : (
-                <div className="w-full flex justify-center mt-2">
+                <div className="w-full flex justify-around mt-2">
                   {equivalencia && (
                     <Contador
                       producto={e}
