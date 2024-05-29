@@ -35,15 +35,10 @@ export default function RecommendablesRow(props) {
       {producto?.codigo === eq.codigo ? null : (
         <>
           <TableCell className="w-full">
-            <ProductoInfo producto={eq} />
+           
           </TableCell>
           <TableCell className="w-full text-center">
-            {/*  {producto?.aplicaciones ? (
-          <Aplicaciones
-            aplicaciones={producto.aplicaciones}
-            srubro={producto.rubro}
-          />
-        ) : null} */}
+          <ProductoInfo producto={eq} />
           </TableCell>
           <TableCell className="w-full flex justify-center text-center">
             <Marca producto={eq} />

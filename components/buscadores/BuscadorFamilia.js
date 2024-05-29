@@ -30,7 +30,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import RowBuscadorFamilia from "./RowBuscadorFamilia";
 
 export default function BuscadorFamilia(props) {
-  const { auth, setReloadUser, buscar, setBuscar, setBuscador } = props;
+  const { auth } = props;
   const [productos1, setProductos1] = useState([]);
   const [productos, setProductos] = useState([]);
   const [marID, setMarID] = useState();
@@ -117,7 +117,6 @@ export default function BuscadorFamilia(props) {
   useEffect(() => {
     if (marID?.length > 0 && !rudID && !marcaId?.length && !rubroId) {
       (async () => {
-        setReloadUser(false);
         var newproduct = marID.map(function (data) {
           var data = data.value;
           return data;
@@ -819,11 +818,7 @@ export default function BuscadorFamilia(props) {
                 : productos
               )?.map((producto) => (
                 <RowBuscadorFamilia
-                  productos={productos}
                   producto={producto}
-                  setBuscar={setBuscar}
-                  buscar={buscar}
-                  setBuscador={setBuscador}
                 />
               ))}
             </TableBody>

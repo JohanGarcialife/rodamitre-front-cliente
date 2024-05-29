@@ -110,6 +110,8 @@ export default function BuscadorVehiculo(props) {
     };
     const rubromodV = await rubroModeloS(Dato);
     setSelectRubro(rubromodV);
+    const motorTT = await motorRM(Dato);
+    setMotorSelect(motorTT);
 
     setLoade(true);
 
