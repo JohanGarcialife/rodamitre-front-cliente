@@ -12,14 +12,15 @@ export default function Esparte(props) {
   }
 
   return (
-    <div className="flex font-normal gap-x-2">
+    <div className="font-normal grid grid-cols-3 ">
       {arr?.map((ar) => (
-        <div className="text-center ">
+        <div className="">
           <p
-            className="cursor-pointer hover:border-b-2 hover:border-amarillo flex flex-wrap "
+            className="cursor-pointer hover:border-b-2 hover:border-amarillo text-xs "
             onClick={() => handlebuscar(ar)}
           >
             {ar}
+
           </p>
         </div>
       ))}

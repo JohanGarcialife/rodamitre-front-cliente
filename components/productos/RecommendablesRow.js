@@ -47,8 +47,8 @@ export default function RecommendablesRow(props) {
             <Precio producto={eq} />
           </TableCell>
           {/* contador */}
-          <TableCell colSpan={3} className="w-full flex justify-center">
-            <div className="w-full flex justify-center">
+          <TableCell colSpan={3}  className="w-full flex justify-center">
+          <div className="w-full flex justify-around">
                 <Contador
             producto={eq}
             /* quantity={quantity}
@@ -62,22 +62,6 @@ export default function RecommendablesRow(props) {
         </>
       )}
     </TableRowStyled>
-    /*  <div className="flex flex-row gap-8">
-        <text>
-            Imagen producto
-        </text>
-
-    <text>
-    {eq.PRE_CODIGO_FABRICA}
-  </text>
-  <text>
-    {eq.MAR_DESCRIPCION}
-  </text>
-  <text>
-    {eq.PPA_PRECIO}
-  </text>
-
-
-    </div> */
+  
   );
 }

@@ -124,26 +124,23 @@ export default function RowBuscadorFamilia(props) {
           {equivalencia?.map((e) => (
             <>
               {e?.codigo === producto?.codigo ? null : (
-                <div className="mt-8">
-                  {equivalencia && <Marca producto={e} />}
-                </div>
+                <div>{equivalencia && <Marca producto={e} />}</div>
               )}
             </>
           ))}
         </TableCell>
-        <TableCell className="w-full text-center ">
-          <div>
-            <Precio producto={producto} />
-            {equivalencia?.map((e) => (
-              <>
-                {e?.codigo === producto?.codigo ? null : (
-                  <div className="mt-8">
-                    {equivalencia && <Precio producto={e} />}
-                  </div>
-                )}
-              </>
-            ))}
-          </div>
+        <TableCell className="w-full flex justify-center text-center ">
+          <Precio producto={producto} />
+
+          {equivalencia?.map((e) => (
+            <>
+              {e?.codigo === producto?.codigo ? null : (
+                <div className="">
+                  {equivalencia && <Precio producto={e} />}
+                </div>
+              )}
+            </>
+          ))}
         </TableCell>
         {/* contador */}
         <TableCell colSpan={3} className="w-full flex justify-center">
@@ -158,7 +155,7 @@ export default function RowBuscadorFamilia(props) {
             />
           </div>
           {equivalencia?.map((e) => (
-            <div className="w-full flex justify-center ">
+            <>
               {e?.codigo === producto?.codigo ? null : (
                 <div className="w-full flex justify-around mt-2">
                   {equivalencia && (
@@ -173,7 +170,7 @@ export default function RowBuscadorFamilia(props) {
                   )}
                 </div>
               )}
-            </div>
+            </>
           ))}
         </TableCell>
       </TableRowStyled>

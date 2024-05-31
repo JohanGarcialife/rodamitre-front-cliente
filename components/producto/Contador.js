@@ -9,7 +9,7 @@ export default function Contador(props) {
   const [valor, setValor] = useState("0");
 
   return (
-    <div className="flex justify-around items-center w-full">
+    <div className="flex justify-around items-center w-full h-[100px]">
       <div className="w-full grid grid-cols-3 ">
         <div className=" flex items-center justify-end space-x-2">
           {valor <= 0 ? (

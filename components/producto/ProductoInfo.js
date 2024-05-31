@@ -75,7 +75,7 @@ export default function ProductoInfo(props) {
       </div>
 
       {equi?.map((e) => (
-        <div className="flex items-center justify-start space-x-3 mt-2">
+        <div className="flex items-center space-x-3 gap-y-4 ">
           {e?.codigo === producto?.codigo ? null : (
             <>
               <Image
