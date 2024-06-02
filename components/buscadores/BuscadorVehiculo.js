@@ -102,6 +102,7 @@ export default function BuscadorVehiculo(props) {
 
   const handleSelectModelo = async function (event) {
     setModelo(event);
+    setLoade(true);
     setSelectRubro(null);
     setModId(event.value);
 
@@ -113,7 +114,6 @@ export default function BuscadorVehiculo(props) {
     const motorTT = await motorRM(Dato);
     setMotorSelect(motorTT);
 
-    setLoade(true);
 
     const productAuto = await productosMarModelo(
       auth.CLI_ID,
@@ -148,7 +148,7 @@ export default function BuscadorVehiculo(props) {
       setMotorSelect(motorTT);
 
       setLoade(true);
-
+/*
       const productAuto = await productosMarModelo(
         auth.CLI_ID,
         auth.LPP_ID,
@@ -156,8 +156,8 @@ export default function BuscadorVehiculo(props) {
       );
       setProducto(productAuto);
       setProducto2(productAuto);
-      setLoade(false);
-    }
+      setLoade(false);*/
+    } 
   };
 
   const handleSelectMotor = async function (event) {
@@ -166,12 +166,17 @@ export default function BuscadorVehiculo(props) {
     if (vehiculo && modelo && rubro && !motor?.label > 0) {
       setProducto(producto2);
     }
-
+    
+    if ( vehiculo && modelo && !rubro.label > 0 && !motor?.label > 0){
+      setProducto(producto1)
+    }
     var motor = event.map(function (data) {
       var data = data.value;
       return data;
     });
     var motort = motor.toString();
+
+    console.log(motort, "motor")
 
     var rup = rubro.map(function (data) {
       var data = data.value;
@@ -188,6 +193,8 @@ export default function BuscadorVehiculo(props) {
     if (event.length > 0) {
       setLoade(true);
 
+      console.log(Dato)
+
       const productAuto = await productosMarModelo(
         auth.CLI_ID,
         auth.LPP_ID,
@@ -202,6 +209,7 @@ export default function BuscadorVehiculo(props) {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
   }
+  ///console.log(producto, "productos")
 
   return (
     <div className=" pt-[200px] pb-24 bg-white">
@@ -404,13 +412,7 @@ export default function BuscadorVehiculo(props) {
             </TableHead>
             {rubro.length > 0 ? (
               <TableBody className="bg-white">
-                <RowBuscadorVehiculo
-                  rubros={rubro}
-                  producto={producto}
-                  buscar={buscar}
-                  setBuscar={setBuscar}
-                  setBuscador={setBuscador}
-                />
+                <RowBuscadorVehiculo rubros={rubro} producto={producto} />
               </TableBody>
             ) : (
               <TableBody className="bg-white">
@@ -418,9 +420,6 @@ export default function BuscadorVehiculo(props) {
                   selectRubro={selectRubro}
                   rubros={rubro}
                   producto={producto}
-                  buscar={buscar}
-                  setBuscar={setBuscar}
-                  setBuscador={setBuscador}
                 />
               </TableBody>
             )}

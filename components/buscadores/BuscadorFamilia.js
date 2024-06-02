@@ -780,7 +780,7 @@ export default function BuscadorFamilia(props) {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-start">
                     Aplicaciones
                   </div>
                 </TableCell>
@@ -817,9 +817,7 @@ export default function BuscadorFamilia(props) {
                   )
                 : productos
               )?.map((producto) => (
-                <RowBuscadorFamilia
-                  producto={producto}
-                />
+                <RowBuscadorFamilia producto={producto} />
               ))}
             </TableBody>
 

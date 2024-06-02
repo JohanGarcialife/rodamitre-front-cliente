@@ -23,7 +23,7 @@ export default function RowBuscadorFamilia(props) {
     }
   }, [producto?.equivalente]);
 
-  console.log(equivalencia, "equivalencia");
+  console.log(producto?.equivalente, "equivalencia");
 
   const {
     atributos,
@@ -119,32 +119,35 @@ export default function RowBuscadorFamilia(props) {
             />
           ) : null}
         </TableCell>
-        <TableCell className="w-full flex justify-center text-center">
+        <TableCell className="w-full flex justify-center  text-center">
           <Marca producto={producto} />
           {equivalencia?.map((e) => (
             <>
               {e?.codigo === producto?.codigo ? null : (
-                <div>{equivalencia && <Marca producto={e} />}</div>
-              )}
-            </>
-          ))}
-        </TableCell>
-        <TableCell className="w-full flex justify-center text-center ">
-          <Precio producto={producto} />
-
-          {equivalencia?.map((e) => (
-            <>
-              {e?.codigo === producto?.codigo ? null : (
                 <div className="">
-                  {equivalencia && <Precio producto={e} />}
+                  {equivalencia && <Marca producto={e} codiE={e} />}
                 </div>
               )}
             </>
           ))}
         </TableCell>
+        <TableCell className="w-full text-center ">
+          <div>
+            <Precio producto={producto} />
+            {equivalencia?.map((e) => (
+              <>
+                {e?.codigo === producto?.codigo ? null : (
+                  <div className="">
+                    {equivalencia && <Precio producto={e} />}
+                  </div>
+                )}
+              </>
+            ))}
+          </div>
+        </TableCell>
         {/* contador */}
-        <TableCell colSpan={3} className="w-full flex justify-center">
-          <div className="w-full flex justify-around">
+        <TableCell colSpan={3} className="w-full  flex justify-center">
+          <div className="w-full flex h-[100px] items-center justify-around">
             <Contador
               producto={producto}
               quantity={quantity}
@@ -157,7 +160,7 @@ export default function RowBuscadorFamilia(props) {
           {equivalencia?.map((e) => (
             <>
               {e?.codigo === producto?.codigo ? null : (
-                <div className="w-full flex justify-around mt-2">
+                <div className="w-full flex h-[100px] items-center justify-around ">
                   {equivalencia && (
                     <Contador
                       producto={e}

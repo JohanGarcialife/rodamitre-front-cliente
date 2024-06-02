@@ -15,7 +15,7 @@ export default function ContadorVehiculo(props) {
   const [valor, setValor] = useState("0");
 
   return (
-    <div className="w-full flex items-center justify-around">
+    <div className="w-full flex items-center justify-around h-[100px]">
       <div className=" flex items-center justify-center space-x-2">
         {valor <= 0 ? (
           <button className="text-amarillo p-1 bg-gray-500 rounded-md ">

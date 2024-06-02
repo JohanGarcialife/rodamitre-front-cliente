@@ -4,12 +4,11 @@ import styled from "@emotion/styled";
 import Marca from "../producto/Marca";
 import Precio from "../producto/Precio";
 import ProductoInfo from "../producto/ProductoInfo";
-import Contador from "../producto/Contador";
+import ContadorRapida from "../producto/ContadorRapida";
 
 export default function RecommendablesRow(props) {
   const { eq, producto } = props;
-  console.log(eq);
-  console.log(producto);
+
 
   const TableRowStyled = styled(TableRow)`
 
@@ -48,8 +47,8 @@ export default function RecommendablesRow(props) {
           </TableCell>
           {/* contador */}
           <TableCell colSpan={3}  className="w-full flex justify-center">
-          <div className="w-full flex justify-around">
-                <Contador
+          <div className="w-full flex justify-center">
+                <ContadorRapida
             producto={eq}
             /* quantity={quantity}
             setQuantity={setQuantity}

@@ -17,7 +17,7 @@ export default function Aplicaciones(props) {
         <div className="text-gris text-xs ">
           {array?.map((aplicacion) => (
             <div>
-              <div className="flex items-center space-x-2 ">
+              <div className="flex items-center gap-x-2 text-left ">
                 <div className="flex items-center space-x-1 ">
                   <p>{aplicacion.marca_modelo}</p>
                 </div>
@@ -29,7 +29,7 @@ export default function Aplicaciones(props) {
                       <p className=" text-black  text-xs">{d.hover}</p>
                     ))}
                   </div>
-                  <CiCircleInfo className="font-bold text-lg" />
+                  <CiCircleInfo className="text-black w-4 h-4 text-lg" />
                 </div>
               </div>
             </div>
@@ -41,7 +41,7 @@ export default function Aplicaciones(props) {
             <>
               {mayorQueSeis?.map((aplicacion) => (
                 <div>
-                  <div className="flex items-center space-x-2 ">
+                  <div className="flex items-center gap-x-2 text-left">
                     <div className="flex items-center space-x-1 ">
                       <p>{aplicacion.marca_modelo}</p>
                     </div>
@@ -55,7 +55,7 @@ export default function Aplicaciones(props) {
                           <p className=" text-black  text-xs">{d.hover}</p>
                         ))}
                       </div>
-                      <CiCircleInfo className="font-bold text-lg" />
+                      <CiCircleInfo className="text-black w-4 h-4 text-lg" />
                     </div>
                   </div>
                 </div>
@@ -65,7 +65,7 @@ export default function Aplicaciones(props) {
             <>
               {array?.map((aplicacion) => (
                 <div>
-                  <div className="flex items-center space-x-2 ">
+                  <div className="flex items-center gap-x-2 text-left ">
                     <div className="flex items-center space-x-1 ">
                       <p>{aplicacion.marca_modelo}</p>
                     </div>
@@ -79,7 +79,7 @@ export default function Aplicaciones(props) {
                           <p className=" text-black  text-xs">{d.hover}</p>
                         ))}
                       </div>
-                      <CiCircleInfo className="font-bold text-lg" />
+                      <CiCircleInfo className="text-black w-4 h-4 text-lg" />
                     </div>
                   </div>
                 </div>

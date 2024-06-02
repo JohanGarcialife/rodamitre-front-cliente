@@ -9,7 +9,7 @@ import Formadopor from "../productos/Formadopor";
 export default function ProductoInfo(props) {
   const { producto, equi } = props;
   return (
-    <>
+    <div className="space-y-2">
       <div className="font-bold flex items-center justify-start space-x-3">
         <Image
           src="/VKPC-85097_1_SKF.jpg"
@@ -75,7 +75,7 @@ export default function ProductoInfo(props) {
       </div>
 
       {equi?.map((e) => (
-        <div className="flex items-center space-x-3 gap-y-4 ">
+        <div className="flex items-center justify-start space-x-2 ">
           {e?.codigo === producto?.codigo ? null : (
             <>
               <Image
@@ -85,13 +85,13 @@ export default function ProductoInfo(props) {
                 alt="Imagen"
                 className="mr-3"
               />
-              <div className="space-y-2">
+             {/*  <div className="space-y-2 min-w-[100px]">
                 <p>{e?.codigo} </p>
-              </div>
+              </div> */}
             </>
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 }

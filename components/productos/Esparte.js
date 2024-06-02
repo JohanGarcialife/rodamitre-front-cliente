@@ -12,7 +12,7 @@ export default function Esparte(props) {
   }
 
   return (
-    <div className="font-normal grid grid-cols-3 ">
+    <div className="font-normal grid grid-cols-3 gap-x-2">
       {arr?.map((ar) => (
         <div className="">
           <p
@@ -20,7 +20,6 @@ export default function Esparte(props) {
             onClick={() => handlebuscar(ar)}
           >
             {ar}
-
           </p>
         </div>
       ))}
