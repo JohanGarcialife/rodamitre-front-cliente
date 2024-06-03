@@ -126,7 +126,7 @@ export default function BuscadorRapida(props) {
 
   return (
     <div
-      className=" pt-[200px] pb-24 bg-white"
+      className="pt-[200px] xl:pt-[245px] pb-24 bg-white"
       ///onClick={() => setSearch([])}
     >
       <form
@@ -296,7 +296,9 @@ export default function BuscadorRapida(props) {
                       equivalente={equivalente}
                     />
                     {equivalente
-                      ? equivalente?.map((eq) => <RecommendablesRow eq={eq} producto={producto} />)
+                      ? equivalente?.map((eq) => (
+                          <RecommendablesRow eq={eq} producto={producto} />
+                        ))
                       : ""}
                   </>
                 ))}

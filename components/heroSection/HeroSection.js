@@ -20,14 +20,11 @@ export default function HeroSection() {
     onSubmit: async (formData) => {
       const response = await loginApi(formData);
       if (response?.token) {
-        //router.push("/buscadorFamilia");
         login(response.token);
         setOpen(false);
       }
     },
   });
-
- // auth && router.push("/buscadorFamilia");
 
   return (
     <div
