@@ -28,6 +28,7 @@ export default function BuscadorVehiculo(props) {
   const [modelo, setModelo] = useState(null);
   const [rubro, setRubro] = useState([]);
   const [motor, setMotor] = useState([]);
+
   const [producto, setProducto] = useState([]);
   const [producto1, setProducto1] = useState([]);
   const [producto2, setProducto2] = useState([]);
@@ -36,6 +37,8 @@ export default function BuscadorVehiculo(props) {
   const [modeloVh, setModeloVh] = useState([]);
   const [selectRubro, setSelectRubro] = useState([]);
   const [motorSelect, setMotorSelect] = useState([]);
+  const [motorS2, setMotorS2] = useState([]);
+
   const [expand, setExpand] = useState("noExpand");
   const [loade, setLoade] = useState(false);
 
@@ -113,6 +116,7 @@ export default function BuscadorVehiculo(props) {
     setSelectRubro(rubromodV);
     const motorTT = await motorRM(Dato);
     setMotorSelect(motorTT);
+    setMotorS2(motorTT)
 
 
     const productAuto = await productosMarModelo(
@@ -131,6 +135,7 @@ export default function BuscadorVehiculo(props) {
 
     if (vehiculo && modelo && !rubro.label > 0) {
       setProducto(producto1);
+      setMotorSelect(motorS2);
     }
 
     var motord = event.map(function (data) {
@@ -147,8 +152,8 @@ export default function BuscadorVehiculo(props) {
       const motorTT = await motorRM(Dato);
       setMotorSelect(motorTT);
 
-      setLoade(true);
-/*
+      /*setLoade(true);
+
       const productAuto = await productosMarModelo(
         auth.CLI_ID,
         auth.LPP_ID,
@@ -162,14 +167,16 @@ export default function BuscadorVehiculo(props) {
 
   const handleSelectMotor = async function (event) {
     setMotor(event);
-
+   
     if (vehiculo && modelo && rubro && !motor?.label > 0) {
       setProducto(producto2);
     }
-    
+  
     if ( vehiculo && modelo && !rubro.label > 0 && !motor?.label > 0){
       setProducto(producto1)
     }
+
+   
     var motor = event.map(function (data) {
       var data = data.value;
       return data;
@@ -193,6 +200,7 @@ export default function BuscadorVehiculo(props) {
     if (event.length > 0) {
       setLoade(true);
 
+
       console.log(Dato)
 
       const productAuto = await productosMarModelo(
@@ -201,8 +209,13 @@ export default function BuscadorVehiculo(props) {
         Dato
       );
       setProducto(productAuto);
+      console.log(productAuto, "informacion")
       setLoade(false);
     }
+
+
+
+
   };
 
   function handleClick(event) {
@@ -412,7 +425,7 @@ export default function BuscadorVehiculo(props) {
             </TableHead>
             {rubro.length > 0 ? (
               <TableBody className="bg-white">
-                <RowBuscadorVehiculo rubros={rubro} producto={producto} />
+                <RowBuscadorVehiculo rubros={rubro} producto={producto}   />
               </TableBody>
             ) : (
               <TableBody className="bg-white">
@@ -420,6 +433,7 @@ export default function BuscadorVehiculo(props) {
                   selectRubro={selectRubro}
                   rubros={rubro}
                   producto={producto}
+                  motor={motor}
                 />
               </TableBody>
             )}

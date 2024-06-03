@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 
@@ -6,20 +6,7 @@ import RowVehiculo from "./RowVehiculo";
 
 export default function RowBuscadorVehiculo(props) {
   const { rubros, producto } = props;
-
-  /*  const [equivalencia, setEquivalencia] = useState();
-
-  useEffect(() => {
-    if (producto?.equivalente) {
-      const jsonObject = JSON.parse(producto?.equivalente);
-      const equi = jsonObject.map((item) => {
-        return item;
-      });
-      setEquivalencia(equi);
-    }
-  }, [producto?.equivalente]);
- */
-
+  
   const TableRowStyled = styled(TableRow)`
     &:nth-of-type(odd) {
       background-color: #e8e8ff;
