@@ -5,6 +5,7 @@ import Marca from "../producto/Marca";
 import Precio from "../producto/Precio";
 import ProductoInfo from "../producto/ProductoInfo";
 import ContadorRapida from "../producto/ContadorRapida";
+import ProductoInfoE from "../producto/ProductoInfoE";
 
 export default function RecommendablesRow(props) {
   const { eq, producto } = props;
@@ -35,12 +36,12 @@ export default function RecommendablesRow(props) {
         <>
           <TableCell className="w-full">
            
+          <ProductoInfoE producto={eq} />
           </TableCell>
           <TableCell className="w-full text-center">
-          <ProductoInfo producto={eq} />
           </TableCell>
           <TableCell className="w-full flex justify-center text-center">
-            <Marca producto={eq} />
+            <Marca producto={eq} codiE={eq}  />
           </TableCell>
           <TableCell className="w-full text-center">
             <Precio producto={eq} />
