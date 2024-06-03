@@ -601,10 +601,9 @@ export default function BuscadorFamilia(props) {
     setPage(0);
   };
 
-  console.log(productos);
 
   return (
-    <div className=" pt-[200px] pb-24 bg-white">
+    <div className=" pt-[200px] xl:pt-[245px] pb-24 bg-white">
       <div className="font-montserrat px-2">
         <div className="bg-white w-fit py-2 px-3 rounded-md">
           <Breadcrumbs separator={<MdNavigateNext />} aria-label="breadcrumb">
@@ -785,12 +784,12 @@ export default function BuscadorFamilia(props) {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-start">
                     Marca
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-start">
                     Costo
                   </div>
                 </TableCell>

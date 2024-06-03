@@ -12,12 +12,18 @@ import { Modal } from "@mui/material";
 import { IoClose } from "react-icons/io5";
 import { loginApi } from "./api/clientes";
 import BuscadorFamilia from "@/components/buscadores/BuscadorFamilia.js";
+import BuscadorRapida from "@/components/buscadores/BuscadorRapida.js";
+import { useRouter } from "next/router";
+
 
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [buscador, setBuscador] = useState("Familia");
+  const [buscador, setBuscador] = useState("Rapida");
   const { auth, login } = useAuth();
+  const [comparacion, setComparacion] = useState([]);
+  const [buscar, setBuscar] = useState(null);
+  const data = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -51,7 +57,15 @@ export default function Home() {
         buscador={buscador}
       >
         {auth ? (
-          <BuscadorFamilia auth={auth} />
+          <BuscadorRapida 
+          auth={auth}
+          comparacion={comparacion}
+          buscar={buscar}
+          setBuscar={setBuscar}
+          data={data}
+          
+          
+          />
         ) : (
           <>
             <HeroSection

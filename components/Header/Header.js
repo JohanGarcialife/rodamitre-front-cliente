@@ -108,6 +108,19 @@ export default function Header(props) {
                 </p>
               </div>
               <div className="flex items-center space-x-5">
+                <Link href="/busquedaRapida">
+                  <p
+                    //onClick={() => setBuscador("Rapida")}
+                    className={
+                      buscador === "Rapida"
+                        ? "text-white text-lg text-center cursor-pointer border-b-2 border-amarillo"
+                        : "text-white text-lg text-center cursor-pointer"
+                    }
+                  >
+                    RAPIDA
+                  </p>
+                </Link>
+
                 <Link href="/buscadorFamilia">
                   <p
                     //onClick={() => setBuscador("Familia")}
@@ -130,18 +143,6 @@ export default function Header(props) {
                     }
                   >
                     VEHICULO
-                  </p>
-                </Link>
-                <Link href="/busquedaRapida">
-                  <p
-                    //onClick={() => setBuscador("Rapida")}
-                    className={
-                      buscador === "Rapida"
-                        ? "text-white text-lg text-center cursor-pointer border-b-2 border-amarillo"
-                        : "text-white text-lg text-center cursor-pointer"
-                    }
-                  >
-                    RAPIDA
                   </p>
                 </Link>
               </div>

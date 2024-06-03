@@ -28,7 +28,6 @@ export default function BuscadorVehiculo(props) {
   const [modelo, setModelo] = useState(null);
   const [rubro, setRubro] = useState([]);
   const [motor, setMotor] = useState([]);
-
   const [producto, setProducto] = useState([]);
   const [producto1, setProducto1] = useState([]);
   const [producto2, setProducto2] = useState([]);
@@ -116,8 +115,7 @@ export default function BuscadorVehiculo(props) {
     setSelectRubro(rubromodV);
     const motorTT = await motorRM(Dato);
     setMotorSelect(motorTT);
-    setMotorS2(motorTT)
-
+    setMotorS2(motorTT);
 
     const productAuto = await productosMarModelo(
       auth.CLI_ID,
@@ -162,28 +160,27 @@ export default function BuscadorVehiculo(props) {
       setProducto(productAuto);
       setProducto2(productAuto);
       setLoade(false);*/
-    } 
+    }
   };
 
   const handleSelectMotor = async function (event) {
     setMotor(event);
-   
+
     if (vehiculo && modelo && rubro && !motor?.label > 0) {
       setProducto(producto2);
     }
-  
-    if ( vehiculo && modelo && !rubro.label > 0 && !motor?.label > 0){
-      setProducto(producto1)
+
+    if (vehiculo && modelo && !rubro.label > 0 && !motor?.label > 0) {
+      setProducto(producto1);
     }
 
-   
     var motor = event.map(function (data) {
       var data = data.value;
       return data;
     });
     var motort = motor.toString();
 
-    console.log(motort, "motor")
+    console.log(motort, "motor");
 
     var rup = rubro.map(function (data) {
       var data = data.value;
@@ -200,22 +197,15 @@ export default function BuscadorVehiculo(props) {
     if (event.length > 0) {
       setLoade(true);
 
-
-      console.log(Dato)
-
       const productAuto = await productosMarModelo(
         auth.CLI_ID,
         auth.LPP_ID,
         Dato
       );
       setProducto(productAuto);
-      console.log(productAuto, "informacion")
+      console.log(productAuto, "informacion");
       setLoade(false);
     }
-
-
-
-
   };
 
   function handleClick(event) {
@@ -225,7 +215,7 @@ export default function BuscadorVehiculo(props) {
   ///console.log(producto, "productos")
 
   return (
-    <div className=" pt-[200px] pb-24 bg-white">
+    <div className=" pt-[200px] xl:pt-[245px] pb-24 bg-white">
       <div className="font-montserrat px-2">
         <div className="bg-white w-fit py-2 px-3 rounded-md">
           <Breadcrumbs separator={<MdNavigateNext />} aria-label="breadcrumb">
@@ -425,7 +415,7 @@ export default function BuscadorVehiculo(props) {
             </TableHead>
             {rubro.length > 0 ? (
               <TableBody className="bg-white">
-                <RowBuscadorVehiculo rubros={rubro} producto={producto}   />
+                <RowBuscadorVehiculo rubros={rubro} producto={producto} />
               </TableBody>
             ) : (
               <TableBody className="bg-white">

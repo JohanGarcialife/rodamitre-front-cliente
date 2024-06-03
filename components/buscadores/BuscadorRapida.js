@@ -33,7 +33,7 @@ export default function BuscadorRapida(props) {
 
   const router = useRouter();
 
-  setBuscar(data.query.query);
+  setBuscar(data?.query.query);
 
   function initialValues() {
     return {
@@ -126,13 +126,13 @@ export default function BuscadorRapida(props) {
 
   return (
     <div
-      className=" pt-[200px] pb-24 bg-white"
+      className="pt-[200px] xl:pt-[245px] pb-24 bg-white"
       ///onClick={() => setSearch([])}
     >
       <form
         className="flex space-x-10 px-2 w-full font-montserrat"
         onSubmit={formik.handleSubmit}
-        //onClick={() => setSearch([])}
+        onClick={() => setSearch([])}
       >
         <div className="w-full space-y-5">
           <div className="bg-white rounded-lg border border-black flex">
@@ -210,7 +210,7 @@ export default function BuscadorRapida(props) {
             </div>
           </div>
         </div>
-        <div className="flex h-fit bg-azul text-white rounded-lg  ">
+        <div className="flex h-fit bg-azul text-white rounded-lg">
           <button
             className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-l-lg cursor-pointer"
             // type="submit"
@@ -296,7 +296,9 @@ export default function BuscadorRapida(props) {
                       equivalente={equivalente}
                     />
                     {equivalente
-                      ? equivalente?.map((eq) => <RecommendablesRow eq={eq} producto={producto} />)
+                      ? equivalente?.map((eq) => (
+                          <RecommendablesRow eq={eq} producto={producto} />
+                        ))
                       : ""}
                   </>
                 ))}
