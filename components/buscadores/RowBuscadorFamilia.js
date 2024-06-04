@@ -23,7 +23,6 @@ export default function RowBuscadorFamilia(props) {
     }
   }, [producto?.equivalente]);
 
-  console.log(producto?.equivalente, "equivalencia");
 
   const {
     atributos,

@@ -51,13 +51,6 @@ export default function BuscadorFamilia(props) {
   const [marcaAutos, setMarcaAutos] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const response = await marcaAutosApi();
-      setMarcaAutos(response);
-    })();
-  }, []);
-
-  useEffect(() => {
     setFamilia(null);
     setRudID(null);
     setMarcaId([]);
@@ -75,6 +68,13 @@ export default function BuscadorFamilia(props) {
 
   useEffect(() => {
     (async () => {
+      const response = await marcaAutosApi();
+      setMarcaAutos(response);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
       setLoade(true);
       const response = await productosApi(auth.CLI_ID, auth.LPP_ID);
       setProductos1(response);
@@ -83,6 +83,7 @@ export default function BuscadorFamilia(props) {
     })();
   }, []);
 
+  /*Selectores rubros */
   var autoSelect = marcaAutos?.map(function (obj) {
     var rObj = {
       value: obj?.MAU_ID,
@@ -98,18 +99,19 @@ export default function BuscadorFamilia(props) {
     };
     return rObj;
   });
-  var marcaArticuloSelect = selectMarId?.map(function (obj) {
-    var rObj = {
-      value: obj?.mar_id,
-      label: obj?.marca_a,
-    };
-    return rObj;
-  });
 
   var rubroSelect = selectRubro?.map(function (obj) {
     var rObj = {
       value: obj?.rubro,
       label: obj?.rup_descripcion,
+    };
+    return rObj;
+  });
+
+  var marcaArticuloSelect = selectMarId?.map(function (obj) {
+    var rObj = {
+      value: obj?.mar_id,
+      label: obj?.marca_a,
     };
     return rObj;
   });
@@ -125,14 +127,16 @@ export default function BuscadorFamilia(props) {
         const Dato = {
           mau_id: marid,
         };
-        setLoade(true);
+        console.log("aqui en VEHICULO ID");
+        console.log(rudID, "super rubro")
+        /* setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
-        setLoade(false);
+        setLoade(false); */
 
         const listrubro = await superrubrosMarcId(Dato);
         setSelectSrubro(listrubro);
@@ -291,6 +295,9 @@ export default function BuscadorFamilia(props) {
     }
     if (marID?.length > 0 && !rudID && !marcaId?.length && !rubroId) {
       (async () => {
+        
+        console.log("ejecute aqui tambien")
+        console.log(marcaId, "existe")
         var newproduct = marID.map(function (data) {
           var data = data.value;
           return data;
@@ -302,14 +309,14 @@ export default function BuscadorFamilia(props) {
           mar_id: "",
           rubro: "",
         };
-        setLoade(true);
+        /* setLoade(true);
         const productAuto = await productosMarcAuto(
           auth.CLI_ID,
           auth.LPP_ID,
           Dato
         );
         setProductos(productAuto);
-        setLoade(false);
+        setLoade(false); */
       })();
     }
 
@@ -486,7 +493,7 @@ export default function BuscadorFamilia(props) {
         setLoade(false);
       })();
     }
-  }, [marcaId]);
+  }, [marcaId.length > 0]);
 
   useEffect(() => {
     if (marID?.length > 0 && rudID && marcaId?.length > 0 && rubroId) {
@@ -601,9 +608,9 @@ export default function BuscadorFamilia(props) {
     setPage(0);
   };
 
-
   return (
-    <div className=" pt-[200px] xl:pt-[245px] pb-24 bg-white">
+    /////pt-[200px] xl:pt-[245px] anterior
+    <div className="  pb-24 bg-white">
       <div className="font-montserrat px-2">
         <div className="bg-white w-fit py-2 px-3 rounded-md">
           <Breadcrumbs separator={<MdNavigateNext />} aria-label="breadcrumb">

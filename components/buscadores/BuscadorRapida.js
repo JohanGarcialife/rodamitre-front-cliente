@@ -126,7 +126,8 @@ export default function BuscadorRapida(props) {
 
   return (
     <div
-      className="pt-[200px] xl:pt-[245px] pb-24 bg-white"
+    //pt-[200px] xl:pt-[245px]
+      className=" pb-24 bg-white"
       ///onClick={() => setSearch([])}
     >
       <form

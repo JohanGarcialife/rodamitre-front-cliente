@@ -203,7 +203,6 @@ export default function BuscadorVehiculo(props) {
         Dato
       );
       setProducto(productAuto);
-      console.log(productAuto, "informacion");
       setLoade(false);
     }
   };
@@ -215,7 +214,8 @@ export default function BuscadorVehiculo(props) {
   ///console.log(producto, "productos")
 
   return (
-    <div className=" pt-[200px] xl:pt-[245px] pb-24 bg-white">
+    ////pt-[200px] xl:pt-[245px]
+    <div className="pb-24 bg-white">
       <div className="font-montserrat px-2">
         <div className="bg-white w-fit py-2 px-3 rounded-md">
           <Breadcrumbs separator={<MdNavigateNext />} aria-label="breadcrumb">
