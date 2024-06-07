@@ -214,8 +214,8 @@ export default function BuscadorVehiculo(props) {
   ///console.log(producto, "productos")
 
   return (
-    ////pt-[200px] xl:pt-[245px]
-    <div className="pb-24 bg-white">
+    ////
+    <div className=" pt-[200px] xl:pt-[245px] pb-24 bg-white">
       <div className="font-montserrat px-2">
         <div className="bg-white w-fit py-2 px-3 rounded-md">
           <Breadcrumbs separator={<MdNavigateNext />} aria-label="breadcrumb">
@@ -381,32 +381,32 @@ export default function BuscadorVehiculo(props) {
             <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
               <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-center xl:justify-start">
                     ARTÍCULO
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-center xl:justify-start">
                     MOTORIZACIÓN
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-center xl:justify-start">
                     MARCA
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-center xl:justify-start">
                     COSTO
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-center xl:justify-start">
                     VENTA
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center">
+                  <div className="font-bold text-white flex justify-start xl:px-5">
                     CANTIDAD
                   </div>
                 </TableCell>

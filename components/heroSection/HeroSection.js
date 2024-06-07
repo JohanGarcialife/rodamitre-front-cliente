@@ -3,13 +3,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FaCheck } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
-import { useRouter } from "next/router";
 import useAuth from "@/hooks/useAuth";
 import { loginApi } from "@/pages/api/clientes";
 
 export default function HeroSection() {
   const { auth, login } = useAuth();
-  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {

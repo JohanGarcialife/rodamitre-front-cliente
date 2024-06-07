@@ -33,7 +33,7 @@ export default function BuscadorFamilia(props) {
   const { auth } = props;
   const [productos1, setProductos1] = useState([]);
   const [productos, setProductos] = useState([]);
-  const [marID, setMarID] = useState();
+  const [marID, setMarID] = useState("");
   const [rudID, setRudID] = useState(null);
   const [marcaId, setMarcaId] = useState([]);
   const [rubroId, setRubroId] = useState(null);
@@ -49,41 +49,29 @@ export default function BuscadorFamilia(props) {
   const [expand, setExpand] = useState("noExpand");
   const [loade, setLoade] = useState(false);
   const [marcaAutos, setMarcaAutos] = useState([]);
+  const [superR1, setSuperR1] = useState();
+  const [mar1, setMar1] = useState();
 
-  useEffect(() => {
-    setFamilia(null);
-    setRudID(null);
-    setMarcaId([]);
-    setRubroId(null);
-  }, [vehiculoName]);
-
-  useEffect(() => {
-    setMarcaId([]);
-    setRubroId(null);
-  }, [rudID]);
-
-  useEffect(() => {
-    setMarcaId([]);
-  }, [rubroId]);
-
-  useEffect(() => {
-    (async () => {
-      const response = await marcaAutosApi();
-      setMarcaAutos(response);
-    })();
-  }, []);
 
   useEffect(() => {
     (async () => {
       setLoade(true);
-      const response = await productosApi(auth.CLI_ID, auth.LPP_ID);
-      setProductos1(response);
-      setProductos(response);
+      const response1 = await productosApi(auth.CLI_ID, auth.LPP_ID);
+      setProductos1(response1);
+      setProductos(response1);
+      const response = await marcaAutosApi();
+      setMarcaAutos(response);
+      const listrubro = await superrubrosMarcId();
+      setSelectSrubro(listrubro);
+      setSuperR1(listrubro);
+      const pArticulo = await pMarcarticulo();
+      setSelectMarId(pArticulo);
+      setMar1(pArticulo);
       setLoade(false);
     })();
   }, []);
 
-  /*Selectores rubros */
+  
   var autoSelect = marcaAutos?.map(function (obj) {
     var rObj = {
       value: obj?.MAU_ID,
@@ -116,483 +104,111 @@ export default function BuscadorFamilia(props) {
     return rObj;
   });
 
-  useEffect(() => {
-    if (marID?.length > 0 && !rudID && !marcaId?.length && !rubroId) {
-      (async () => {
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-        const Dato = {
-          mau_id: marid,
-        };
-        console.log("aqui en VEHICULO ID");
-        console.log(rudID, "super rubro")
-        /* setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false); */
 
-        const listrubro = await superrubrosMarcId(Dato);
-        setSelectSrubro(listrubro);
-
-        const pArticulo = await pMarcarticulo(Dato);
-        setSelectMarId(pArticulo);
-      })();
-    }
-    if (marID?.length > 0 && rudID && !marcaId?.length && !rubroId) {
-      (async () => {
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-        const Dato = {
-          mau_id: marid,
-          rud_id: rudID.value,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-        const pArticulo = await pMarcarticulo(Dato);
-        setSelectMarId(pArticulo);
-        const psRubro = await rubrosP(Dato);
-        setSelecRubro(psRubro);
-      })();
-    }
-
-    if (rudID && !marID?.length && !marcaId?.length && !rubroId) {
-      (async () => {
-        const Dato = {
-          rud_id: rudID.value,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-        const pArticulo = await pMarcarticulo(Dato);
-        setSelectMarId(pArticulo);
-        const psRubro = await rubrosP(Dato);
-        setSelecRubro(psRubro);
-      })();
-    }
-
-    if (!marID?.length && !rudID && !marcaId?.length) {
-      (async () => {
-        const listrubro = await superrubrosMarcId();
-        setSelectSrubro(listrubro);
-        const pArticulo = await pMarcarticulo();
-        setSelectMarId(pArticulo);
-      })();
-      setProductos(productos1);
-    }
-  }, [rudID || marID]);
-
-  useEffect(() => {
-    if (marID?.length > 0 && rudID && marcaId?.length > 0 && !rubroId) {
-      (async () => {
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-
-        var newmarca = marcaId.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marcid = newmarca.toString();
-
-        const Dato = {
-          mau_id: marid,
-          rud_id: rudID.value,
-          mar_id: marcid,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-        /* const psRubro = await rubrosP(Dato);
-            setSelecRubro(psRubro); */
-      })();
-    }
-
-    if (marID?.length > 0 && rudID && !marcaId?.length && !rubroId) {
-      (async () => {
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-        const Dato = {
-          mau_id: marid,
-          rud_id: rudID.value,
-          mar_id: "",
-          rubro: "",
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-        /* const pArticulo = await pMarcarticulo(Dato);
-            setSelectMarId(pArticulo);
-            const psRubro = await rubrosP(Dato);
-            setSelecRubro(psRubro); */
-      })();
-    }
-
-    if (marID?.length > 0 && !rudID && marcaId?.length > 0 && !rubroId) {
-      (async () => {
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-
-        var newmarca = marcaId.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marcid = newmarca.toString();
-
-        const Dato = {
-          mau_id: marid,
-          rud_id: "",
-          mar_id: marcid,
-          rubro: "",
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-      })();
-    }
-    if (marID?.length > 0 && !rudID && !marcaId?.length && !rubroId) {
-      (async () => {
-        
-        console.log("ejecute aqui tambien")
-        console.log(marcaId, "existe")
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-        const Dato = {
-          mau_id: marid,
-          rud_id: "",
-          mar_id: "",
-          rubro: "",
-        };
-        /* setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false); */
-      })();
-    }
-
-    if (!marID?.length > 0 && rudID && marcaId?.length > 0 && !rubroId) {
-      (async () => {
-        var newmarca = marcaId.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marcid = newmarca.toString();
-
-        const Dato = {
-          mau_id: "",
-          rud_id: rudID.value,
-          mar_id: marcid,
-          rubro: "",
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-      })();
-    }
-
-    if (!marID?.length > 0 && rudID && !marcaId?.length > 0 && !rubroId) {
-      (async () => {
-        const Dato = {
-          mau_id: "",
-          rud_id: rudID.value,
-          mar_id: "",
-          rubro: "",
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-      })();
-    }
-
-    if (!marID?.length > 0 && rudID && marcaId?.length > 0 && rubroId) {
-      (async () => {
-        var newmarca = marcaId.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marcid = newmarca.toString();
-
-        const Dato = {
-          mau_id: "",
-          rud_id: rudID.value,
-          mar_id: marcid,
-          rubro: rubroId.value,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-      })();
-    }
-    if (!marID?.length > 0 && rudID && !marcaId?.length > 0 && rubroId) {
-      (async () => {
-        const Dato = {
-          mau_id: "",
-          rud_id: rudID.value,
-          mar_id: "",
-          rubro: rubroId.value,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-        const pArticulo = await pMarcarticulo(Dato);
-        setSelectMarId(pArticulo);
-      })();
-    }
-
-    if (!marID?.length > 0 && !rudID && marcaId?.length > 0 && !rubroId) {
-      (async () => {
-        var newmarca = marcaId.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marcid = newmarca.toString();
-
-        const Dato = {
-          mau_id: "",
-          rud_id: "",
-          mar_id: marcid,
-          rubro: "",
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-      })();
-    }
-
-    if (!marID?.length > 0 && !rudID && !marcaId?.length && !rubroId) {
-      setProductos(productos1);
-    }
-
-    if (marID?.length > 0 && rudID && marcaId?.length > 0 && rubroId) {
-      (async () => {
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-
-        var newmarca = marcaId.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marcid = newmarca.toString();
-
-        const Dato = {
-          mau_id: marid,
-          rud_id: rudID.value,
-          mar_id: marcid,
-          rubro: rubroId.value,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-      })();
-    }
-
-    if (marID?.length > 0 && rudID && !marcaId?.length > 0 && rubroId) {
-      (async () => {
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-
-        const Dato = {
-          mau_id: marid,
-          rud_id: rudID.value,
-          mar_id: "",
-          rubro: rubroId.value,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-      })();
-    }
-  }, [marcaId.length > 0]);
-
-  useEffect(() => {
-    if (marID?.length > 0 && rudID && marcaId?.length > 0 && rubroId) {
-      (async () => {
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-
-        var newmarca = marcaId.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marcid = newmarca.toString();
-
-        const Dato = {
-          mau_id: marid,
-          rud_id: rudID.value,
-          mar_id: marcid,
-          rubro: rubroId.value,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-      })();
-    }
-
-    if (marID?.length > 0 && rudID && !marcaId?.length > 0 && rubroId) {
-      (async () => {
-        var newproduct = marID.map(function (data) {
-          var data = data.value;
-          return data;
-        });
-        var marid = newproduct.toString();
-
-        const Dato = {
-          mau_id: marid,
-          rud_id: rudID.value,
-          mar_id: "",
-          rubro: rubroId.value,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-      })();
-    }
-
-    if (!marID?.length > 0 && rudID && !marcaId?.length > 0 && rubroId) {
-      (async () => {
-        const Dato = {
-          mau_id: "",
-          rud_id: rudID.value,
-          mar_id: "",
-          rubro: rubroId.value,
-        };
-        setLoade(true);
-        const productAuto = await productosMarcAuto(
-          auth.CLI_ID,
-          auth.LPP_ID,
-          Dato
-        );
-        setProductos(productAuto);
-        setLoade(false);
-        const pArticulo = await pMarcarticulo(Dato);
-        setSelectMarId(pArticulo);
-      })();
-    }
-  }, [rubroId]);
-
-  const handleChangeVehiculo = (event) => {
+  const handleChangeVehiculo = async function (event) {
     setVehiculoName(event);
-    setMarID(event);
+    setRudID(null);
+    setMarcaId([]);
+    setRubroId(null);
+    setSelecRubro(null);
+    var newproduct = event.map(function (data) {
+      var data = data.value;
+      return data;
+    });
+    var marid = newproduct.toString();
+    const Dato = {
+      mau_id: marid,
+    };
+    setMarID(marid);
+
+    if (event?.length === 0) {
+      setProductos(productos1);
+      setSelectSrubro(superR1);
+      setSelectMarId(mar1);
+    } else {
+      setLoade(true);
+      const listrubro = await superrubrosMarcId(Dato);
+      setSelectSrubro(listrubro);
+      const pArticulo = await pMarcarticulo(Dato);
+      setSelectMarId(pArticulo);
+      const productAuto = await productosMarcAuto(
+        auth.CLI_ID,
+        auth.LPP_ID,
+        Dato
+      );
+      setProductos(productAuto);
+      setLoade(false);
+    }
   };
 
-  function handleSelectFamilia(event) {
-    setRudID(event);
+  const handleSelectFamilia = async function (event) {
     setFamilia(event.label);
-  }
-
-  const handleChangeMarca = (event) => {
-    setMarca(event);
-    setMarcaId(event);
+    setMarcaId([]);
+    setRubroId(null);
+    setRudID(event);
+    const Dato = {
+      mau_id: marID,
+      rud_id: event.value,
+    };
+    setLoade(true);
+    const psRubro = await rubrosP(Dato);
+    setSelecRubro(psRubro);
+    const pArticulo = await pMarcarticulo(Dato);
+    setSelectMarId(pArticulo);
+    const productAuto = await productosMarcAuto(auth.CLI_ID, auth.LPP_ID, Dato);
+    setProductos(productAuto);
+    setLoade(false);
   };
 
-  function handleSelectRubro(event) {
+  const handleSelectRubro = async function (event) {
     setRubro(event.label);
     setRubroId(event);
-  }
+    setMarcaId([]);
+    const Dato = {
+      mau_id: marID,
+      rud_id: rudID.value,
+      mar_id: "",
+      rubro: event.value,
+    };
+    setLoade(true);
+    const pArticulo = await pMarcarticulo(Dato);
+    setSelectMarId(pArticulo);
+    const productAuto = await productosMarcAuto(auth.CLI_ID, auth.LPP_ID, Dato);
+    setProductos(productAuto);
+    setLoade(false);
+  };
+
+  const handleChangeMarca = async function (event) {
+    setMarca(event);
+    setMarcaId(event);
+    var newmarca = event.map(function (data) {
+      var data = data.value;
+      return data;
+    });
+    var marcid = newmarca.toString();
+    
+    if(event?.length === 0 && !rudID && marID?.length === 0) {
+      console.log("entreaqyuu")
+      setProductos(productos1);
+    } else {
+      setLoade(true);
+      const Dato = {
+        mau_id: marID,
+        rud_id: rudID?.value ? rudID.value : "",
+        mar_id: marcid,
+        rubro: rubroId?.value ? rubroId.value : "",
+      };
+
+      const productAuto = await productosMarcAuto(
+        auth.CLI_ID,
+        auth.LPP_ID,
+        Dato
+      );
+      setProductos(productAuto);
+      setLoade(false);
+    }
+
+  };
 
   function handleClick(event) {
     event.preventDefault();
@@ -610,7 +226,7 @@ export default function BuscadorFamilia(props) {
 
   return (
     /////pt-[200px] xl:pt-[245px] anterior
-    <div className="  pb-24 bg-white">
+    <div className=" pt-[200px] xl:pt-[245px] pb-24 bg-white">
       <div className="font-montserrat px-2">
         <div className="bg-white w-fit py-2 px-3 rounded-md">
           <Breadcrumbs separator={<MdNavigateNext />} aria-label="breadcrumb">

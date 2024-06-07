@@ -11,7 +11,6 @@ import useAuth from "../hooks/useAuth.js";
 import { Modal } from "@mui/material";
 import { IoClose } from "react-icons/io5";
 import { loginApi } from "./api/clientes";
-import BuscadorFamilia from "@/components/buscadores/BuscadorFamilia.js";
 import BuscadorRapida from "@/components/buscadores/BuscadorRapida.js";
 import { useRouter } from "next/router";
 

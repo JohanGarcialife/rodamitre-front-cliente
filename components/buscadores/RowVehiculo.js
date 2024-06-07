@@ -137,14 +137,14 @@ export default function RowVehiculo(props) {
         </div>
       </TableCell>
       <TableCell className="w-full text-center">
-        <div className="font-bold flex h-[100px] items-center justify-center ">
+        <div className="font-bold flex h-[100px] items-center justify-start ">
           <p>$ 9.668,68</p>
         </div>
 
         {equivalencia?.map((e) => (
           <>
             {e?.codigo === producto?.codigo ? null : (
-              <div className="font-bold flex h-[100px] items-center justify-center ">
+              <div className="font-bold flex h-[100px] items-center justify-start ">
                 <p>$ 9.668,68</p>
               </div>
             )}

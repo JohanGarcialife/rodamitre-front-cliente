@@ -126,8 +126,8 @@ export default function BuscadorRapida(props) {
 
   return (
     <div
-    //pt-[200px] xl:pt-[245px]
-      className=" pb-24 bg-white"
+    
+      className=" pt-[200px] xl:pt-[245px] pb-24 bg-white"
       ///onClick={() => setSearch([])}
     >
       <form
@@ -250,32 +250,32 @@ export default function BuscadorRapida(props) {
               <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
                 <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
                   <TableCell>
-                    <div className="font-bold text-white flex justify-center">
+                    <div className="font-bold text-white flex justify-cente xl:justify-start">
                       Artículo
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="font-bold text-white flex justify-center">
+                    <div className="font-bold text-white flex justify-center xl:justify-start">
                       Aplicaciones
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="font-bold text-white flex justify-center">
+                    <div className="font-bold text-white flex justify-center xl:justify-start">
                       Marca
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="font-bold text-white flex justify-center">
+                    <div className="font-bold text-white flex justify-center xl:justify-start">
                       Costo
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="font-bold text-white flex justify-center">
+                    <div className="font-bold text-white flex justify-center xl:justify-start">
                       Cantidad
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="font-bold text-white flex justify-center">
+                    <div className="font-bold text-white flex justify-center xl:justify-start">
                       SUB-TOTAL
                     </div>
                   </TableCell>

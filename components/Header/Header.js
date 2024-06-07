@@ -75,8 +75,8 @@ export default function Header(props) {
           )}
         </>
       ) : (
-        ///absolute anterior
-        <div className="static top-0 w-full z-50 bg-azul">
+        /// static anterior
+        <div className="absolute top-0 w-full z-50 bg-azul">
           <div>
             <Image
               src="/austin-distel-tLZhFRLj6nY-unsplash.jpg"
