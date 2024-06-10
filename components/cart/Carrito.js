@@ -22,13 +22,14 @@ export default function Carrito() {
 
   useEffect(() => {
     const itemsAgrupados = items.reduce((results, item) => {
-      (results[item.codigo] = results[item.codigo] || []).push(item);
+      (results[item.pre_id] = results[item.pre_id] || []).push(item);
       return results;
     }, {});
 
     setItemsAgrupadosEnCarrito(itemsAgrupados);
   }, [items]);
-  console.log(itemsAgrupadosEnCarrito);
+
+  console.log(items);
 
   return (
     <div className="pt-[200px] pb-24 bg-white">

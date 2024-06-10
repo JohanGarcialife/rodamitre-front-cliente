@@ -14,10 +14,12 @@ export const cartSlice = createSlice({
 
     removeFromCart: (state, action) => {
       const index = state.items.findIndex(
-        (item) => item.codigo === action.payload.codigo
+        (item) => item.pre_id === action.payload.pre_id
       );
 
       let newCart = [...state.items];
+
+      
 
       if (index >= 0) {
         newCart.splice(index, 1);
