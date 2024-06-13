@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import RowVehiculo from "./RowVehiculo";
 
 export default function RowBuscadorVehiculo2(props) {
-  const { producto, selectRubro, motor } = props;
+  const { producto, selectRubro, motor, setEje } = props;
  
 
   var ru = producto?.map(function (obj) {
@@ -31,6 +31,8 @@ export default function RowBuscadorVehiculo2(props) {
     }
   `;
 
+ /// console.log("entre aqui vehiculo 2")
+
   return (
 
     <>
@@ -50,7 +52,7 @@ export default function RowBuscadorVehiculo2(props) {
               {producto?.map((producto) => (
                 <>
                   {e === producto.rubro && (
-                    <RowVehiculo producto={producto} />
+                    <RowVehiculo producto={producto} setEje={setEje} />
                   )}
                 </>
               ))}
@@ -73,7 +75,7 @@ export default function RowBuscadorVehiculo2(props) {
               {producto?.map((producto) => (
                 <>
                   {rubro.rup_descripcion === producto.rubro && (
-                    <RowVehiculo producto={producto} />
+                    <RowVehiculo producto={producto} setEje={setEje} />
                   )}
                 </>
               ))}
