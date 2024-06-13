@@ -2,18 +2,14 @@ import React, { useEffect, useState } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 import moment from "moment";
-import Contador from "../producto/Contador";
 import { useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "@/features/cartSlice";
+import { removeFromCart } from "@/features/cartSlice";
 import { IoMdCloseCircle } from "react-icons/io";
 import Subtotal from "../producto/Subtotal";
 import ContadorCarrito from "./ContadorCarrito";
 
 export default function RowCarrito(props) {
-  const { items, setNewTotalCarrito, newTotalCarrito, productos } = props;
-  const [quantity, setQuantity] = useState(items.valor);
-
-  const { pre_id, valor } = items;
+  const { items } = props;
 
   const dispatch = useDispatch();
 
@@ -31,12 +27,18 @@ export default function RowCarrito(props) {
     }
   `;
 
+  let quantity = 0;
+
+  items.forEach(cantidad);
+
+  function cantidad(item) {
+    quantity += item.valor;
+  }
+
   const removeItemFromCart = () => {
-    console.log(items[0].codigo);
-    const codigo = items[0].codigo;
+    const pre_id = items[0].pre_id;
     if (!items.length > 0) return;
-    dispatch(removeFromCart({ codigo }));
-    // setNewTotalCarrito(newTotalCarrito - items.ppa_precio * items.quantity);
+    dispatch(removeFromCart({ pre_id }));
   };
 
   return (
@@ -60,7 +62,7 @@ export default function RowCarrito(props) {
             handleRemoveItem={handleRemoveItem}
           /> */}
 
-          {items[0].valor}
+          {quantity}
         </p>
       </TableCell>
       <TableCell className="w-full flex justify-center font-bold">
@@ -71,7 +73,7 @@ export default function RowCarrito(props) {
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
         <p className="text-black font-bold">
-          <Subtotal producto={items[0]} valor={items[0]?.valor} />
+          <Subtotal producto={items[0]} valor={quantity} />
         </p>
       </TableCell>
       <TableCell className="w-full text-center space-y-2">
