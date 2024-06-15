@@ -10,10 +10,17 @@ import Motor from "../productos/Motor";
 import ContadorVehiculo from "../producto/ContadorVehiculo";
 
 export default function RowVehiculo(props) {
-  const { producto } = props;
+  const { producto, r , setEje} = props;
   const [quantity, setQuantity] = useState(0);
-
   const [equivalencia, setEquivalencia] = useState();
+  ///const array = JSON.parse(atributos);
+
+  ///console.log(producto)
+  if (r?.label && producto?.dt && producto?.eje) {
+    setEje(true)
+  } else {
+    setEje(false)
+  }
 
   useEffect(() => {
     if (producto?.equivalente) {

@@ -5,7 +5,8 @@ import styled from "@emotion/styled";
 import RowVehiculo from "./RowVehiculo";
 
 export default function RowBuscadorVehiculo(props) {
-  const { rubros, producto } = props;
+  const { rubros, producto, setEje } = props;
+  ///console.log(producto, "info")
   
   const TableRowStyled = styled(TableRow)`
     &:nth-of-type(odd) {
@@ -20,6 +21,7 @@ export default function RowBuscadorVehiculo(props) {
       text-align: center;
     }
   `;
+ /// console.log("vehiculo 1")
 
   return (
     <>
@@ -38,7 +40,7 @@ export default function RowBuscadorVehiculo(props) {
           {producto?.map((producto) => (
             <>
               {producto.rubro === rubro.label && (
-                <RowVehiculo producto={producto} />
+                <RowVehiculo producto={producto} r = {rubro} setEje={setEje}  />
               )}
             </>
           ))}

@@ -37,9 +37,9 @@ export default function BuscadorVehiculo(props) {
   const [selectRubro, setSelectRubro] = useState([]);
   const [motorSelect, setMotorSelect] = useState([]);
   const [motorS2, setMotorS2] = useState([]);
-
   const [expand, setExpand] = useState("noExpand");
   const [loade, setLoade] = useState(false);
+  const [eje, setEje] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -149,17 +149,6 @@ export default function BuscadorVehiculo(props) {
     if (event.length > 0) {
       const motorTT = await motorRM(Dato);
       setMotorSelect(motorTT);
-
-      /*setLoade(true);
-
-      const productAuto = await productosMarModelo(
-        auth.CLI_ID,
-        auth.LPP_ID,
-        Dato
-      );
-      setProducto(productAuto);
-      setProducto2(productAuto);
-      setLoade(false);*/
     }
   };
 
@@ -180,7 +169,7 @@ export default function BuscadorVehiculo(props) {
     });
     var motort = motor.toString();
 
-    console.log(motort, "motor");
+    //console.log(motort, "motor");
 
     var rup = rubro.map(function (data) {
       var data = data.value;
@@ -207,11 +196,46 @@ export default function BuscadorVehiculo(props) {
     }
   };
 
+
+  const handleSelectEje = async function (event) {
+    var rup = rubro.map(function (data) {
+      var data = data.value;
+      return data;
+    });
+    var rub = rup.toString()
+  
+    const Dato = {
+      mod_id: modId,
+      rubro: rub,
+      motor: "",
+      eje: event.value
+    };
+
+    ///console.log(Dato)
+     setLoade(true);
+
+    const productAuto = await productosMarModelo(
+      auth.CLI_ID,
+      auth.LPP_ID,
+      Dato
+    );
+    setProducto(productAuto);
+    setLoade(false);
+ 
+ 
+  };
+
+
   function handleClick(event) {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
   }
   ///console.log(producto, "productos")
+  const tren = [
+    { value: "delantero", label: "Delantero" },
+    { value: "trasero", label: "Trasero" },
+  ];
+ /// console.log(tren);
 
   return (
     ////
@@ -310,33 +334,45 @@ export default function BuscadorVehiculo(props) {
         </div>
         <div className="w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase">Rubros</p>
-          <div className="flex space-x-2 w-full items-center">
-            <Select
-              isMulti
-              value={rubro}
-              closeMenuOnSelect={false}
-              name="rubros"
-              options={rubroSelect}
-              className={
-                expand === "expand"
-                  ? "text-black font-montserrat w-full expand"
-                  : "text-black font-montserrat w-full"
-              }
-              placeholder="Todos los rubros..."
-              onChange={handleSelectRubro}
-            />
-            {expand === "noExpand" && (
-              <FaPlus
-                onClick={() => setExpand("expand")}
-                className="text-base text-azul cursor-pointer plus"
+          <div className="flex flex-col gap-y-2 w-full items-center">
+            <div className="flex space-x-2 w-full items-center">
+              <Select
+                isMulti
+                value={rubro}
+                closeMenuOnSelect={false}
+                name="rubros"
+                options={rubroSelect}
+                className={
+                  expand === "expand"
+                    ? "text-black font-montserrat w-full expand"
+                    : "text-black font-montserrat w-full"
+                }
+                placeholder="Todos los rubros..."
+                onChange={handleSelectRubro}
               />
-            )}
-            {expand === "expand" && (
-              <FaMinus
-                onClick={() => setExpand("noExpand")}
-                className="text-base text-azul cursor-pointer"
+              {expand === "noExpand" && (
+                <FaPlus
+                  onClick={() => setExpand("expand")}
+                  className="text-base text-azul cursor-pointer plus"
+                />
+              )}
+              {expand === "expand" && (
+                <FaMinus
+                  onClick={() => setExpand("noExpand")}
+                  className="text-base text-azul cursor-pointer"
+                />
+              )}
+            </div>
+
+            {eje  && 
+              <Select
+                ///value={tr}
+                options={tren}
+                placeholder="Seleccione Eje"
+                className="text-black font-montserrat w-full"
+                 onChange={handleSelectEje}
               />
-            )}
+          }
           </div>
         </div>
         <div className="w-full p-2">
@@ -415,7 +451,7 @@ export default function BuscadorVehiculo(props) {
             </TableHead>
             {rubro.length > 0 ? (
               <TableBody className="bg-white">
-                <RowBuscadorVehiculo rubros={rubro} producto={producto} />
+                <RowBuscadorVehiculo rubros={rubro} producto={producto} setEje={setEje}/>
               </TableBody>
             ) : (
               <TableBody className="bg-white">
@@ -424,6 +460,7 @@ export default function BuscadorVehiculo(props) {
                   rubros={rubro}
                   producto={producto}
                   motor={motor}
+                  setEje={setEje}
                 />
               </TableBody>
             )}

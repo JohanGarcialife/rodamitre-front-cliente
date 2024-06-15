@@ -21,8 +21,8 @@ export default function buscadorVehiculo() {
         marcaAutos={marcaAutos}
         setMarcaAutos={setMarcaAutos}
         auth={auth}
-        setBuscar={setBuscar}
-        buscar={buscar}
+    /*     setBuscar={setBuscar}
+        buscar={buscar} */
         //setBuscador={setBuscador}
       />
     </Layout>
