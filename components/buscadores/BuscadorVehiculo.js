@@ -381,7 +381,7 @@ export default function BuscadorVehiculo(props) {
             <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
               <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
                 <TableCell>
-                  <div className="font-bold text-white flex justify-center xl:justify-start">
+                  <div className="font-bold text-white flex justify-center ">
                     ARTÍCULO
                   </div>
                 </TableCell>
