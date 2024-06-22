@@ -4,7 +4,7 @@ import Subtotal from "./Subtotal";
 import Pedir from "./Pedir";
 
 export default function Contador(props) {
-  const { setQuantity, producto, addItemToCart } = props;
+  const { setQuantity, quantity, producto, addItemToCart } = props;
 
   const [valor, setValor] = useState("0");
 
@@ -48,6 +48,7 @@ export default function Contador(props) {
         </div>
         <div className="flex items-center justify-center mr-2">
           <Pedir
+            quantity={valor}
             setQuantity={setQuantity}
             producto={producto}
             valor={parseInt(valor)}

@@ -52,7 +52,6 @@ export default function BuscadorFamilia(props) {
   const [superR1, setSuperR1] = useState();
   const [mar1, setMar1] = useState();
 
-
   useEffect(() => {
     (async () => {
       setLoade(true);
@@ -71,7 +70,6 @@ export default function BuscadorFamilia(props) {
     })();
   }, []);
 
-  
   var autoSelect = marcaAutos?.map(function (obj) {
     var rObj = {
       value: obj?.MAU_ID,
@@ -103,7 +101,6 @@ export default function BuscadorFamilia(props) {
     };
     return rObj;
   });
-
 
   const handleChangeVehiculo = async function (event) {
     setVehiculoName(event);
@@ -186,9 +183,9 @@ export default function BuscadorFamilia(props) {
       return data;
     });
     var marcid = newmarca.toString();
-    
-    if(event?.length === 0 && !rudID && marID?.length === 0) {
-      console.log("entreaqyuu")
+
+    if (event?.length === 0 && !rudID && marID?.length === 0) {
+      console.log("entreaqyuu");
       setProductos(productos1);
     } else {
       setLoade(true);
@@ -207,7 +204,6 @@ export default function BuscadorFamilia(props) {
       setProductos(productAuto);
       setLoade(false);
     }
-
   };
 
   function handleClick(event) {

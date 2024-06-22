@@ -18,7 +18,7 @@ export default function NuevoReclamo() {
   }
 
   return (
-    <div className=" pt-[200px] pb-24 bg-white">
+    <div className="pt-[200px] xl:pt-[245px]  pb-24 bg-white">
       <div className="flex space-x-5 font-montserrat">
         <div className="rounded-md bg-white border border-[#D9D9D9] w-full p-2">
           <p className="text-[#969696] font-bold text-xs uppercase ">

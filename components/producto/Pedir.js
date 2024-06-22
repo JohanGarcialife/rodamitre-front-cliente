@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/features/cartSlice";
 
 export default function Pedir(props) {
-  const { producto, setQuantity, valor } = props;
+  const { producto, quantity, valor } = props;
   const [pedir, setPedir] = useState(false);
   const {
     atributos,
@@ -58,12 +58,18 @@ export default function Pedir(props) {
 
   return (
     <div>
-      <div
-        onClick={addItemToCart}
-        className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo"
-      >
-        <p>Pedir</p>
-      </div>
+      {quantity > 0 ? (
+        <div
+          onClick={addItemToCart}
+          className="py-1 px-2 bg-amarillo text-azul rounded-sm cursor-pointer font-bold hover:bg-azul hover:text-amarillo"
+        >
+          <p>Pedir</p>
+        </div>
+      ) : (
+        <div className="py-1 px-2 bg-gray-700  rounded-sm cursor-pointer font-bold text-white">
+          <p>Pedir</p>
+        </div>
+      )}
 
       {producto?.pre_stock_actual > 0 && (
         <div className="font-bold text-green-600">

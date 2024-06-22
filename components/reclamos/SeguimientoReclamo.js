@@ -25,12 +25,12 @@ export default function SeguimientoReclamo() {
 
   return (
     <>
-      <div className=" pt-[200px] pb-24 bg-white">
-      <div className="border-b-2 border-gris flex justify-center items-center mb-5 mt-2">
-              <p className="text-black text-4xl border-b-4 border-amarillo">
-                Seguimiento de Reclamo
-              </p>
-            </div>
+      <div className=" pt-[200px] xl:pt-[245px]  pb-24 bg-white">
+        <div className="border-b-2 border-gris flex justify-center items-center mb-5 mt-2">
+          <p className="text-black text-4xl border-b-4 border-amarillo">
+            Seguimiento de Reclamo
+          </p>
+        </div>
         <Table>
           <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
             <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
@@ -85,4 +85,3 @@ export default function SeguimientoReclamo() {
     </>
   );
 }
-
