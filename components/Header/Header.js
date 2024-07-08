@@ -91,15 +91,17 @@ export default function Header(props) {
             />
           </div>
 
-          <div className="flex items-end pb-3 justify-between px-12">
-            <div className="w-1/3">
-              <Image
-                src="/rodamitre-logo.png"
-                height={150}
-                width={300}
-                alt="Roadmitre logo"
-                className="h-fit"
-              />
+          <div className="flex items-center pb-3 justify-between lg:justify-around xl:px-24 px-12">
+            <div className="w-1/3 flex h-full items-center justify-start xl:justify-center">
+              <Link href="/">
+                <Image
+                  src="/rodamitre-logo.png"
+                  height={150}
+                  width={300}
+                  alt="Roadmitre logo"
+                  className="h-fit"
+                />
+              </Link>
             </div>
 
             <div className="pb-3 w-1/3 flex flex-col items-center">
@@ -147,13 +149,12 @@ export default function Header(props) {
                     FAMILIA
                   </p>
                 </Link>
-                
               </div>
             </div>
 
             <div className=" pb-3 text-lg w-1/3 space-x-5">
               <div className="py-3 mb-3  w-full">
-                <div className="flex justify-end items-center w-full space-x-4">
+                <div className="flex justify-end items-center w-full space-x-4 xl:pr-24">
                   <div className="relative">
                     <Link href="/carrito">
                       <BsCart4 className="text-white text-3xl font-light cursor-pointer" />
