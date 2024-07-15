@@ -126,7 +126,6 @@ export default function BuscadorRapida(props) {
 
   return (
     <div
-    
       className=" pt-[200px] xl:pt-[245px] pb-24 bg-white"
       ///onClick={() => setSearch([])}
     >
@@ -137,7 +136,7 @@ export default function BuscadorRapida(props) {
       >
         <div className="w-full space-y-5">
           <div className="bg-white rounded-lg border border-black flex">
-            <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 w-1/5">
+            <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 w-fit">
               <p>Código / Ubicación</p>
             </div>
             <div className="flex flex-col w-4/5 relative">
