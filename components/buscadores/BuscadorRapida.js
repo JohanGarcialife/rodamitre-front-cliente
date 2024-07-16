@@ -21,6 +21,8 @@ import { productosCodigo, codigoP } from "@/pages/api/productos";
 import RecommendablesRow from "../productos/RecommendablesRow";
 import { useRouter } from "next/router";
 import RowBusquedaRapida from "./RowBusquedaRapida";
+import { AutoComplete } from "primereact/autocomplete";
+
 
 export default function BuscadorRapida(props) {
   const { auth, setBuscar, buscar, setBuscador, data } = props;
@@ -124,6 +126,14 @@ export default function BuscadorRapida(props) {
     router.push(`/busquedaRapida?query=${event}`);
   }
 
+  const [value, setValue] = useState('');
+  const [items, setItems] = useState([]);
+
+  const sear = (event) => {
+      setItems([...Array(10).keys()].map(item => event.query + '-' + item));
+  }
+
+
   return (
     <div
     
@@ -140,8 +150,13 @@ export default function BuscadorRapida(props) {
             <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 w-1/5">
               <p>Código / Ubicación</p>
             </div>
-            <div className="flex flex-col w-4/5 relative">
-              <input
+           {/*  <div className="flex flex-col w-4/5 relative"> */}
+           <div className="flex justify-center items-center w-4/5">
+            <AutoComplete 
+            className="cls .p-iputtext:enabled:focus "
+            
+            value={value} suggestions={items} completeMethod={sear} onChange={(e) => setValue(e.value)} />
+              {/* <input
                 type="text"
                 name="p"
                 className="bg-transparent p-3 w-full text-black"
@@ -166,7 +181,7 @@ export default function BuscadorRapida(props) {
                 </div>
               ) : (
                 <></>
-              )}
+              )} */}
             </div>
           </div>
           <div className="w-full flex space-x-5">

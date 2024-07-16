@@ -8,9 +8,14 @@ import { store } from "./store.js";
 import "@/styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import "../components/buscadores/BuscadorFamilia.scss";
+import "../components/buscadores/BuscadorRapida.scss";
 import "../components/garantias/NuevaGarantia.scss";
 import { PrimeReactProvider } from "primereact/api";
-import Tailwind from "primereact/passthrough/tailwind";
+
+
+import 'primereact/resources/themes/md-light-deeppurple/theme.css';
+import 'primereact/resources/primereact.css';
+///import Tailwind from "primereact/passthrough/tailwind";
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);
@@ -63,7 +68,7 @@ export default function App({ Component, pageProps }) {
     <>
       <AuthContext.Provider value={userData}>
         <Provider store={store}>
-          <PrimeReactProvider value={{ unstyled: true, pt: Tailwind }}>
+          <PrimeReactProvider  /* value={{ unstyled: false, pt: Tailwind}} */ >
             <Component {...pageProps} />
             <ToastContainer
               position="top-right"

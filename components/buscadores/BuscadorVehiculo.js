@@ -31,6 +31,7 @@ export default function BuscadorVehiculo(props) {
   const [producto, setProducto] = useState([]);
   const [producto1, setProducto1] = useState([]);
   const [producto2, setProducto2] = useState([]);
+  const [producto3, setProducto3] = useState([]);  
   const [modId, setModId] = useState([]);
   const [vehiculo, setVehiculo] = useState(null);
   const [modeloVh, setModeloVh] = useState([]);
@@ -130,6 +131,7 @@ export default function BuscadorVehiculo(props) {
   const handleSelectRubro = async function (event) {
     setRubro(event);
     setMotorSelect(null);
+    console.log(event, "valors")
 
     if (vehiculo && modelo && !rubro.label > 0) {
       setProducto(producto1);
@@ -203,6 +205,8 @@ export default function BuscadorVehiculo(props) {
       return data;
     });
     var rub = rup.toString()
+
+
   
     const Dato = {
       mod_id: modId,
@@ -232,6 +236,7 @@ export default function BuscadorVehiculo(props) {
   }
   ///console.log(producto, "productos")
   const tren = [
+    {value:"", label:"Todos"},
     { value: "delantero", label: "Delantero" },
     { value: "trasero", label: "Trasero" },
   ];
