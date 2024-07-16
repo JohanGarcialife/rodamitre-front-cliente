@@ -215,14 +215,14 @@ export default function BuscadorRapida(props) {
             className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-l-lg cursor-pointer"
             // type="submit"
           >
-            <p>Buscar</p>
+            <p className="font-bold">Buscar</p>
             <FaSearch />
           </button>
           <div
             className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-r-lg cursor-pointer text-white"
             onClick={() => formik.resetForm()}
           >
-            <p>Limpiar</p>
+            <p className="font-bold">Limpiar</p>
             <IoClose className="text-2xl" />
           </div>
         </div>
