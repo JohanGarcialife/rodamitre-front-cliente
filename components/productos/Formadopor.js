@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 export default function Formadopor(props) {
   const { formadopor } = props;
   const router = useRouter();
-  console.log(formadopor, "string");
+  ///console.log(formadopor, "string");
 
   let arr = formadopor?.split(",");
 

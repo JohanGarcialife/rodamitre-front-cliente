@@ -23,7 +23,6 @@ import { useRouter } from "next/router";
 import RowBusquedaRapida from "./RowBusquedaRapida";
 import { AutoComplete } from "primereact/autocomplete";
 
-
 export default function BuscadorRapida(props) {
   const { auth, setBuscar, buscar, setBuscador, data } = props;
   const [loade, setLoade] = useState(false);
@@ -59,13 +58,13 @@ export default function BuscadorRapida(props) {
           auth.LPP_ID,
           Dato
         );
-        if (productAuto[0]?.m) {
+       /*  if (productAuto[0]?.m) {
           setProductos(productAuto[0].m);
           setEquivalente(productAuto[1]);
-        } else if (productAuto.length > 0 && !productAuto[0].m) {
+        } else if (productAuto.length > 0 && !productAuto[0].m) { */
           setProductos(productAuto);
           setEquivalente(null);
-        }
+       /*  } */
         setBuscar(null);
         setLoade(false);
       })();
@@ -80,36 +79,26 @@ export default function BuscadorRapida(props) {
       setSearch([]);
       setLoade(true);
       const productAuto = await productosCodigo(auth.CLI_ID, auth.LPP_ID, Dato);
-      if (productAuto.length <= 0) {
+      /* if (productAuto.length <= 0) {
         setProductos(productAuto);
         setLoade(false);
       }
 
       if (productAuto[0]?.m) {
-        console.log("PRODUCTOS M");
+        //console.log("PRODUCTOS M");
         setProductos(productAuto[0].m);
         setEquivalente(productAuto[1]);
       } else if (!productAuto[0].m) {
-        console.log("PRODUCTOS NORMALES");
+        //console.log("PRODUCTOS NORMALES");
         setProductos(productAuto);
         setEquivalente(null);
-      }
+      } */
+      setProductos(productAuto);
       setLoade(false);
       setBuscar(null);
     },
   });
 
-  useEffect(() => {
-    if (formik?.values?.p?.length > 2 && formik?.values?.p?.length < 12) {
-      (async () => {
-        const Dato = {
-          p: formik?.values?.p,
-        };
-        const response = await codigoP(Dato);
-        setSearch(response);
-      })();
-    }
-  }, [formik?.values?.p]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -120,23 +109,27 @@ export default function BuscadorRapida(props) {
     setPage(0);
   };
 
-  function handlebuscar(event) {
-    setBuscar(event);
-    formik.values.p = event;
-    router.push(`/busquedaRapida?query=${event}`);
-  }
-
-  const [value, setValue] = useState('');
+ /*  const [value, setValue] = useState(
+    data?.query.query ? data?.query.query : ""
+  ); */
   const [items, setItems] = useState([]);
 
-  const sear = (event) => {
-      setItems([...Array(10).keys()].map(item => event.query + '-' + item));
-  }
-
+  const sear = async (event) => {
+    if (event.query?.length > 2 && event.query?.length < 12) {
+      const Dato = {
+        p: event.query,
+      };
+      const response = await codigoP(Dato);
+      var a = response?.map(function (o) {
+        var p = o.CODIGO;
+        return p;
+      });
+      setItems(a);
+    }
+  };
 
   return (
     <div
-    
       className=" pt-[200px] xl:pt-[245px] pb-24 bg-white"
       ///onClick={() => setSearch([])}
     >
@@ -147,47 +140,29 @@ export default function BuscadorRapida(props) {
       >
         <div className="w-full space-y-5">
           <div className="bg-white rounded-lg border border-black flex">
-            <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 w-1/5">
-              <p>Código / Ubicación</p>
+            <div className="bg-azul text-white rounded-l-lg flex  space-x-3 text-balck p-3 w-fit">
+              <p className="font-bold">¿Qué necesita?</p>
             </div>
-           {/*  <div className="flex flex-col w-4/5 relative"> */}
-           <div className="flex justify-center items-center w-4/5">
-            <AutoComplete 
-            className="cls .p-iputtext:enabled:focus "
-            
-            value={value} suggestions={items} completeMethod={sear} onChange={(e) => setValue(e.value)} />
-              {/* <input
-                type="text"
+            {/*  <div className="flex flex-col w-4/5 relative"> */}
+            <div className=" justify-center items-center w-[80%] ">
+              <AutoComplete
+                className="cls .p-iputtext:enabled:focus "
                 name="p"
-                className="bg-transparent p-3 w-full text-black"
                 placeholder="Código del artículo y/o ubicación. Ej: VKM 1258 / Mazda Ford Fiesta / VKM Fiat"
-                onChange={formik.handleChange}
                 value={formik.values.p}
-                autocomplete="off"
+                suggestions={items}
+                completeMethod={sear}
+                onChange={
+                  formik.handleChange
+                } /* onChange={(e) => setValue(e.value)} */
               />
-              {search?.length > 0 ? (
-                <div className=" absolute z-10 w-full flex-col bg-white rounded-lg border border-black mt-14 ">
-                  {search?.map((c) => {
-                    return (
-                      <p
-                        className="hover:bg-slate-200 cursor-pointer px-2 text-black"
-                        // onClsick={() => setBuscar(c.CODIGO_EQUIVALENTE)}
-                        onClick={() => handlebuscar(c.CODIGO)}
-                      >
-                        {c?.CODIGO}
-                      </p>
-                    );
-                  })}
-                </div>
-              ) : (
-                <></>
-              )} */}
+             
             </div>
           </div>
           <div className="w-full flex space-x-5">
             <div className="bg-white rounded-lg border border-black flex">
               <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
-                <p>Interior</p>
+                <p className="font-bold">Interior</p>
               </div>
               <input
                 type="text"
@@ -200,7 +175,7 @@ export default function BuscadorRapida(props) {
             </div>
             <div className="bg-white rounded-lg border border-black flex">
               <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
-                <p>Exterior</p>
+                <p className="font-bold">Exterior</p>
               </div>
               <input
                 type="text"
@@ -213,7 +188,7 @@ export default function BuscadorRapida(props) {
             </div>
             <div className="bg-white rounded-lg border border-black flex">
               <div className="bg-azul text-white rounded-l-lg flex space-x-3 text-balck p-3 ">
-                <p>Altura</p>
+                <p className="font-bold">Altura</p>
               </div>
               <input
                 name="altura"
@@ -231,14 +206,14 @@ export default function BuscadorRapida(props) {
             className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-l-lg cursor-pointer"
             // type="submit"
           >
-            <p>Buscar</p>
+            <p className="font-bold">Buscar</p>
             <FaSearch />
           </button>
           <div
             className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-r-lg cursor-pointer text-white"
             onClick={() => formik.resetForm()}
           >
-            <p>Limpiar</p>
+            <p className="font-bold">Limpiar</p>
             <IoClose className="text-2xl" />
           </div>
         </div>
@@ -298,6 +273,7 @@ export default function BuscadorRapida(props) {
                 </TableRow>
               </TableHead>
               <TableBody className="bg-white">
+              <RecommendablesRow  producto={productos?.[0]} />
                 {(rowsPerPage > 0
                   ? productos?.slice(
                       page * rowsPerPage,
@@ -306,16 +282,18 @@ export default function BuscadorRapida(props) {
                   : productos
                 )?.map((producto) => (
                   <>
+                  
+                      
                     <RowBusquedaRapida
                       productos={productos}
                       producto={producto}
                       equivalente={equivalente}
                     />
-                    {equivalente
+                    {/* {equivalente
                       ? equivalente?.map((eq) => (
                           <RecommendablesRow eq={eq} producto={producto} />
                         ))
-                      : ""}
+                      : ""} */}
                   </>
                 ))}
               </TableBody>

@@ -1,22 +1,3 @@
-/* import Image from "next/image";
-import React from "react";
-
-
-export default function ProductoInfoE(props) {
-  const { producto, setBuscar, buscar, setBuscador } = props;
-  return (
-    <div className="font-bold flex items-center justify-start space-x-3">
-      <Image
-        src="/VKPC-85097_1_SKF.jpg"
-        height={100}
-        width={100}
-        alt="Imagen"
-        className="mr-3"
-      />
-    </div>
-  );
-}
- */
 import React from "react";
 import Image from "next/image";
 import { AiFillInfoCircle } from "react-icons/ai";
@@ -25,7 +6,7 @@ import Esparte from "../productos/Esparte";
 import Intercambiables from "../productos/Intercambiables";
 import Formadopor from "../productos/Formadopor";
 
-export default function ProductoInfoE(props) {
+export default function ProductoInfoE1(props) {
   const { producto, equi } = props;
   return (
     <div className="space-y-2">
@@ -59,29 +40,20 @@ export default function ProductoInfoE(props) {
               </div>
             )}
 
-{
-        producto?.pre_id_principal === producto?.pre_id
-          ? ""
-          : !producto?.pre_id_principal 
-          ? <p>{producto?.codigo} </p>
-          : producto?.pre_id_principal != producto?.pre_id && ""
-             /*  <div className="text-center">
-                <p>{producto.codigo} </p>
-              </div> */
-             /* : !producto?.pre_id_principal && "" */
+            {producto?.pre_id_principal === producto?.pre_id ? (
+              <p >{producto?.codigo} </p>
+            ) : !producto?.pre_id_principal ? (
+              <p>{producto?.codigo} </p>
+            ) : (
+              producto?.pre_id_principal != producto?.pre_id && (
+                <div className="flex flex-col text-left">
+                  <p>{producto?.codigo_principal}</p>
+                  <p className="text-orange-500">{producto?.codigo} </p>
+                </div>
+              )
+            )}
 
-        /* (
-        <div className="text-left">
-          <p>{codiE.codigo}</p>
-        </div>
-      ) */
-      }
-            
-
-
-
-
-          {/*   <p>{producto?.codigo} </p> */}
+            {/*   <p>{producto?.codigo} </p> */}
           </div>
           <div>
             {producto?.es_parte_de ? (
@@ -115,8 +87,6 @@ export default function ProductoInfoE(props) {
           </div>
         </div>
       </div>
-
-
     </div>
   );
 }

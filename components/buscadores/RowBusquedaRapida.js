@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
 import ProductoInfo from "../producto/ProductoInfo";
+import ProductoInfoE from "../producto/ProductoInfoE";
 import Aplicaciones from "../producto/Aplicaciones";
 import Marca from "../producto/Marca";
 import Precio from "../producto/Precio";
 import ContadorRapida from "../producto/ContadorRapida";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
+import MarcaRapida from "../producto/MarcaRapida";
 
 export default function RowBusquedaRapida(props) {
   const { producto, productos, equivalente } = props;
@@ -100,48 +102,15 @@ export default function RowBusquedaRapida(props) {
 
   return (
     <>
-    { equivalente ? 
-     < TableRowStyled2
-     key={producto?.pre_id}
-     className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
-   >
-     <TableCell className="w-full">
-       <ProductoInfo producto={producto} />
-     </TableCell>
-     <TableCell className="w-full text-center">
-       {producto?.aplicaciones ? (
-         <Aplicaciones
-           aplicaciones={producto.aplicaciones}
-           srubro={producto.rubro}
-         />
-       ) : null}
-     </TableCell>
-     <TableCell className="w-full flex justify-center text-center">
-       <Marca producto={producto} />
-     </TableCell>
-     <TableCell className="w-full text-center">
-       <Precio producto={producto} />
-     </TableCell>
-     {/* contador */}
-     <TableCell colSpan={3} className="w-full flex justify-center">
-       <div className="w-full flex justify-center">
-         <ContadorRapida
-           producto={producto}
-           addItemToCart={addItemToCart}
-           quantity={quantity}
-           setQuantity={setQuantity}
-         />
-       </div>
-     </TableCell>
-   </TableRowStyled2> : 
-
-      
+    
+    
     < TableRowStyled
       key={producto?.pre_id}
       className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
     >
+      {producto?.pre_id === productos?.[0].pre_id ? "" : <>
       <TableCell className="w-full">
-        <ProductoInfo producto={producto} />
+        <ProductoInfoE producto={producto} />
       </TableCell>
       <TableCell className="w-full text-center">
         {producto?.aplicaciones ? (
@@ -152,7 +121,7 @@ export default function RowBusquedaRapida(props) {
         ) : null}
       </TableCell>
       <TableCell className="w-full flex justify-center text-center">
-        <Marca producto={producto} />
+        <MarcaRapida producto={producto} />
       </TableCell>
       <TableCell className="w-full text-center">
         <Precio producto={producto} />
@@ -168,8 +137,14 @@ export default function RowBusquedaRapida(props) {
           />
         </div>
       </TableCell>
+      
+      </>
+
+
+      }
+      
     </TableRowStyled>
-    }
+    
     </>
 
   );
