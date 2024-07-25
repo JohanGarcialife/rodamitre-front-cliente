@@ -42,7 +42,7 @@ export default function MenuItems(props) {
               className={
                 depthLevel > 0
                   ? "flex items-center hover:bg-amarillo px-2 w-full text-black"
-                  : "flex items-center space-x-2 w-full text-white"
+                  : "flex items-center space-x-2 w-full text-white 2xl:text-lg text-sm "
               }
             >
               {items.title}{" "}
