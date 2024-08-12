@@ -7,7 +7,7 @@ function AtributosProducto(props) {
 
   return (
     <div className="grid grid-cols-3 space-x-3 ">
-      {array.map((a) => (
+      {array?.map((a) => (
         <>
           {a.pra_valor != 0 ? (
             <div>

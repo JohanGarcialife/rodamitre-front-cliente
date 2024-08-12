@@ -231,7 +231,7 @@ export async function productosCodigo(CLI_ID, LPP_ID, Dato) {
 ////////////////
 
 export async function codigoP(Dato) {
-  console.log("vine aqui a consultar")
+  //console.log("vine aqui a consultar")
   try {
     const url = `${URL}/codigo`;
     const params = {

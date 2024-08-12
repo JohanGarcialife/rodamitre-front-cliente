@@ -7,7 +7,7 @@ import Intercambiables from "../productos/Intercambiables";
 import Formadopor from "../productos/Formadopor";
 
 export default function ProductoInfoE1(props) {
-  const { producto, equi } = props;
+  const { producto } = props;
   return (
     <div className="space-y-2">
       <div className="font-bold flex items-center justify-start space-x-3">

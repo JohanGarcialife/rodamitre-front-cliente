@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import styled from "@emotion/styled";
-import ProductoInfo from "../producto/ProductoInfo";
 import ProductoInfoE from "../producto/ProductoInfoE";
 import Aplicaciones from "../producto/Aplicaciones";
-import Marca from "../producto/Marca";
 import Precio from "../producto/Precio";
 import ContadorRapida from "../producto/ContadorRapida";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +10,7 @@ import { addToCart, selectCartItemsWithId } from "@/features/cartSlice";
 import MarcaRapida from "../producto/MarcaRapida";
 
 export default function RowBusquedaRapida(props) {
-  const { producto, productos, equivalente } = props;
+  const { producto } = props;
 
   const {
     atributos,
@@ -67,7 +65,6 @@ export default function RowBusquedaRapida(props) {
       })
     );
   };
-  
 
   const TableRowStyled = styled(TableRow)`
     &:nth-of-type(odd) {
@@ -94,58 +91,74 @@ export default function RowBusquedaRapida(props) {
     th {
       width: fit-content;
       text-align: center;
-      border: hidden
-
+      border: hidden;
     }
   `;
 
+  const jsonObject = JSON?.parse(producto?.todo);
+  const array = jsonObject?.map((item) => {
+    return item;
+  });
+
+  const jsonO = JSON?.parse(producto?.c);
+  const com = jsonO?.map((item) => {
+    return item;
+  });
+
+  /* console.log(com, "veo")
+  console.log(producto) */
 
   return (
     <>
-    
-    
-    < TableRowStyled
-      key={producto?.pre_id}
-      className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
-    >
-      {producto?.pre_id === productos?.[0].pre_id ? "" : <>
-      <TableCell className="w-full">
-        <ProductoInfoE producto={producto} />
-      </TableCell>
-      <TableCell className="w-full text-center">
-        {producto?.aplicaciones ? (
-          <Aplicaciones
-            aplicaciones={producto.aplicaciones}
-            srubro={producto.rubro}
-          />
-        ) : null}
-      </TableCell>
-      <TableCell className="w-full flex justify-center text-center">
-        <MarcaRapida producto={producto} />
-      </TableCell>
-      <TableCell className="w-full text-center">
-        <Precio producto={producto} />
-      </TableCell>
-      {/* contador */}
-      <TableCell colSpan={3} className="w-full flex justify-center">
-        <div className="w-full flex justify-center">
-          <ContadorRapida
-            producto={producto}
-            addItemToCart={addItemToCart}
-            quantity={quantity}
-            setQuantity={setQuantity}
-          />
-        </div>
-      </TableCell>
-      
-      </>
-
-
-      }
-      
-    </TableRowStyled>
-    
+      <TableRowStyled
+        key={producto?.pre_id}
+        className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center"
+      >
+        <>
+          <TableCell className="w-full">
+            <ProductoInfoE producto={array[0]} equi={array} c={com} atributos = {producto}  />
+          </TableCell>
+          <TableCell className="w-full text-center">
+            {producto?.aplicaciones ? (
+              <Aplicaciones
+                aplicaciones={producto.aplicaciones}
+                srubro={producto.rubro}
+              />
+            ) : null}
+          </TableCell>
+          <TableCell className="w-full flex justify-center text-center">
+            {array?.map((e) => (
+              <div className="">
+                <MarcaRapida producto={e} c={com} prod={array[0]} />
+              </div>
+            ))}
+          </TableCell>
+          <TableCell className="w-full text-center">
+            {array?.map((e) => (
+              <div className="">
+                <Precio producto={e} />
+              </div>
+            ))}
+          </TableCell>
+          {/* contador */}
+          <TableCell colSpan={3} className="w-full flex justify-center">
+            {array.map((e) => (
+              <>
+                <div className="w-full flex h-[100px] items-center justify-around ">
+                  <ContadorRapida
+                    producto={e}
+                    quantity={quantity}
+                    setQuantity={setQuantity}
+                    /*  handleAddItem={handleAddItem}
+                      handleRemoveItem={handleRemoveItem} */
+                    addItemToCart={addItemToCart}
+                  />
+                </div>
+              </>
+            ))}
+          </TableCell>
+        </>
+      </TableRowStyled>
     </>
-
   );
 }

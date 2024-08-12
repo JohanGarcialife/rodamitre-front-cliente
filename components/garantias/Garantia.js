@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -5,10 +6,23 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React, { useState } from "react";
 import styled from "@emotion/styled";
+import useAuth from "@/hooks/useAuth";
+import { garantiasApi } from "@/pages/api/reclamoGarantias";
 
 export default function Garantia() {
+  const { auth, setReloadUser } = useAuth();
+  const [garant, setGarant] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const response = await garantiasApi(auth.CLI_ID);
+      setGarant(response);
+    })();
+  }, []);
+
+  console.log(garant);
+
   const TableRowStyled = styled(TableRow)`
     &:nth-of-type(odd) {
       background-color: #e8e8ff;

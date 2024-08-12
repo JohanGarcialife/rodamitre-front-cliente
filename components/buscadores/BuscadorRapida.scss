@@ -1,21 +1,21 @@
-.cls{
+.cls {
     height: 100% !important;
     width: 100% !important;
-    //border-color: black !important;
-   // border-style: solid !important;
-   // border: 1px;
-//border-top-right-radius: 10px;    
-//border-bottom-right-radius: 10px;
-:focus{
-    box-shadow: none !important
-    ;
+
+    :focus {
+        box-shadow: none !important;
+    }
 }
-    
-   
-    
-   
-   
-    
-   /* border: 0 !important;*/
-  
-  }
+
+.p-autocomplete-items-wrapper {
+    .p-autocomplete-items {
+        .p-highlight {
+            background-color: rgba(255, 166, 0, 0.37);
+        }
+
+        .p-autocomplete-item {
+            padding-top: 2px !important;
+            padding-bottom: 2px !important;
+        }
+    }
+}

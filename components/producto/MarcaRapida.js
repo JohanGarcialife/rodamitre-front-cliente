@@ -1,27 +1,36 @@
 import React from "react";
 
 export default function MarcaRapida(props) {
-  const { producto } = props;
+  const { producto, c, prod } = props;
+  // console.log(producto, "ver")
+  // console.log(c, "informarcion")
+  /////sconsole.log(c, "c")
+
   return (
     <div className="h-[100px] flex flex-col items-center  text-center  justify-center font-bold">
       <p>{producto?.marca_articulo} </p>
-      {
-        producto?.pre_id_principal === producto?.pre_id
-          ? ""
-          : !producto?.pre_id_principal
-          ? ""
-          : producto?.pre_id_principal != producto?.pre_id && (
-              <div className="text-center">
-                <p>({producto.codigo}) </p>
-              </div>
-            ) /* : !producto?.pre_id_principal && "" */
 
-        /* (
-        <div className="text-left">
-          <p>{codiE.codigo}</p>
+      {c?.length > 0 &&
+      c[0]?.codigo_equivalente != producto?.codigo &&
+      c[0]?.pre_id_equivalente === 0 ? (
+        <div>
+          <div className="text-center">
+            <p>({producto.codigo}) </p>
+          </div>
         </div>
-      ) */
-      }
+      ) : c?.length > 0 &&
+        c[0]?.codigo_equivalente != producto?.codigo &&
+        c[0]?.pre_id_equivalente != 0 ? (
+        <div>
+          <p>({producto?.codigo}) </p>
+        </div>
+      ) : (
+          c === undefined &&  prod.codigo != producto?.codigo && (
+          <div>
+            <p> ({producto?.codigo}) </p>
+          </div>
+        )
+      )}
     </div>
   );
 }

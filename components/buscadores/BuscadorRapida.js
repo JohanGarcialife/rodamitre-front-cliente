@@ -24,15 +24,13 @@ import RowBusquedaRapida from "./RowBusquedaRapida";
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function BuscadorRapida(props) {
-  const { auth, setBuscar, buscar, setBuscador, data } = props;
+  const { auth, setBuscar, data } = props;
   const [loade, setLoade] = useState(false);
   const [productos, setProductos] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [search, setSearch] = useState([]);
   const [equivalente, setEquivalente] = useState([]);
-
-  const router = useRouter();
 
   setBuscar(data?.query.query);
 
@@ -58,47 +56,27 @@ export default function BuscadorRapida(props) {
           auth.LPP_ID,
           Dato
         );
-       /*  if (productAuto[0]?.m) {
-          setProductos(productAuto[0].m);
-          setEquivalente(productAuto[1]);
-        } else if (productAuto.length > 0 && !productAuto[0].m) { */
-          setProductos(productAuto);
-          setEquivalente(null);
-       /*  } */
+        setProductos(productAuto);
+        setEquivalente(null);
         setBuscar(null);
         setLoade(false);
       })();
-      setSearch([]);
+   //   setSearch([]);
     }
-    setSearch([]);
+   // setSearch([]);
   }, [data]);
 
   const formik = useFormik({
     initialValues: initialValues(),
     onSubmit: async (Dato) => {
-      setSearch([]);
+      //setSearch([]);
       setLoade(true);
       const productAuto = await productosCodigo(auth.CLI_ID, auth.LPP_ID, Dato);
-      /* if (productAuto.length <= 0) {
-        setProductos(productAuto);
-        setLoade(false);
-      }
-
-      if (productAuto[0]?.m) {
-        //console.log("PRODUCTOS M");
-        setProductos(productAuto[0].m);
-        setEquivalente(productAuto[1]);
-      } else if (!productAuto[0].m) {
-        //console.log("PRODUCTOS NORMALES");
-        setProductos(productAuto);
-        setEquivalente(null);
-      } */
       setProductos(productAuto);
       setLoade(false);
       setBuscar(null);
     },
   });
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -109,9 +87,6 @@ export default function BuscadorRapida(props) {
     setPage(0);
   };
 
- /*  const [value, setValue] = useState(
-    data?.query.query ? data?.query.query : ""
-  ); */
   const [items, setItems] = useState([]);
 
   const sear = async (event) => {
@@ -125,18 +100,19 @@ export default function BuscadorRapida(props) {
         return p;
       });
       setItems(a);
+    } else {
+      setItems([])
     }
   };
 
+  //console.log(productos, "info");
+
   return (
-    <div
-      className=" pt-[200px] xl:pt-[245px] pb-24 bg-white"
-      ///onClick={() => setSearch([])}
-    >
+    <div className=" pt-[200px] xl:pt-[245px] pb-24 bg-white">
       <form
         className="flex space-x-10 px-2 w-full font-montserrat"
         onSubmit={formik.handleSubmit}
-        onClick={() => setSearch([])}
+      ///  onClick={() => setSearch([])}
       >
         <div className="w-full space-y-5">
           <div className="bg-white rounded-lg border border-black flex">
@@ -146,7 +122,7 @@ export default function BuscadorRapida(props) {
             {/*  <div className="flex flex-col w-4/5 relative"> */}
             <div className=" justify-center items-center w-[80%] ">
               <AutoComplete
-                className="cls .p-iputtext:enabled:focus "
+                className="cls"
                 name="p"
                 placeholder="Código del artículo y/o ubicación. Ej: VKM 1258 / Mazda Ford Fiesta / VKM Fiat"
                 value={formik.values.p}
@@ -156,7 +132,6 @@ export default function BuscadorRapida(props) {
                   formik.handleChange
                 } /* onChange={(e) => setValue(e.value)} */
               />
-             
             </div>
           </div>
           <div className="w-full flex space-x-5">
@@ -204,7 +179,6 @@ export default function BuscadorRapida(props) {
         <div className="flex h-fit bg-azul text-white rounded-lg">
           <button
             className="flex items-center space-x-2 p-3 hover:bg-amarillo rounded-l-lg cursor-pointer"
-            // type="submit"
           >
             <p className="font-bold">Buscar</p>
             <FaSearch />
@@ -218,118 +192,116 @@ export default function BuscadorRapida(props) {
           </div>
         </div>
       </form>
-      {productos?.length <= 0 ? (
-        <div
-          className="flex items-center justify-center font-montserrat text-center mt-20 text-4xl text-azul"
-          /// onClick={() => setSearch([])}
-        >
-          {loade === true ? (
-            <CircularProgress />
-          ) : (
-            <div>Indique los criterios de busqueda</div>
-          )}
+      {productos?.message ? (
+        <div className="flex items-center justify-center font-montserrat text-center mt-20 text-4xl text-azul">
+          <div>Producto no encontrado</div>
         </div>
       ) : (
-        <div className=" font-montserrat mt-10">
-          {loade === true ? (
-            <div className="flex items-center justify-center">
-              <CircularProgress />
+        <>
+          {productos?.length <= 0 ? (
+            <div
+              className="flex items-center justify-center font-montserrat text-center mt-20 text-4xl text-azul"
+            >
+              {loade === true ? (
+                <CircularProgress />
+              ) : (
+                <div>Indique los criterios de busqueda</div>
+              )}
             </div>
           ) : (
-            <Table /*  onClick={() => setSearch([])} */ className="relative">
-              <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
-                <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
-                  <TableCell>
-                    <div className="font-bold text-white flex justify-cente xl:justify-start">
-                      Artículo
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="font-bold text-white flex justify-center xl:justify-start">
-                      Aplicaciones
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="font-bold text-white flex justify-center xl:justify-start">
-                      Marca
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="font-bold text-white flex justify-center xl:justify-start">
-                      Costo
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="font-bold text-white flex justify-center xl:justify-start">
-                      Cantidad
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="font-bold text-white flex justify-center xl:justify-start">
-                      SUB-TOTAL
-                    </div>
-                  </TableCell>
-                  <TableCell>{""}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody className="bg-white">
-              <RecommendablesRow  producto={productos?.[0]} />
-                {(rowsPerPage > 0
-                  ? productos?.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                  : productos
-                )?.map((producto) => (
-                  <>
-                  
-                      
-                    <RowBusquedaRapida
-                      productos={productos}
-                      producto={producto}
-                      equivalente={equivalente}
-                    />
-                    {/* {equivalente
-                      ? equivalente?.map((eq) => (
-                          <RecommendablesRow eq={eq} producto={producto} />
-                        ))
-                      : ""} */}
-                  </>
-                ))}
-              </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      50,
-                      { label: "All", value: -1 },
-                    ]}
-                    labelRowsPerPage="Productos por página:"
-                    colSpan={7}
-                    count={productos?.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    slotProps={{
-                      select: {
-                        inputProps: {
-                          "aria-label": "Productos por página",
-                          label: "Productos por página",
-                        },
-                        native: true,
-                      },
-                    }}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                  />
-                </TableRow>
-              </TableFooter>
-            </Table>
+            <div className=" font-montserrat mt-10">
+              {loade === true ? (
+                <div className="flex items-center justify-center">
+                  <CircularProgress />
+                </div>
+              ) : (
+                <Table
+                className="relative"
+                >
+                  <TableHead className="text-white rounded-t-lg p-5 w-full uppercase">
+                    <TableRow className=" bg-azul flex justify-between !rounded-t-lg items-center">
+                      <TableCell>
+                        <div className="font-bold text-white flex justify-cente xl:justify-start">
+                          Artículo
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="font-bold text-white flex justify-center xl:justify-start">
+                          Aplicaciones
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="font-bold text-white flex justify-center xl:justify-start">
+                          Marca
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="font-bold text-white flex justify-center xl:justify-start">
+                          Costo
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="font-bold text-white flex justify-center xl:justify-start">
+                          Cantidad
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="font-bold text-white flex justify-center xl:justify-start">
+                          SUB-TOTAL
+                        </div>
+                      </TableCell>
+                      <TableCell>{""}</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody className="bg-white">
+                    {(rowsPerPage > 0
+                      ? productos?.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : productos
+                    )?.map((producto) => (
+                      <>
+                        <RowBusquedaRapida
+                          producto={producto}
+                        />
+                      </>
+                    ))}
+                  </TableBody>
+                  <TableFooter>
+                    <TableRow>
+                      <TablePagination
+                        rowsPerPageOptions={[
+                          5,
+                          10,
+                          15,                    
+                          { label: "All", value: -1 },
+                        ]}
+                        labelRowsPerPage="Productos por página:"
+                        colSpan={7}
+                        count={productos?.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        slotProps={{
+                          select: {
+                            inputProps: {
+                              "aria-label": "Productos por página",
+                              label: "Productos por página",
+                            },
+                            native: true,
+                          },
+                        }}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                        ActionsComponent={TablePaginationActions}
+                      />
+                    </TableRow>
+                  </TableFooter>
+                </Table>
+              )}
+            </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );

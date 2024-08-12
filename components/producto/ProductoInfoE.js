@@ -1,23 +1,4 @@
-/* import Image from "next/image";
-import React from "react";
-
-
-export default function ProductoInfoE(props) {
-  const { producto, setBuscar, buscar, setBuscador } = props;
-  return (
-    <div className="font-bold flex items-center justify-start space-x-3">
-      <Image
-        src="/VKPC-85097_1_SKF.jpg"
-        height={100}
-        width={100}
-        alt="Imagen"
-        className="mr-3"
-      />
-    </div>
-  );
-}
- */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { AiFillInfoCircle } from "react-icons/ai";
 import AtributosProducto from "../buscadores/AtributosProducto";
@@ -26,7 +7,14 @@ import Intercambiables from "../productos/Intercambiables";
 import Formadopor from "../productos/Formadopor";
 
 export default function ProductoInfoE(props) {
-  const { producto, equi } = props;
+  const { producto, c, atributos, equi } = props;
+  //console.log(producto.atributos, "Atributos")
+  //console.log(atributos, "Atributo")
+
+ // console.log(equi, "productos array")
+ // console.log(producto, "info producto")
+
+ 
   return (
     <div className="space-y-2">
       <div className="font-bold flex items-center justify-start space-x-3">
@@ -39,49 +27,42 @@ export default function ProductoInfoE(props) {
         />
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
-            {!producto?.atributos && !producto?.notas ? null : (
+            {!atributos?.atributos && atributos.notas.length === 0  ? null : (
               <div className="group">
-                {" "}
+                
                 <AiFillInfoCircle />
                 <div className="absolute z-30 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3">
-                  {!producto?.atributos ? null : (
-                    <AtributosProducto atributos={producto?.atributos} />
+                  {!atributos ? null : (
+                    <AtributosProducto atributos={atributos.atributos} />
                   )}
-                  {!producto?.notas ? null : (
+                   {atributos?.notas.length === 0 ? null : (
                     <div className="space-y-3">
                       <div className="bg-amarillo w-full py-1">
                         <p className="text-azul font-bold">Notas</p>
                       </div>
-                      <p>{producto?.notas} </p>
+                      <p>{atributos?.notas} </p>
                     </div>
-                  )}
+                  )} 
                 </div>
               </div>
             )}
-
-{
-        producto?.pre_id_principal === producto?.pre_id
-          ? ""
-          : !producto?.pre_id_principal 
-          ? <p>{producto?.codigo} </p>
-          : producto?.pre_id_principal != producto?.pre_id && ""
-             /*  <div className="text-center">
-                <p>{producto.codigo} </p>
-              </div> */
-             /* : !producto?.pre_id_principal && "" */
-
-        /* (
-        <div className="text-left">
-          <p>{codiE.codigo}</p>
-        </div>
-      ) */
-      }
-            
-
-
-
-
-          {/*   <p>{producto?.codigo} </p> */}
+            {c?.length > 0 &&
+            c[0]?.codigo_equivalente != producto?.codigo &&
+            c[0]?.pre_id_equivalente === 0 ? (
+              <div>
+                <p className=" text-orange-500">
+                  {c[0]?.codigo_equivalente}
+                </p>
+              </div>
+            ) : c?.length > 0 &&
+              c[0]?.codigo_equivalente != producto?.codigo &&
+              c[0]?.pre_id_equivalente != 0 ? (
+              <div>
+                <p>{c[0]?.codigo_equivalente} </p>
+              </div>
+            ) : (
+              <p>{producto?.codigo} </p>
+            )}
           </div>
           <div>
             {producto?.es_parte_de ? (
@@ -115,8 +96,21 @@ export default function ProductoInfoE(props) {
           </div>
         </div>
       </div>
-
-
+      {equi?.map((e) => (
+        <div className="flex items-center justify-start space-x-2 ">
+          {e?.pre_id_equivalente === producto?.pre_id_equivalente ? null : (
+            <>
+              <Image
+                src="/VKPC-85097_1_SKF.jpg"
+                height={100}
+                width={100}
+                alt="Imagen"
+                className="mr-3"
+              />
+            </>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
