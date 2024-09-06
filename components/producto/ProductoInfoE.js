@@ -5,44 +5,51 @@ import AtributosProducto from "../buscadores/AtributosProducto";
 import Esparte from "../productos/Esparte";
 import Intercambiables from "../productos/Intercambiables";
 import Formadopor from "../productos/Formadopor";
+import Compañero from "../productos/Compañero";
+import Sliders from "../sliders/Sliders";
+import SlidersEq from "../sliders/SlidersEq";
 
 export default function ProductoInfoE(props) {
   const { producto, c, atributos, equi } = props;
   //console.log(producto.atributos, "Atributos")
   //console.log(atributos, "Atributo")
 
- // console.log(equi, "productos array")
- // console.log(producto, "info producto")
+  // console.log(equi, "productos array")
+  // console.log(producto, "info producto")
 
- 
+  console.log(producto, "principales");
+  console.log(equi, "equi");
+
   return (
     <div className="space-y-2">
       <div className="font-bold flex items-center justify-start space-x-3">
         <Image
           src="/VKPC-85097_1_SKF.jpg"
-          height={100}
+          height={100} 
           width={100}
           alt="Imagen"
           className="mr-3"
         />
+        {/* <div className="w-[100px] h-[100px] items-center">
+          <Sliders images={producto?.pre_imagenes} />
+        </div> */}
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
-            {!atributos?.atributos && atributos.notas.length === 0  ? null : (
+            {!atributos?.atributos && atributos.notas.length === 0 ? null : (
               <div className="group">
-                
                 <AiFillInfoCircle />
                 <div className="absolute z-30 hidden group-hover:block bg-white text-black p-3 rounded-md border border-gris space-y-3">
                   {!atributos ? null : (
                     <AtributosProducto atributos={atributos.atributos} />
                   )}
-                   {atributos?.notas.length === 0 ? null : (
+                  {atributos?.notas.length === 0 ? null : (
                     <div className="space-y-3">
                       <div className="bg-amarillo w-full py-1">
                         <p className="text-azul font-bold">Notas</p>
                       </div>
                       <p>{atributos?.notas} </p>
                     </div>
-                  )} 
+                  )}
                 </div>
               </div>
             )}
@@ -51,7 +58,7 @@ export default function ProductoInfoE(props) {
             c[0]?.pre_id_equivalente === 0 ? (
               <div>
                 <p className=" text-orange-500">
-                  {c[0]?.codigo_equivalente}
+                  {c[0]?.codigo_equivalente} {c[0]?.marca}
                 </p>
               </div>
             ) : c?.length > 0 &&
@@ -94,20 +101,31 @@ export default function ProductoInfoE(props) {
               <></>
             )}
           </div>
+          <div>
+            {producto?.companieros ? (
+              <div className="flex flex-col">
+                <p className="font-bold text-black text-left">Compañero</p>
+                <Compañero compañero={producto?.companieros} />
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </div>
       {equi?.map((e) => (
         <div className="flex items-center justify-start space-x-2 ">
           {e?.pre_id_equivalente === producto?.pre_id_equivalente ? null : (
-            <>
-              <Image
-                src="/VKPC-85097_1_SKF.jpg"
-                height={100}
-                width={100}
-                alt="Imagen"
-                className="mr-3"
-              />
-            </>
+           <Image
+            src="/VKPC-85097_1_SKF.jpg"
+            height={100} 
+            width={100}
+            alt="Imagen"
+            className="mr-3"
+          />
+            /* <div className="w-[100px] h-[100px] items-center">
+               <SlidersEq images={e?.pre_imagenes} />
+             </div> */
           )}
         </div>
       ))}

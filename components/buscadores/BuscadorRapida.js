@@ -80,12 +80,23 @@ export default function BuscadorRapida(props) {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    console.log(event, newPage)
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    console.log(event, setPage, "arriba")
   };
+
+/*   let probar = "010000000400_2.JPG"
+  let esono = probar.split(';')
+
+  console.log(esono, "ver") */
+
+
+//console.log(productos)
+  
 
   const [items, setItems] = useState([]);
 
@@ -310,6 +321,10 @@ export default function BuscadorRapida(props) {
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
+  console.log(page, "paguina")
+  console.log(count, "count")
+  console.log(rowsPerPage, "rouws")
+  console.log(onPageChange, "onPageChange")
 
   const handleFirstPageButtonClick = (event) => {
     onPageChange(event, 0);

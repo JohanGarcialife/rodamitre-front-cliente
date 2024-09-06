@@ -5,6 +5,7 @@ import AtributosProducto from "../buscadores/AtributosProducto";
 import Esparte from "../productos/Esparte";
 import Intercambiables from "../productos/Intercambiables";
 import Formadopor from "../productos/Formadopor";
+import Compañero from "../productos/Compañero";
 
 export default function ProductoInfoE1(props) {
   const { producto } = props;
@@ -80,6 +81,16 @@ export default function ProductoInfoE1(props) {
               <div className="flex flex-col">
                 <p className="font-bold text-black text-left">Formado por</p>
                 <Formadopor formadopor={producto?.formado_por} />
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+          <div>
+            {producto?.companieros ? (
+              <div className="flex flex-col">
+                <p className="font-bold text-black text-left">Compañero</p>
+                <Compañero compañero={producto?.companieros} />
               </div>
             ) : (
               <></>
