@@ -167,7 +167,7 @@ export default function RowBuscadorFamilia(props) {
                       setQuantity={setQuantity}
                       handleAddItem={handleAddItem}
                       handleRemoveItem={handleRemoveItem}
-                      addItemToCart={addItemToCart}
+                      addItemToCart={addItemToCart} 
                     />
                   )}
                 </div>

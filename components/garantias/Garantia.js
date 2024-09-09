@@ -9,6 +9,7 @@ import {
 import styled from "@emotion/styled";
 import useAuth from "@/hooks/useAuth";
 import { garantiasApi } from "@/pages/api/reclamoGarantias";
+import RowGarantía from "./RowGarantía";
 
 export default function Garantia() {
   const { auth, setReloadUser } = useAuth();
@@ -20,22 +21,6 @@ export default function Garantia() {
       setGarant(response);
     })();
   }, []);
-
-  console.log(garant);
-
-  const TableRowStyled = styled(TableRow)`
-    &:nth-of-type(odd) {
-      background-color: #e8e8ff;
-    }
-    &:nth-of-type(even) {
-      background-color: #f5f5f5;
-    }
-    & td,
-    th {
-      width: fit-content;
-      text-align: center;
-    }
-  `;
 
   return (
     <>
@@ -76,23 +61,9 @@ export default function Garantia() {
             </TableRow>
           </TableHead>
           <TableBody className="bg-white">
-            <TableRowStyled className="text-black p-5 flex justify-between w-full last-of-type:rounded-b-lg items-center">
-              <TableCell className="w-full text-center">
-                <div className="font-black">Reclamo</div>
-              </TableCell>
-              <TableCell className="w-full text-center">
-                <div className="font-black">Fecha</div>
-              </TableCell>
-              <TableCell className="w-full text-center">
-                <div className="font-black">Producto</div>
-              </TableCell>
-              <TableCell className="w-full text-center">
-                <div className="font-black">Cantidad</div>
-              </TableCell>
-              <TableCell className="w-full flex justify-center">
-                <div className="font-black">Tracking</div>
-              </TableCell>
-            </TableRowStyled>
+            {garant?.map((garantia) => (
+              <RowGarantía garantia={garantia} />
+            ))}
           </TableBody>
         </Table>
       </div>

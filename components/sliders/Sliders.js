@@ -1,9 +1,7 @@
 import React from "react";
 import Image from "next/image";
-
 import Slider from "react-slick";
 import { map } from "lodash";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -23,7 +21,7 @@ export default function Sliders(props) {
 
   let imagenes = images?.split(";");
 
-  console.log(imagenes," ver")
+  console.log(imagenes, " ver");
 
   return (
     <>
@@ -33,7 +31,7 @@ export default function Sliders(props) {
             <>
               <Image
                 /// key={producto?.id}
-                src={`/RODAMITRE-FOTOS/${producto}`}
+                src={`/RODAMITRE-FOTOS/050150100550_1.jpg`}
                 height={100}
                 width={100}
                 // alt={producto?.title}

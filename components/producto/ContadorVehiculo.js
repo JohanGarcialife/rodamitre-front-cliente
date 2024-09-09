@@ -50,6 +50,7 @@ export default function ContadorVehiculo(props) {
       </div>
       <div className="">
         <Pedir
+          quantity={valor}
           setQuantity={setQuantity}
           producto={producto}
           valor={parseInt(valor)}

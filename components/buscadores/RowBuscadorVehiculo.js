@@ -38,7 +38,7 @@ export default function RowBuscadorVehiculo(props) {
           </TableRowStyled>
 
           {producto?.map((producto) => (
-            <>
+            <> 
               {producto.rubro === rubro.label && (
                 <RowVehiculo producto={producto} r = {rubro} setEje={setEje}  />
               )}
