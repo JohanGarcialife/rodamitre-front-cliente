@@ -6,19 +6,17 @@ import Esparte from "../productos/Esparte";
 import Intercambiables from "../productos/Intercambiables";
 import Formadopor from "../productos/Formadopor";
 import Compañero from "../productos/Compañero";
+import Sliders from "../sliders/Sliders";
 
 export default function ProductoInfo(props) {
   const { producto, equi } = props;
+  console.log(producto, "Buscador Familia")
   return (
     <div className="space-y-2">
-      <div className="font-bold flex items-center justify-start space-x-3">
-        <Image
-          src="/VKPC-85097_1_SKF.jpg"
-          height={100}
-          width={100}
-          alt="Imagen"
-          className="mr-3"
-        />
+      <div className="font-bold flex items-center justify-start space-x-3 ">
+      <div className="w-[100px] h-[100px] items-center">
+          <Sliders images={producto?.pre_imagenes} />
+        </div>
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
             {!producto?.atributos && !producto?.notas ? null : (
@@ -88,18 +86,14 @@ export default function ProductoInfo(props) {
       {equi?.map((e) => (
         <div className="flex items-center justify-start space-x-2 ">
           {e?.codigo === producto?.codigo ? null : (
-            <>
-              <Image
-                src="/VKPC-85097_1_SKF.jpg"
-                height={100}
-                width={100}
-                alt="Imagen"
-                className="mr-3"
-              />
-             {/*  <div className="space-y-2 min-w-[100px]">
-                <p>{e?.codigo} </p>
-              </div> */}
-            </>
+
+<div className="w-[100px] h-[100px] items-center">
+<Sliders images={e?.pre_imagenes} />
+</div>
+
+
+
+          
           )}
         </div>
       ))}

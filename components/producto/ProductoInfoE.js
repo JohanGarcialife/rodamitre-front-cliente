@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { AiFillInfoCircle } from "react-icons/ai";
 import AtributosProducto from "../buscadores/AtributosProducto";
 import Esparte from "../productos/Esparte";
@@ -7,32 +6,18 @@ import Intercambiables from "../productos/Intercambiables";
 import Formadopor from "../productos/Formadopor";
 import Compañero from "../productos/Compañero";
 import Sliders from "../sliders/Sliders";
-import SlidersEq from "../sliders/SlidersEq";
 
 export default function ProductoInfoE(props) {
   const { producto, c, atributos, equi } = props;
-  //console.log(producto.atributos, "Atributos")
-  //console.log(atributos, "Atributo")
 
-  // console.log(equi, "productos array")
-  // console.log(producto, "info producto")
-
-  console.log(producto, "principales");
-  console.log(equi, "equi");
+  console.log(equi, "informacion")
 
   return (
     <div className="space-y-2">
       <div className="font-bold flex items-center justify-start space-x-3">
-        <Image
-          src="/VKPC-85097_1_SKF.jpg"
-          height={100} 
-          width={100}
-          alt="Imagen"
-          className="mr-3"
-        />
-        {/* <div className="w-[100px] h-[100px] items-center">
+        <div className="w-[100px] h-[100px] items-center">
           <Sliders images={producto?.pre_imagenes} />
-        </div> */}
+        </div>
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
             {!atributos?.atributos && atributos.notas.length === 0 ? null : (
@@ -116,16 +101,9 @@ export default function ProductoInfoE(props) {
       {equi?.map((e) => (
         <div className="flex items-center justify-start space-x-2 ">
           {e?.pre_id_equivalente === producto?.pre_id_equivalente ? null : (
-           <Image
-            src="/VKPC-85097_1_SKF.jpg"
-            height={100} 
-            width={100}
-            alt="Imagen"
-            className="mr-3"
-          />
-            /* <div className="w-[100px] h-[100px] items-center">
-               <SlidersEq images={e?.pre_imagenes} />
-             </div> */
+            <div className="w-[100px] h-[100px] items-center">
+              <Sliders images={e?.pre_imagenes} />
+            </div>
           )}
         </div>
       ))}

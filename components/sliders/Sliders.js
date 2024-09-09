@@ -23,19 +23,39 @@ export default function Sliders(props) {
 
   let imagenes = images?.split(";");
 
+  console.log(imagenes," ver")
+
   return (
-    <Slider {...settings}>
-      {map(imagenes, (producto) => (
+    <>
+      {imagenes?.length <= 1 ? (
         <>
-          <Image
-            /// key={producto?.id}
-            src={`/RODAMITRE-FOTOS/${producto}`}
-            height={100}
-            width={100}
-            // alt={producto?.title}
-          />
+          {map(imagenes, (producto) => (
+            <>
+              <Image
+                /// key={producto?.id}
+                src={`/RODAMITRE-FOTOS/${producto}`}
+                height={100}
+                width={100}
+                // alt={producto?.title}
+              />
+            </>
+          ))}
         </>
-      ))}
-    </Slider>
+      ) : (
+        <Slider {...settings}>
+          {map(imagenes, (producto) => (
+            <>
+              <Image
+                /// key={producto?.id}
+                src={`/RODAMITRE-FOTOS/${producto}`}
+                height={100}
+                width={100}
+                // alt={producto?.title}
+              />
+            </>
+          ))}
+        </Slider>
+      )}
+    </>
   );
 }

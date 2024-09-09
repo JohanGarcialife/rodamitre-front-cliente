@@ -11,7 +11,7 @@ export default function SlidersEq(props) {
   const { images } = props;
 
   const settings = {
-    className: "carousel-precios",
+  //  className: "carousel-precios",
     dots: false,
     infinite: true,
     speed: 400,
@@ -22,30 +22,21 @@ export default function SlidersEq(props) {
   };
 
   let imagenes = images?.split(";");
+  console.log(imagenes, "Images")
 
   return (
-        <>
-        
+    <Slider {...settings}>
       {map(imagenes, (producto) => (
         <>
-        <Image
+          <Image
             src={`/RODAMITRE-FOTOS/${producto}`}
-            height={100} 
+            height={100}
             width={100}
             alt="Imagen"
             className="mr-3"
           />
-         {/*  <Image
-            /// key={producto?.id}
-            src={`/RODAMITRE-FOTOS/${producto}`}
-            height={100}
-            width={100}
-            // alt={producto?.title}
-          /> */}
         </>
       ))}
-        </>
-    /* <Slider {...settings}> 
-    /* </Slider> */
+    </Slider>
   );
 }
