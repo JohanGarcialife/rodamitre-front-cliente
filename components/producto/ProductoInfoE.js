@@ -41,9 +41,12 @@ export default function ProductoInfoE(props) {
             {c?.length > 0 &&
             c[0]?.codigo_equivalente != producto?.codigo &&
             c[0]?.pre_id_equivalente === 0 ? (
-              <div>
+              <div className="flex flex-col">
                 <p className=" text-orange-500">
-                  {c[0]?.codigo_equivalente} {c[0]?.marca}
+                  {c[0]?.codigo_equivalente} 
+                </p>
+                <p className=" text-orange-500 text-left">
+                  {c[0]?.marca}
                 </p>
               </div>
             ) : c?.length > 0 &&
