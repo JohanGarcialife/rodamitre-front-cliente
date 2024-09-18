@@ -31,7 +31,7 @@ export default function BuscadorVehiculo(props) {
   const [producto, setProducto] = useState([]);
   const [producto1, setProducto1] = useState([]);
   const [producto2, setProducto2] = useState([]);
-  const [producto3, setProducto3] = useState([]);  
+  const [producto3, setProducto3] = useState([]);
   const [modId, setModId] = useState([]);
   const [vehiculo, setVehiculo] = useState(null);
   const [modeloVh, setModeloVh] = useState([]);
@@ -131,7 +131,7 @@ export default function BuscadorVehiculo(props) {
   const handleSelectRubro = async function (event) {
     setRubro(event);
     setMotorSelect(null);
-    console.log(event, "valors")
+    console.log(event, "valors");
 
     if (vehiculo && modelo && !rubro.label > 0) {
       setProducto(producto1);
@@ -198,25 +198,22 @@ export default function BuscadorVehiculo(props) {
     }
   };
 
-
   const handleSelectEje = async function (event) {
     var rup = rubro.map(function (data) {
       var data = data.value;
       return data;
     });
-    var rub = rup.toString()
+    var rub = rup.toString();
 
-
-  
     const Dato = {
       mod_id: modId,
       rubro: rub,
       motor: "",
-      eje: event.value
+      eje: event.value,
     };
 
     ///console.log(Dato)
-     setLoade(true);
+    setLoade(true);
 
     const productAuto = await productosMarModelo(
       auth.CLI_ID,
@@ -225,10 +222,7 @@ export default function BuscadorVehiculo(props) {
     );
     setProducto(productAuto);
     setLoade(false);
- 
- 
   };
-
 
   function handleClick(event) {
     event.preventDefault();
@@ -236,15 +230,15 @@ export default function BuscadorVehiculo(props) {
   }
   ///console.log(producto, "productos")
   const tren = [
-    {value:"", label:"Todos"},
+    { value: "", label: "Todos" },
     { value: "delantero", label: "Delantero" },
     { value: "trasero", label: "Trasero" },
   ];
- /// console.log(tren);
+  /// console.log(tren);
 
   return (
     ////
-    <div className=" pt-[200px] xl:pt-[245px] pb-24 bg-white">
+    <div className=" xl:pt-[180px] 2xl:pt-[245px]  pb-24 bg-white">
       <div className="font-montserrat px-2">
         <div className="bg-white w-fit py-2 px-3 rounded-md">
           <Breadcrumbs separator={<MdNavigateNext />} aria-label="breadcrumb">
@@ -369,15 +363,15 @@ export default function BuscadorVehiculo(props) {
               )}
             </div>
 
-            {eje  && 
+            {eje && (
               <Select
                 ///value={tr}
                 options={tren}
                 placeholder="Seleccione Eje"
                 className="text-black font-montserrat w-full"
-                 onChange={handleSelectEje}
+                onChange={handleSelectEje}
               />
-          }
+            )}
           </div>
         </div>
         <div className="w-full p-2">
@@ -456,7 +450,11 @@ export default function BuscadorVehiculo(props) {
             </TableHead>
             {rubro.length > 0 ? (
               <TableBody className="bg-white">
-                <RowBuscadorVehiculo rubros={rubro} producto={producto} setEje={setEje}/>
+                <RowBuscadorVehiculo
+                  rubros={rubro}
+                  producto={producto}
+                  setEje={setEje}
+                />
               </TableBody>
             ) : (
               <TableBody className="bg-white">

@@ -119,7 +119,7 @@ export default function BuscadorRapida(props) {
   //console.log(productos, "info");
 
   return (
-    <div className=" pt-[200px] xl:pt-[245px] pb-24 bg-white">
+    <div className=" xl:pt-[180px] 2xl:pt-[245px]  pb-24 bg-white">
       <form
         className="flex space-x-10 px-2 w-full font-montserrat"
         onSubmit={formik.handleSubmit}
