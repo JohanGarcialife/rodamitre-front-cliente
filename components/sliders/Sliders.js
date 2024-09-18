@@ -1,12 +1,14 @@
 import React from "react";
 import Image from "next/image";
+
 import Slider from "react-slick";
 import { map } from "lodash";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function Sliders(props) {
-  const { images, images2 } = props;
+  const { images } = props;
 
   const settings = {
     className: "carousel-precios",
@@ -21,17 +23,19 @@ export default function Sliders(props) {
 
   let imagenes = images?.split(";");
 
-  console.log(imagenes, " ver");
+  console.log(images, " ver");
 
   return (
     <>
-      {imagenes?.length <= 1 ? (
+      {!images ? (
+        <div className="w-[100px] h-[100px]"></div>
+      ) : imagenes?.length === 1 ? (
         <>
           {map(imagenes, (producto) => (
             <>
               <Image
                 /// key={producto?.id}
-                src={`/RODAMITRE-FOTOS/050150100550_1.jpg`}
+                src={`/RODAMITRE-FOTOS/${producto}`}
                 height={100}
                 width={100}
                 // alt={producto?.title}
