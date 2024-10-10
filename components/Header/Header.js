@@ -91,7 +91,7 @@ export default function Header(props) {
             />
           </div>
 
-          <div className="flex items-center space-y-3 max-h-24 2xl:max-h-32 pb-1 2xl:pb-3 justify-between  xl:px-24 px-12">
+          <div className="flex items-center space-y-3 max-h-24 2xl:max-h-32 pb-1 2xl:pb-3 justify-between  xl:pr-24 pr-12 xl:pl-2 pl-2">
             <div className="flex space-x-24 items-center ">
               <div className="w-1/3 flex h-full items-center justify-start xl:justify-center">
                 <Link href="/">
