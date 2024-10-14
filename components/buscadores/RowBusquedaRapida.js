@@ -105,6 +105,7 @@ export default function RowBusquedaRapida(props) {
     return item;
   });
 
+
   /* console.log(com, "veo")
   console.log(producto) */
 
@@ -116,7 +117,7 @@ export default function RowBusquedaRapida(props) {
       >
         <>
           <TableCell className="w-full">
-            <ProductoInfoE producto={array[0]} equi={array} c={com} atributos = {producto}  />
+            <ProductoInfoE producto={array?.[0]} equi={array} c={com} atributos = {producto}  />
           </TableCell>
           <TableCell className="w-full text-center">
             {producto?.aplicaciones ? (
@@ -142,7 +143,7 @@ export default function RowBusquedaRapida(props) {
           </TableCell>
           {/* contador */}
           <TableCell colSpan={3} className="w-full flex justify-center">
-            {array.map((e) => (
+            {array?.map((e) => (
               <>
                 <div className="w-full flex h-[100px] items-center justify-around ">
                   <ContadorRapida
